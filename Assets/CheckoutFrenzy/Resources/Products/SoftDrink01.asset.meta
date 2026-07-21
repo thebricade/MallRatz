@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c9b78efa75b79e840a10d8629cb1d34b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Products/SoftDrink01.asset
+  uploadId: 897610

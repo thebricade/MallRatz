@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 03e08d42d2370ef4c9870558a0f86bde
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/HeadLights.prefab
+  uploadId: 897610

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4d2b7189221489f41b6e290f0611f552
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Men/Suit.prefab
+  uploadId: 897610

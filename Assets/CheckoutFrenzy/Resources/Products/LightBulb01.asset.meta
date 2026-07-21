@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 172073ee7b2bda04eb5f9c349311f5ff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Products/LightBulb01.asset
+  uploadId: 897610

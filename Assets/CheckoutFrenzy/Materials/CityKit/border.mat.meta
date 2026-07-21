@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3f8683809c1fc91428741ff7b9ed99e0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Materials/CityKit/border.mat
+  uploadId: 897610

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Shared
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 4371b8699c795dd4f9238bb90e520a7e
+  m_SerializeEntries:
+  - m_GUID: 442dc6d9b89497e45a98cd0986238638
+    m_Address: Assets/CheckoutFrenzy/Localization/UI Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 444d198365119b04097e3500dde396db
+    m_Address: Assets/CheckoutFrenzy/Localization/Message Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 795bb12153a462845acb652347f2d4d9
+    m_Address: Assets/CheckoutFrenzy/Localization/Monitor Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7ba446bad0fa4742a59ed3872cfeb37
+    m_Address: Assets/CheckoutFrenzy/Localization/Customer Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5744b4a2dc01be4192d33ed9049b260
+    m_Address: Assets/CheckoutFrenzy/Localization/Interaction Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: e1af398c1bf4ff44499165947c35182d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a1d4a8db25c923e44b2602fbab791ff0, type: 2}
+    - {fileID: 11400000, guid: ec8cbe0ef1e4cc14192ace107044a41e, type: 2}

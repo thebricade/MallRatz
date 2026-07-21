@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f49036b8225cab4f82b851d29f28a73, type: 3}
+  m_Name: Milk01
+  m_EditorClassIdentifier: 
+  productId: 10
+  category: 0
+  name: Milky Moo Original
+  icon: {fileID: 21300000, guid: 6ff307f2af9697e44bbed71e763927fb, type: 3}
+  priceInCents: 543
+  orderTime: 5
+  section: 2
+  model: {fileID: 3057628475499008730, guid: b4edf0f2db9769247b4640368524ac19, type: 3}
+  box: {fileID: 4667130823675369136, guid: a668f6bd3aca6f140877fb56ac58b045, type: 3}
+  overrideBoxQuantity: 0
+  boxQuantity: {x: 0, y: 0, z: 0}
+  overrideShelfQuantity: 0
+  shelfQuantity: {x: 0, y: 0, z: 0}

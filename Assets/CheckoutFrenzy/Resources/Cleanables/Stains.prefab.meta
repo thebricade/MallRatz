@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fecb0061ea6011d42afe5f35a6741df3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Cleanables/Stains.prefab
+  uploadId: 897610

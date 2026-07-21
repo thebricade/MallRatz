@@ -1,0 +1,22 @@
+{
+    "name": "CryingSnow.CheckoutFrenzy.Gameplay",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b7c43988f464c294083f3f261feeb736",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:4307f53044263cf4b835bd812fc161a4",
+        "GUID:8c4dd21966739024fbd72155091d199e",
+        "GUID:eec0964c48f6f4e40bc3ec2257ccf8c5",
+        "GUID:16a35b22bcb3d68408bec3de04e2d6ca",
+        "GUID:15567a44fbdce764586bf6f622260903"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

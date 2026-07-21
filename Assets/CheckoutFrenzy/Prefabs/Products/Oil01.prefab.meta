@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 00205bcb163962b46b06f3c6fdf1b32e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Products/Oil01.prefab
+  uploadId: 897610

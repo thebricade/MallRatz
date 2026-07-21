@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 84fd5f7e3e1dd5844846398a8ea059f0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Women/Adventurer.prefab
+  uploadId: 897610

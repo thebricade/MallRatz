@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1ef72f68ec1210d4797792da65fadeba
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Furnitures/FruitRack01.prefab
+  uploadId: 897610

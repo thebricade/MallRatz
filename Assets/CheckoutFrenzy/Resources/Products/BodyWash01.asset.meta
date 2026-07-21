@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f17f876b6e223494b850379646ada3ad
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Products/BodyWash01.asset
+  uploadId: 897610

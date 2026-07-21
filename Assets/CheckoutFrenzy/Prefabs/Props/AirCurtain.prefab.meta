@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4ed749cc3fbd54f4e92e67299ec6d8db
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Props/AirCurtain.prefab
+  uploadId: 897610

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c478a6b2cc4269a4a8bf3da54768c49e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Scripts/UI/PC/EmployeeListing.cs
+  uploadId: 897610

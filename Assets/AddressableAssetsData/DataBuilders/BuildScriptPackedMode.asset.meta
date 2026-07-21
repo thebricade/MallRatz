@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2c6fa0806009a514caab483384547210
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedMode.asset
+  uploadId: 897610

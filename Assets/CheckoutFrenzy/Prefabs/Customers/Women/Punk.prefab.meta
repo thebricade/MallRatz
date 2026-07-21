@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e2d82eefec33bb04ea4224b8f9bf11ed
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Women/Punk.prefab
+  uploadId: 897610

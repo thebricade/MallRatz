@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: da121500e40277747a746bd35e3eebff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Materials/Products/IceCream02.mat
+  uploadId: 897610

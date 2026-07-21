@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ed2ca060bcf6f274cbbe52cdce38c48d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Buildings/Wall_Corner.prefab
+  uploadId: 897610

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: eb9e369fb9cabd84291f8e533bbbe243
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Women/Medieval.prefab
+  uploadId: 897610

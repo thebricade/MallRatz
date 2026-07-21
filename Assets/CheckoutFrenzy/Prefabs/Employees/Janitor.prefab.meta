@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 768f899885a8476469709b9036837912
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Employees/Janitor.prefab
+  uploadId: 897610

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ad49cbaab54c599418c53b445a4d00a1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/LoanTemplates/RiskyLoan.asset
+  uploadId: 897610

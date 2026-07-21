@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 677411745014f2e4fb63fcb5484d446c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/UI/BillUI.prefab
+  uploadId: 897610

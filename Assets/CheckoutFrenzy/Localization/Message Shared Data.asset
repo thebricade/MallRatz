@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Message Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Message
+  m_TableCollectionNameGuidString: 444d198365119b04097e3500dde396db
+  m_Entries:
+  - m_Id: 1209035440128
+    m_Key: Counter_HasCashier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2573031489536
+    m_Key: Counter_InsufficientChange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3124343390208
+    m_Key: Counter_InvalidAmount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83409761492992
+    m_Key: Furniture_InvalidPlacement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91272345051136
+    m_Key: Box_Throw_Blocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91565879222272
+    m_Key: Box_Place_AssignedDifferentProduct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91838072774656
+    m_Key: Box_Place_WrongSection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91979538259968
+    m_Key: Box_Place_DifferentProduct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 661342849646592
+    m_Key: Box_Place_ShelfFull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92224317841408
+    m_Key: Box_Take_Full
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92318307999744
+    m_Key: Box_Take_DifferentProduct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92423127851008
+    m_Key: Box_Take_IncompatibleSize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92578585534464
+    m_Key: Box_Store_DifferentProduct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 683213758447616
+    m_Key: Box_Store_RackFull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 457185107927040
+    m_Key: Data_LevelUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467368643158016
+    m_Key: Employee_Hired
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467478592643072
+    m_Key: Employee_Fired
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467651964198912
+    m_Key: Employee_WarehouseLocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467988183801856
+    m_Key: Employee_NoCounter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 468400232226816
+    m_Key: Employee_NoPoint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467813864333312
+    m_Key: Finance_InsufficientMoney
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498326742261760
+    m_Key: Finance_LoanActive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652818342002688
+    m_Key: Mission_RewardCollected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670737037836288
+    m_Key: PC_Checkout_EmptyCart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670795917475840
+    m_Key: PC_Checkout_Success
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6202332534465626129
+  references:
+    version: 2
+    RefIds:
+    - rid: 6202332534465626129
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1774678329552

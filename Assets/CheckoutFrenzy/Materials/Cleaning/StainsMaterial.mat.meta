@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d46733120e25814db9f1b5b357a41ff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Materials/Cleaning/StainsMaterial.mat
+  uploadId: 897610

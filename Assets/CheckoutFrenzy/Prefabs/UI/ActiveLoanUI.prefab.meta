@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1ae2354cc91e6da44872c351b9426580
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/UI/ActiveLoanUI.prefab
+  uploadId: 897610

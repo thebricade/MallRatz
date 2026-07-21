@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c86c99e416082a24bbafe42c1de4797c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Products/Apple.prefab
+  uploadId: 897610

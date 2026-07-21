@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5a259929724620147ae297703b1b733c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Men/Casual_Hoodie.prefab
+  uploadId: 897610

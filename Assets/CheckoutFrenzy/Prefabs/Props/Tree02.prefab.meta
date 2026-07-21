@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 05df1d22915f2fd449ea0f86fff1dfcb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Props/Tree02.prefab
+  uploadId: 897610

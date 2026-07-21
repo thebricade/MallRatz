@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: df3a813b8728c1f42a65549ebdda237c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Scripts/Core/Enums/DisplaySection.cs
+  uploadId: 897610

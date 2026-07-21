@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d9bf223e48b8b74b8f42fdf6163e2b5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/ScriptableObjects/BillTemplates/Rent.asset
+  uploadId: 897610

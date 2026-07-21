@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3424f291fe995344e84ca70cfb46cfd2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Cleaning/MessPrefabs/DustsQuad.prefab
+  uploadId: 897610

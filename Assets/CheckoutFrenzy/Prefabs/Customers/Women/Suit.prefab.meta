@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8127ad030bb4fae49ac3881bb1932a25
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Women/Suit.prefab
+  uploadId: 897610

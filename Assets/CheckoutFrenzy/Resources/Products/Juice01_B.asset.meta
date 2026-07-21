@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b6668af24c1aa5b4e91e6e3cb4a8c962
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Products/Juice01_B.asset
+  uploadId: 897610

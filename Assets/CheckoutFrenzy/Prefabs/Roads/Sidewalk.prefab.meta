@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 73b536c4943f22f42bbcf48cd7782912
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Roads/Sidewalk.prefab
+  uploadId: 897610

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b1d1d585d86b4634aa42063f1c31ad68
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Scripts/Gameplay/Employee/Stocker.cs
+  uploadId: 897610

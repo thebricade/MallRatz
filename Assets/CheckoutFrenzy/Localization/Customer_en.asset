@@ -1,0 +1,181 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Customer_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: a7ba446bad0fa4742a59ed3872cfeb37, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 3351683237010735107
+  m_TableData:
+  - m_Id: 145255088128
+    m_Localized: Alright alright... I will pay.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18485176483840
+    m_Localized: Whoa, calm down! I'll give it back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22180433805312
+    m_Localized: You caught me... I'll pay for it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22192815390720
+    m_Localized: No need to hit! It was a mistake...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22207277350912
+    m_Localized: Please dont call cop. I'll pay now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22222410399744
+    m_Localized: You win. I'll pay I swear!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22234892648448
+    m_Localized: Please dont tell anyone. I'll pay now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22251669864448
+    m_Localized: Okay okay, chill... I'll return everything.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22263413915648
+    m_Localized: No trouble here. I'll give it back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22277678743552
+    m_Localized: Take it easy dude! I'll pay for that.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25994494787584
+    m_Localized: Ugh, I can't find anything anywhere.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26010269564928
+    m_Localized: Where is it? I've looked everywhere...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26064367697920
+    m_Localized: They're supposed to have it here...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26071183441920
+    m_Localized: 'This store is a mess.
+
+      How am I supposed to find anything?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26073293176832
+    m_Localized: Seriously? Nothing?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26074366918656
+    m_Localized: 'I''m wasting my time.
+
+      I should just go somewhere else.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26075272888320
+    m_Localized: 'Maybe I should ask someone...
+
+      but I hate asking for help.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26077726556160
+    m_Localized: They probably don't even have it in stock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26079135842304
+    m_Localized: I'm never coming back to this store.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26080410910720
+    m_Localized: I can't believe I can't find what I'm looking for.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28479095619584
+    m_Localized: 'Wow, that''s expensive!
+
+      Is the {productName} usually this
+      price?'
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735107
+  - m_Id: 28479829622784
+    m_Localized: This {productName} is a bit out of my budget.
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735107
+  - m_Id: 28480471351296
+    m_Localized: Are you sure that's the correct price for the {productName}?
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735107
+  - m_Id: 28481104691200
+    m_Localized: That's way too much for a {productName}.
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735107
+  - m_Id: 28481809334272
+    m_Localized: 'Is there a sale on the {productName}
+
+      or a less expensive
+      alternative?'
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735107
+  - m_Id: 28482484617216
+    m_Localized: I can't afford that!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28483155705856
+    m_Localized: That's highway robbery!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28483789045760
+    m_Localized: 'I''ll have to think about this.
+
+      The {productName} is a bit
+      pricey.'
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735107
+  - m_Id: 28484464328704
+    m_Localized: Similar products that are more affordable?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28486444040192
+    m_Localized: 'Ouch! My wallet is crying.
+
+      I''ll have to pass on the {productName}
+      for now.'
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735107
+  references:
+    version: 2
+    RefIds:
+    - rid: 3351683237010735107
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 28486444040192
+        - id: 28483789045760
+        - id: 28481809334272
+        - id: 28481104691200
+        - id: 28480471351296
+        - id: 28479829622784
+        - id: 28479095619584

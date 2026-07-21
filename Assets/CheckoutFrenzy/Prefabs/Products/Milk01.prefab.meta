@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b4edf0f2db9769247b4640368524ac19
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Products/Milk01.prefab
+  uploadId: 897610

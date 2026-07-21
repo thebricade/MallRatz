@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4b14f08a3f30c5b448ad4c6c937cc2ac
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Animations/Controllers/Cleaner.controller
+  uploadId: 897610

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a61a7d367cc42724e990eabbd3537382
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Materials/Buildings/Concrete.mat
+  uploadId: 897610

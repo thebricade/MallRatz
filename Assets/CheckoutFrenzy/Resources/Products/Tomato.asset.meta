@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5f9aa0f904f154d4db70c44cd60affeb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Products/Tomato.asset
+  uploadId: 897610

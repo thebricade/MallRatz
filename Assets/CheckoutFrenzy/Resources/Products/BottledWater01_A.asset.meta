@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 21a03a2d783381845853abe544e4d078
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Products/BottledWater01_A.asset
+  uploadId: 897610

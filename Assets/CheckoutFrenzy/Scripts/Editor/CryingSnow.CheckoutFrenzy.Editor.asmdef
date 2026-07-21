@@ -1,0 +1,19 @@
+{
+    "name": "CryingSnow.CheckoutFrenzy.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b7c43988f464c294083f3f261feeb736",
+        "GUID:bdf94647c6ca91e4a8c6aaa802f3a7d3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

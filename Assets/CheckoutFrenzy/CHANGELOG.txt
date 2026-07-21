@@ -1,0 +1,110 @@
+Version 2.0.0 (Current)
+Breaking Changes:
+- Reorganized the entire project hierarchy for improved clarity and maintainability.
+- Implemented a multi-assembly architecture to isolate global systems from gameplay logic.
+- Introduced a domain-based event hub system, moving core systems toward an event-driven architecture.
+- Refactored interactable from an interface into an abstract base class for improved shared behavior and extensibility.
+- Migrated the save system from BinaryFormatter to Newtonsoft.Json for improved security and human-readability (for debugging).
+
+New Features:
+- Added Localization support (English, French, German, Portuguese, Spanish) with a lightweight setup and easy expansion.
+- Implemented a ScriptableObject-driven currency system to globally decouple monetary values, symbols, and sprites from hardcoded logic.
+- Implemented a trait-driven customer behavior system that replaces hardcoded values with CustomerTrait ScriptableObjects.
+- Integrated a pivot validation and correction tool into the ProductEditor that automatically detects misaligned 3D models and generates new, bottom-centered mesh assets and prefabs.
+- Added a quick-select dropdown that automatically caches and displays all available Product Box prefabs.
+- Added an integrated icon generator for Furniture assets.
+
+Bug Fixes:
+- The Quit button now correctly exits Play Mode when testing in the Editor.
+- Resolved an issue where furniture would not turn red when overlapping with other objects in the Universal Render Pipeline (URP).
+- Fixed a crash when completing the final mission with no subsequent license-type objective.
+- Fixed a bug where the loan information text on the PC Monitor failed to refresh once a loan was fully billed and removed from the active list.
+- License listing now correctly displays licenses with more than 4 products by adding a scroll view.
+- Fixed camera stutter on mobile builds.
+
+Version 1.4.1
+Bug Fixes:
+- Reverted a recent change to Input calculations based on community feedback. Removed Time.deltaTime from look inputs to prevent sensitivity drops at high frame rates.
+- Recreated Game scene asset to replace inherited template GUID (from SampleScene) and prevent import conflicts.
+
+Version 1.4.0
+Bug Fixes:
+- Fixed an issue where identical UI messages could be repeatedly queued, causing message spam during failed interactions.
+- Fixed camera look rotation being frame-rate dependent, causing inconsistent sensitivity across devices.
+
+Changes:
+- Updated minimum required Unity version to 2022.3.62f3 LTS to address a security issue (CVE-2025-59489).
+- Box quantity (products per pack) icon in PC now uses a Unity UI Image, replacing the previous TextMeshPro sprite-based approach.
+- Customer dialogue now uses a dedicated world-space overhead UI instead of the main UI canvas.
+
+New Features:
+- Added a theft system where customers may steal items, and the player can catch them or hire a security employee.
+
+Version 1.3.0
+Bug Fixes:
+- Fixed issue where product icons were unintentionally overwritten when multi-editing Product assets in the inspector.
+
+Changes:
+- PC Monitor tabs are now grouped by purpose and can be accessed using buttons styled like desktop app shortcuts.
+- Employee salaries are now listed as Bills under the PC's Bill tab, instead of being deducted automatically.
+- Added the ability to set model rotation in the editor when generating product icons.
+- Added RGB sliders to customize the store name color.
+- Player state management is now centralized via PlayerStateManager, enabling consistent state transitions using a stack system.
+- Furniture is now delivered in boxes that players can open to place and later repack as needed.
+- Added support for multiple checkout counters.
+- Hiring multiple employees of the same type is now possible.
+
+New Features:
+- Introduced a financial system covering bills and loans, accessible through the PC's Finance group.
+- Introduced cleaning system.
+
+Version 1.2.1
+Bug Fixes:
+- Fixed issues where the Stocker could stop working properly when interrupted by player actions, such as moving shelving units or removing product labels mid-task.
+- Fixed errors of Sorter and Stocker can't be hired after purchasing Expansion F and beyond.
+- Fixed an issue where the Janitor would sometimes target an empty box thrown by the player if it was too close.
+- Fixed an issue where Customers would occasionally walk through the warehouse when entering or exiting the store.
+- Fixed DOTween-related error when exiting play mode in the editor.
+- Fixed an issue where picking up a box and quickly throwing it would cause the box to teleport to the coordinates (0, 0, 0).
+- Fixed screen tearing on Windows Standalone build.
+
+Changes:
+- Added a flag in the VirtualKeyboard component that allows you to enable or disable it in PC control mode.
+- Added dropdown filters to Product and Furniture screens for easier browsing by category and section.
+- Added support for License as a mission goal.
+
+Version 1.2.0
+Bug Fixes:
+- Fridge class now correctly handles models with only a right door.
+- Fixed an issue where boxes left in a previously inaccessible area with a collider (such as an expansion) would collide and be forcefully displaced when the expansion was purchased and the game was reloaded.
+- Fixed incorrect panel starting position in 'PanelToggle' when 'startVisible' is false.
+- Fixed errors when opening Settings Window from Main Menu.
+
+Changes:
+- Virtual keyboard is now disabled in PC control mode and instead reads directly from keyboard inputs.
+- Background music now plays as a sequential playlist, looping through multiple tracks instead of a single BGM for the entire game session.
+- Messages are now queued and displayed one at a time instead of being instantly replaced.
+- Employees are now hired indefinitely until the player decides to fire them. Wages are deducted at the start of each business day, and employees are auto-fired if funds are insufficient.
+- Added an option to require another license as a prerequisite for unlocking a new license.
+- 'Delete Saved Game Tool' has been replaced with 'Save File Manager' to reflect support for multiple save files.
+- Added an undo button to the Cash Register UI, allowing the latest given change to be retracted.
+- Introduced a constraint mechanism in 'Product' to independently control the number of products inside containers (both boxes and shelves), rather than relying solely on product volume and container size.
+- Added 'Shift Up' and 'Shift Down' buttons to the Mission Manager editor window.
+
+New Features:
+- Added Warehouse (Storage Room) unlocked via expansion.
+- Added new employee types: Janitor, Sorter, and Stocker.
+- Added multiple saved game slots.
+- Added pause menu.
+
+Version 1.1.0
+Bug Fixes:
+- Fixed incorrect amount parsing in the payment terminal due to locale differences.
+- Fixed AM/PM time formatting issues caused by locale differences.
+- Fixed errors when creating and renumbering missions.
+
+New Feature:
+Added a setting in GameConfig to easily switch between Mobile and PC controls.
+
+Version 1.0.0
+First release

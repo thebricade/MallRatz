@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ea9e0bed20c594a468daa5d8893c9028
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-French
+    (fr).asset
+  uploadId: 897610

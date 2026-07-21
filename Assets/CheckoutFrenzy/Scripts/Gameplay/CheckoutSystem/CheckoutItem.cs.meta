@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d1c6e220ee771c64aa955133eaf8045f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Scripts/Gameplay/CheckoutSystem/CheckoutItem.cs
+  uploadId: 897610

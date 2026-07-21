@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 181b3f7938230d843af23ebfff62b631
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Animations/Clips/SweepFloor.anim
+  uploadId: 897610

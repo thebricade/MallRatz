@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 685e34a9c16cb1e429bcb28b9f3228e6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Props/SafetyBarrier.prefab
+  uploadId: 897610

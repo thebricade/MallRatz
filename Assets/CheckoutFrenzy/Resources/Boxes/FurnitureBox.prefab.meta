@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 170bcc221b0d55f41bef00c86891ab4b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Boxes/FurnitureBox.prefab
+  uploadId: 897610

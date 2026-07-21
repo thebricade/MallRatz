@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e2954f145b4a40a48b080c993351000b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Products/Cereal01_B.prefab
+  uploadId: 897610

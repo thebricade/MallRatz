@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Message_pt
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt
+  m_SharedData: {fileID: 11400000, guid: 444d198365119b04097e3500dde396db, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1209035440128
+    m_Localized: "J\xE1 h\xE1 um caixa trabalhando aqui."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2573031489536
+    m_Localized: "Troco insuficiente. Por favor, forne\xE7a o valor correto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3124343390208
+    m_Localized: "Valor inv\xE1lido. Por favor, insira um valor v\xE1lido."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83409761492992
+    m_Localized: "N\xE3o \xE9 poss\xEDvel colocar m\xF3veis aqui!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91272345051136
+    m_Localized: "N\xE3o \xE9 poss\xEDvel jogar o objeto aqui!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91565879222272
+    m_Localized: "Esta prateleira est\xE1 atribu\xEDda a um produto diferente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91838072774656
+    m_Localized: "O produto n\xE3o pertence a esta se\xE7\xE3o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91979538259968
+    m_Localized: "A prateleira cont\xE9m um produto diferente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 661342849646592
+    m_Localized: "A prateleira est\xE1 cheia!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92224317841408
+    m_Localized: "A caixa est\xE1 cheia."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92318307999744
+    m_Localized: "A caixa cont\xE9m um produto diferente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92423127851008
+    m_Localized: "Tamanho de caixa incompat\xEDvel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92578585534464
+    m_Localized: "O rack cont\xE9m um produto diferente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 683213758447616
+    m_Localized: "O rack est\xE1 cheio!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 457185107927040
+    m_Localized: "Subiu de n\xEDvel!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467368643158016
+    m_Localized: '{0} contratado com sucesso!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467478592643072
+    m_Localized: '{0} demitido!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467651964198912
+    m_Localized: "Desbloqueie o armaz\xE9m primeiro!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467988183801856
+    m_Localized: "Nenhum balc\xE3o dispon\xEDvel para este Caixa!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 468400232226816
+    m_Localized: "Nenhum ponto dispon\xEDvel para este {EmployeeType}!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467813864333312
+    m_Localized: "Voc\xEA n\xE3o tem dinheiro suficiente!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498326742261760
+    m_Localized: "Este empr\xE9stimo j\xE1 est\xE1 ativo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652818342002688
+    m_Localized: Recompensa coletada!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670737037836288
+    m_Localized: "O carrinho est\xE1 vazio!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670795917475840
+    m_Localized: "Compra conclu\xEDda!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

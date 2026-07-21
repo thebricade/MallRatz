@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Interaction_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: b5744b4a2dc01be4192d33ed9049b260, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 6202332578967715846
+  m_TableData:
+  - m_Id: 2785032585216
+    m_Localized: "Trabaja aqu\xED como cajero."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9255379845120
+    m_Localized: '{0:Cerrar|Abrir} la puerta.'
+    m_Metadata:
+      m_Items:
+      - rid: 6202332578967715846
+  - m_Id: 16381984686080
+    m_Localized: Enciende la PC.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18084079386624
+    m_Localized: "Mant\xE9n pulsado para mover este mueble."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20942464008192
+    m_Localized: Recoge la caja.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22983454277632
+    m_Localized: Limpia el desorden.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25006887190528
+    m_Localized: Abrir o cerrar la tienda.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25725337911296
+    m_Localized: Cambiar nombre de la tienda.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27505501192192
+    m_Localized: "Golpea al ladr\xF3n!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6202332578967715846
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 9255379845120

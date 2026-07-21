@@ -1,0 +1,305 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_pt
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt
+  m_SharedData: {fileID: 11400000, guid: 442dc6d9b89497e45a98cd0986238638, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1738536960000
+    m_Localized: Arremessar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 135125843968
+    m_Localized: Abrir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5779706920960
+    m_Localized: Fechar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6243156541440
+    m_Localized: Colocar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7879551664128
+    m_Localized: Pegar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9036336513024
+    m_Localized: "Definir Pre\xE7o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9140829208576
+    m_Localized: Definir Etiqueta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10710329376768
+    m_Localized: Voltar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9320446083072
+    m_Localized: Rotacionar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9393561190400
+    m_Localized: Empacotar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1153144901099520
+    m_Localized: Confirmar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1370920730017792
+    m_Localized: Continuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1016198441517056
+    m_Localized: Dia {0}, {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1022752226066432
+    m_Localized: "N\xEDvel {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1025149052698624
+    m_Localized: "Pr\xF3xima Entrega:\n{0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058788964614144
+    m_Localized: Nome
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058792009678848
+    m_Localized: Quantidade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058794027139072
+    m_Localized: Tamanho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058795801329664
+    m_Localized: "Se\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058798049476608
+    m_Localized: "Pre\xE7o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074539784093696
+    m_Localized: Nenhum cliente chega durante a noite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074610864963584
+    m_Localized: "Pular para o Pr\xF3ximo Dia"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094931315736576
+    m_Localized: "Miss\xE3o #{0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094969811058688
+    m_Localized: "Miss\xE3o n\xE3o dispon\xEDvel.\nPor favor, aguarde uma nova atualiza\xE7\xE3o!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094976215760896
+    m_Localized: 'Coletar Recompensa:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094976983318528
+    m_Localized: Realizar Pagamento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094977692155904
+    m_Localized: Coletar Receita
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094978493267968
+    m_Localized: Vender Produto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094979206299648
+    m_Localized: Repor Produto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094980003217408
+    m_Localized: Mobiliar a Loja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094982360416256
+    m_Localized: "Possuir Licen\xE7a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1152459388248064
+    m_Localized: "Pre\xE7o Atual: {0}{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1152594180595712
+    m_Localized: "Pre\xE7o de Mercado: {0}{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1152622597005312
+    m_Localized: 'Lucro: {0}{1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1361165991067648
+    m_Localized: Atribuir Etiqueta de Produto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1361176015454208
+    m_Localized: "Voc\xEA n\xE3o tem um produto adequado no armaz\xE9m para esta
+      prateleira. Por favor, abaste\xE7a primeiro!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1361371163836416
+    m_Localized: Remover Etiqueta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1366409034645504
+    m_Localized: Caixa Registradora
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1366465330593792
+    m_Localized: Terminal de Pagamento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1377419191697408
+    m_Localized: RESUMO DE HOJE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1377451513004032
+    m_Localized: 'Total de Clientes
+
+      Saldo Anterior
+
+      - Receita Total
+
+      -
+      Gastos Totais
+
+      Saldo Atual'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1379344209461248
+    m_Localized: Voltar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1379882204446720
+    m_Localized: "Espa\xE7o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1379903108857856
+    m_Localized: Enter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390561074397184
+    m_Localized: Pausado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390590954618880
+    m_Localized: Retomar Jogo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390675822166016
+    m_Localized: Salvar Jogo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390704205021184
+    m_Localized: "Abrir Configura\xE7\xF5es"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390733661618176
+    m_Localized: Menu Principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390767685812224
+    m_Localized: Sair do Jogo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1391726193328128
+    m_Localized: O jogo foi salvo com sucesso!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1395388974153728
+    m_Localized: "Configura\xE7\xF5es"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1395425946943488
+    m_Localized: "Volume da M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1395470939242496
+    m_Localized: Volume dos Efeitos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1395503390572544
+    m_Localized: "Exibir mensagem de intera\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1414889342025728
+    m_Localized: Iniciar Novo Jogo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1414956639633408
+    m_Localized: Carregar Jogo Salvo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1414988650561536
+    m_Localized: Excluir Jogo Salvo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418363748270080
+    m_Localized: "Espa\xE7o {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418457180585984
+    m_Localized: "Este espa\xE7o est\xE1 vazio!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418591733858304
+    m_Localized: '{0}
+
+      Tempo de jogo: {1:N1} horas
+
+      Saldo: {2}{3:N2}
+
+      Salvo
+      em: {4:dd/MM/yyyy HH:mm}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157082662977536
+    m_Localized: "Confirmar Exclus\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2155739609088000
+    m_Localized: "Voc\xEA realmente deseja excluir o jogo salvo no Espa\xE7o {0}?\nEsta
+      a\xE7\xE3o \xE9 permanente e n\xE3o pode ser desfeita!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157144931614720
+    m_Localized: CANCELAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157182512578560
+    m_Localized: CONFIRMAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4286167186980864
+    m_Localized: Selecionar idioma
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

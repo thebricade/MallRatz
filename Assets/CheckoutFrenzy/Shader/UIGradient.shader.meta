@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 58d019ee3e9f269468fbf3666633d074
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Shader/UIGradient.shader
+  uploadId: 897610

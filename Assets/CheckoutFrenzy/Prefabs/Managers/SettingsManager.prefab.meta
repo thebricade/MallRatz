@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 02d963371ce48df4abb2085077783db3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Managers/SettingsManager.prefab
+  uploadId: 897610

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1f4fe04bef2c0c74caaa56fa0019e5b5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Buildings/Window_Partition.prefab
+  uploadId: 897610

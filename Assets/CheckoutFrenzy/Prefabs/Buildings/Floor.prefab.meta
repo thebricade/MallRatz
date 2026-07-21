@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9768cc27d85cd854db8e10e615dceb85
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Buildings/Floor.prefab
+  uploadId: 897610
