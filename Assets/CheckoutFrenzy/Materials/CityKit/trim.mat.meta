@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6929c79d586aa024c877df31323b22e2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Materials/CityKit/trim.mat
+  uploadId: 897610

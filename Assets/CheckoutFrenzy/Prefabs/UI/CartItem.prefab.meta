@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5c3f6d8c8a5570a49905428add28fba9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/UI/CartItem.prefab
+  uploadId: 897610

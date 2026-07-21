@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aa5c6e3f33f481d43aec75a5fd9634d2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Animations/Clips/Walk.anim
+  uploadId: 897610

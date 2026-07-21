@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2f89cce1dd8d3bf478eae552e4bb7f86
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Shelf.prefab
+  uploadId: 897610

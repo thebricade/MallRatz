@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 14b01b69cae95a645ae41ca24423cdfd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Animations/Clips/PickMedium.anim
+  uploadId: 897610

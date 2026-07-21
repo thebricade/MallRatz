@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Message_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 444d198365119b04097e3500dde396db, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1209035440128
+    m_Localized: "Ya hay un cajero trabajando aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2573031489536
+    m_Localized: Cambio insuficiente. Por favor, proporcione la cantidad correcta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3124343390208
+    m_Localized: "Cantidad inv\xE1lida. Por favor, introduzca una cantidad v\xE1lida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83409761492992
+    m_Localized: "No se pueden colocar muebles aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91272345051136
+    m_Localized: "\xA1No puedes lanzar el objeto aqu\xED!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91565879222272
+    m_Localized: "Este estante est\xE1 asignado a un producto diferente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91838072774656
+    m_Localized: "El producto no pertenece a esta secci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91979538259968
+    m_Localized: El estante contiene un producto diferente.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92224317841408
+    m_Localized: "La caja est\xE1 llena."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92318307999744
+    m_Localized: La caja contiene un producto diferente.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92423127851008
+    m_Localized: "Tama\xF1o de caja incompatible."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92578585534464
+    m_Localized: El estante de almacenamiento contiene un producto diferente.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 457185107927040
+    m_Localized: "\xA1Subes de nivel!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467368643158016
+    m_Localized: "\xA1{0} contratado con \xE9xito!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467478592643072
+    m_Localized: "\xA1{0} despedido!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467651964198912
+    m_Localized: "\xA1Desbloquea el almac\xE9n primero!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467813864333312
+    m_Localized: "\xA1No tienes suficiente dinero!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467988183801856
+    m_Localized: "\xA1No hay caja disponible para este Cajero!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 468400232226816
+    m_Localized: "\xA1No hay espacio disponible para este {EmployeeType}!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498326742261760
+    m_Localized: "Este pr\xE9stamo ya est\xE1 activo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652818342002688
+    m_Localized: "\xA1Recompensa obtenida!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 661342849646592
+    m_Localized: "\xA1La estanter\xEDa est\xE1 llena!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670737037836288
+    m_Localized: "\xA1El carrito est\xE1 vac\xEDo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670795917475840
+    m_Localized: "\xA1Compra completada!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 683213758447616
+    m_Localized: "\xA1El rack est\xE1 lleno!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

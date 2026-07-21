@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 97648bab931cde248acafe096a95d84b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Products/Juice01_A.prefab
+  uploadId: 897610

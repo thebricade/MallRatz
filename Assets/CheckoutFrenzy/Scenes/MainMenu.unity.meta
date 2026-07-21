@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8a09cccff1b6ac04f9c44d21b75b4efb
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Scenes/MainMenu.unity
+  uploadId: 897610

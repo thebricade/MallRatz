@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 73ebf3b587494e4459f86f5a4143e54e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Men/Swat.prefab
+  uploadId: 897610

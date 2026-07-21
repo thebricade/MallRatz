@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d98505dcc3429494b867751a3bcdd1d8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Animations/Clips/Hit.anim
+  uploadId: 897610

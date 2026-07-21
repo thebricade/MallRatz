@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Message_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 444d198365119b04097e3500dde396db, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1209035440128
+    m_Localized: A cashier is already working here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2573031489536
+    m_Localized: Insufficient change. Please provide the correct amount.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3124343390208
+    m_Localized: Invalid amount. Please enter a valid amount.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83409761492992
+    m_Localized: Can't place furniture here!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91272345051136
+    m_Localized: Can't throw object here!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91565879222272
+    m_Localized: This shelf is assigned to a different product.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91838072774656
+    m_Localized: Product doesn't belong in this section.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91979538259968
+    m_Localized: Shelf contains a different product.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92224317841408
+    m_Localized: Box is full.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92318307999744
+    m_Localized: Box contains a different product.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92423127851008
+    m_Localized: Incompatible box size.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92578585534464
+    m_Localized: Rack contains a different product.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 457185107927040
+    m_Localized: Level Up!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467368643158016
+    m_Localized: '{0} hired successfully!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467478592643072
+    m_Localized: '{0} fired!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467651964198912
+    m_Localized: Unlock the warehouse first!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467813864333312
+    m_Localized: You don't have enough money!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467988183801856
+    m_Localized: No counter available for this Cashier!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 468400232226816
+    m_Localized: No point available for this {EmployeeType}!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498326742261760
+    m_Localized: This loan is already active.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652818342002688
+    m_Localized: Reward collected!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 661342849646592
+    m_Localized: Shelf is full!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670737037836288
+    m_Localized: Cart is empty!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670795917475840
+    m_Localized: Checkout complete!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 683213758447616
+    m_Localized: Rack is full!
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

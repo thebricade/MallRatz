@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: aed37ade3286ec3429067d66c578e822
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/CityKit/small_buildingF.prefab
+  uploadId: 897610

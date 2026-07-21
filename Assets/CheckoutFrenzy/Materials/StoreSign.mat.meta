@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d9af8b6ac2258c448a0727be6f6cbea4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Materials/StoreSign.mat
+  uploadId: 897610

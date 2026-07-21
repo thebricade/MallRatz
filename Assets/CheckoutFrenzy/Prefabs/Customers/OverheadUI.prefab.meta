@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fa0537747b90f564a9e0f90fb9a7acaa
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/OverheadUI.prefab
+  uploadId: 897610

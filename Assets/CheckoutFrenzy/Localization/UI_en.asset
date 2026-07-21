@@ -1,0 +1,311 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 442dc6d9b89497e45a98cd0986238638, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 135125843968
+    m_Localized: Open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1738536960000
+    m_Localized: Throw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5779706920960
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6243156541440
+    m_Localized: Place
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7879551664128
+    m_Localized: Take
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9036336513024
+    m_Localized: Set Price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9140829208576
+    m_Localized: Set Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9320446083072
+    m_Localized: Rotate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9393561190400
+    m_Localized: Pack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10710329376768
+    m_Localized: Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1016198441517056
+    m_Localized: Day {0}, {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1022752226066432
+    m_Localized: Level {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1025149052698624
+    m_Localized: 'Next Delivery:
+
+      {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058788964614144
+    m_Localized: Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058792009678848
+    m_Localized: Quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058794027139072
+    m_Localized: Size
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058795801329664
+    m_Localized: Section
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058798049476608
+    m_Localized: Price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074539784093696
+    m_Localized: No customers arrive during the night
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074610864963584
+    m_Localized: Skip To The Next Day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094931315736576
+    m_Localized: Mission #{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094969811058688
+    m_Localized: 'Mission not available.
+
+      Please wait for new update!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094976215760896
+    m_Localized: 'Collect Reward:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094976983318528
+    m_Localized: Perform Checkout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094977692155904
+    m_Localized: Collect Revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094978493267968
+    m_Localized: Sell Product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094979206299648
+    m_Localized: Restock Product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094980003217408
+    m_Localized: Furnish The Store
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094982360416256
+    m_Localized: Own License
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1152459388248064
+    m_Localized: 'Current Price: {0}{1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1152594180595712
+    m_Localized: 'Market Price: {0}{1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1152622597005312
+    m_Localized: 'Profit: {0}{1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1153144901099520
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1361165991067648
+    m_Localized: Assign Product Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1361371163836416
+    m_Localized: Remove Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1361176015454208
+    m_Localized: You don't have a suitable product in the warehouse for this shelf.
+      Please stock up first!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1366409034645504
+    m_Localized: Cash Register
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1366465330593792
+    m_Localized: Payment Terminal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1370920730017792
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1377419191697408
+    m_Localized: TODAY'S SUMMARY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1377451513004032
+    m_Localized: 'Total Customers
+
+      Previous Balance
+
+      - Total Revenues
+
+      -
+      Total Spending
+
+      Current Balance'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1379344209461248
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1379882204446720
+    m_Localized: Space
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1379903108857856
+    m_Localized: Enter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390561074397184
+    m_Localized: Paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390590954618880
+    m_Localized: Resume Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390675822166016
+    m_Localized: Save Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390704205021184
+    m_Localized: Open Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390733661618176
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390767685812224
+    m_Localized: Quit Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1391726193328128
+    m_Localized: The game has been successfully saved!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1395388974153728
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1395425946943488
+    m_Localized: BGM Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1395470939242496
+    m_Localized: SFX Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1395503390572544
+    m_Localized: Display interaction message
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1414889342025728
+    m_Localized: Start New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1414956639633408
+    m_Localized: Load Saved Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1414988650561536
+    m_Localized: Delete Saved Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418363748270080
+    m_Localized: Slot {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418457180585984
+    m_Localized: This slot is empty!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418591733858304
+    m_Localized: '{0}
+
+      Playtime: {1:N1} hours
+
+      Balance: {2}{3:N2}
+
+      Saved:
+      {4:MM/dd/yyyy hh:mm tt}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2155739609088000
+    m_Localized: 'Do you really want to delete the saved game in Slot {0}?
+
+      This
+      action is permanent and cannot be undone!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157082662977536
+    m_Localized: Confirm Deletion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157144931614720
+    m_Localized: CANCEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157182512578560
+    m_Localized: CONFIRM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4286167186980864
+    m_Localized: Select Language
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

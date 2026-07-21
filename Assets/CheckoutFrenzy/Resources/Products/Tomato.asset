@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f49036b8225cab4f82b851d29f28a73, type: 3}
+  m_Name: Tomato
+  m_EditorClassIdentifier: 
+  productId: 16
+  category: 0
+  name: Tomato
+  icon: {fileID: 21300000, guid: 482faca2910a897469d08bd7afd67c9e, type: 3}
+  priceInCents: 269
+  orderTime: 5
+  section: 4
+  model: {fileID: 4983762277572070395, guid: a6e6ab33d9e9c8946bb9f9b5df92ccf0, type: 3}
+  box: {fileID: 3931414233478882686, guid: a428b304e21062c4b8c8e1c6240242c1, type: 3}
+  overrideBoxQuantity: 0
+  boxQuantity: {x: 0, y: 0, z: 0}
+  overrideShelfQuantity: 0
+  shelfQuantity: {x: 0, y: 0, z: 0}

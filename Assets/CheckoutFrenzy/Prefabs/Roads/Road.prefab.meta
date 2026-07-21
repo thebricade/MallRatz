@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c1a0dbdb581a64f48925ff1276cba2ce
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Roads/Road.prefab
+  uploadId: 897610

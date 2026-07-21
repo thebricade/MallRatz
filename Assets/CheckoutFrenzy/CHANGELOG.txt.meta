@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ded16a34b1a26a34092f7740ca9cccd7
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/CHANGELOG.txt
+  uploadId: 897610

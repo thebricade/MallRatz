@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f49036b8225cab4f82b851d29f28a73, type: 3}
+  m_Name: Supplement01
+  m_EditorClassIdentifier: 
+  productId: 23
+  category: 3
+  name: Promax Protein Powder
+  icon: {fileID: 21300000, guid: 58dea56f7a874a74c8b274d97a7ce3ff, type: 3}
+  priceInCents: 2855
+  orderTime: 5
+  section: 1
+  model: {fileID: 4899160590660239579, guid: 2d5b91c193cbc2a44934bcaf4f5629a9, type: 3}
+  box: {fileID: 4573207970909738545, guid: 6ad69ebc1db2efc48b9a69f9c4f3f0d6, type: 3}
+  overrideBoxQuantity: 0
+  boxQuantity: {x: 0, y: 0, z: 0}
+  overrideShelfQuantity: 0
+  shelfQuantity: {x: 0, y: 0, z: 0}

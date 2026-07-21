@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cf67a9ea67b2a614aa1de5c888330242
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Men/Casual_2.prefab
+  uploadId: 897610

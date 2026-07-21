@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 64445ca5da4972c419540c1bbc4fbd6e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Scenes/GameSettings.lighting
+  uploadId: 897610

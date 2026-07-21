@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fa2f31b0d10c65949b68ef422800ef90
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Cleaning/CleaningTools/BroomOutdoor.prefab
+  uploadId: 897610

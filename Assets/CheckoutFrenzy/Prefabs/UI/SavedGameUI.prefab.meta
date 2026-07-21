@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c45e225b0f4cfa944b97f117e3ae076d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/UI/SavedGameUI.prefab
+  uploadId: 897610

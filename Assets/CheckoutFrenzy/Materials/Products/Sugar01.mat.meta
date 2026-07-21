@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a35f494b6b3283544975920d78b77ec5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Materials/Products/Sugar01.mat
+  uploadId: 897610

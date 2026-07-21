@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2774b3ca1f9b11441b0dc52a449840fe
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/ScriptableObjects/BillTemplates/Salary_Janitor.asset
+  uploadId: 897610

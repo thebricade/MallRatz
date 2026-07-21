@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6367a3ce778e3dd4db18960ce01571cb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Products/Egg01.prefab
+  uploadId: 897610

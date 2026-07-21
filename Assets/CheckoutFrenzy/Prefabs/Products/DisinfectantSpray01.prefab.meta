@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 711bbd1a36331eb49b3ee0b128be4a8a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Products/DisinfectantSpray01.prefab
+  uploadId: 897610

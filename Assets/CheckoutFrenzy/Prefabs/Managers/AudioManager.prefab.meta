@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2cef75284113cbe47bed34bcc82b6b33
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Managers/AudioManager.prefab
+  uploadId: 897610

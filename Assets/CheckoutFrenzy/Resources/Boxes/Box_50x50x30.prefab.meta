@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6ad69ebc1db2efc48b9a69f9c4f3f0d6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Boxes/Box_50x50x30.prefab
+  uploadId: 897610

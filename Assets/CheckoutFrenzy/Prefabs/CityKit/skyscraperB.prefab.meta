@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 67d8ed31e532b4646b94b82f120ff956
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/CityKit/skyscraperB.prefab
+  uploadId: 897610

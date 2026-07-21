@@ -1,0 +1,301 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Monitor Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Monitor
+  m_TableCollectionNameGuidString: 795bb12153a462845acb652347f2d4d9
+  m_Entries:
+  - m_Id: 74564888715264
+    m_Key: Desktop_Shortcut_Market
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74725559918592
+    m_Key: Desktop_Shortcut_Manage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74757302411264
+    m_Key: Desktop_Shortcut_Finance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78177774100480
+    m_Key: Tab_Product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78260301225984
+    m_Key: Tab_Furniture
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78291100000256
+    m_Key: Tab_Cart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78334582349824
+    m_Key: Tab_License
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78363749539840
+    m_Key: Tab_Expansion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78413066166272
+    m_Key: Tab_Employee
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78457932636160
+    m_Key: Tab_Bill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78485573099520
+    m_Key: Tab_Loan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78486487457792
+    m_Key: Tab_Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82017063821312
+    m_Key: Hint_Category
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82043995447296
+    m_Key: Hint_Section
+    m_Metadata:
+      m_Items: []
+  - m_Id: 305227662147584
+    m_Key: Cart_ProductName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 305257718530048
+    m_Key: Cart_Quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 305309253943296
+    m_Key: Cart_Total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306819706699776
+    m_Key: Cart_Button_Clear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306823959724032
+    m_Key: Cart_Button_Checkout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328991808471040
+    m_Key: Finance_OutstandingBills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326334523949056
+    m_Key: Finance_PayAllBills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326336788873216
+    m_Key: Finance_ActiveLoans
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345454451671040
+    m_Key: Finance_LoanProgress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345693598302208
+    m_Key: Finance_NoLoans
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357249266532352
+    m_Key: ProductListing_Section
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357251539845120
+    m_Key: ProductListing_Price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357252747804672
+    m_Key: ProductListing_Amount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357429911011328
+    m_Key: ProductListing_Total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357448399503360
+    m_Key: ProductListing_Quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357474173501440
+    m_Key: ProductListing_AddToCart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647876084547584
+    m_Key: LicenseListing_ProductsLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647262998937600
+    m_Key: LicenseListing_Availability
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647344049668096
+    m_Key: LicenseListing_LevelRequirement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647590100123648
+    m_Key: LicenseListing_LicenseRequirement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 648132507516928
+    m_Key: LicenseListing_Purchase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 649797029642240
+    m_Key: LicenseListing_Owned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692776406663168
+    m_Key: ExpansionListing_UnlockWarehouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692810292445184
+    m_Key: ExpansionListing_AddRoom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692813446561792
+    m_Key: ExpansionListing_CustomerCapacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692815224946688
+    m_Key: ExpansionListing_PreviousPurchased
+    m_Metadata:
+      m_Items: []
+  - m_Id: 693475169320960
+    m_Key: ExpansionListing_PurchasePrevious
+    m_Metadata:
+      m_Items: []
+  - m_Id: 693672368717824
+    m_Key: ExpansionListing_AlreadyOwned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 747088851812352
+    m_Key: EmployeeListing_Cost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 747094325379072
+    m_Key: EmployeeListing_Salary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 747097081036800
+    m_Key: EmployeeListing_HireStatus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156093100834816
+    m_Key: Bill_Issue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156161656733696
+    m_Key: Bill_Due
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156211069829120
+    m_Key: Bill_Status_Paid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156424786395136
+    m_Key: Bill_Status_DueTomorrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156483204661248
+    m_Key: Bill_Status_DueToday
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156642491744256
+    m_Key: Bill_Status_DaysLeft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156770933915648
+    m_Key: Bill_Status_GraceTomorrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156814273658880
+    m_Key: Bill_Status_GraceToday
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156901599068160
+    m_Key: Bill_Status_GraceDaysLeft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156992116342784
+    m_Key: Bill_Status_Overdue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157078254764032
+    m_Key: Bill_Penalty_Overdue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157118243258368
+    m_Key: Bill_Penalty_Grace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2158411833720832
+    m_Key: Bill_Button_Pay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2166921900376064
+    m_Key: Loan_Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2167723893243904
+    m_Key: Loan_Unlock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2168809794355200
+    m_Key: Loan_Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2168883391807488
+    m_Key: Loan_Take
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2190759400882176
+    m_Key: PC_Standby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2190786726772736
+    m_Key: PC_Booting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2199278544011264
+    m_Key: Counter_Placing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2199474002771968
+    m_Key: Counter_Scanning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2199556546674688
+    m_Key: Counter_CashPay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2199662645788672
+    m_Key: Counter_CardPay
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6202332602107428870
+  references:
+    version: 2
+    RefIds:
+    - rid: 6202332602107428870
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1774945449795

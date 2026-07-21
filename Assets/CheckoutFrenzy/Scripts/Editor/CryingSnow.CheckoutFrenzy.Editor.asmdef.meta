@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d33477ad8f960e64da26761f6d296330
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Scripts/Editor/CryingSnow.CheckoutFrenzy.Editor.asmdef
+  uploadId: 897610

@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Message_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 444d198365119b04097e3500dde396db, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1209035440128
+    m_Localized: "Un caissier travaille d\xE9j\xE0 ici."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2573031489536
+    m_Localized: Monnaie insuffisante. Veuillez fournir le montant correct.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3124343390208
+    m_Localized: Montant invalide. Veuillez entrer un montant valide.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83409761492992
+    m_Localized: Impossible de placer des meubles ici !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91272345051136
+    m_Localized: Impossible de jeter l'objet ici !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91565879222272
+    m_Localized: "Cette \xE9tag\xE8re est assign\xE9e \xE0 un produit diff\xE9rent."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91838072774656
+    m_Localized: "Le produit n'appartient pas \xE0 cette section."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91979538259968
+    m_Localized: "L'\xE9tag\xE8re contient un produit diff\xE9rent."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 661342849646592
+    m_Localized: "L'\xE9tag\xE8re est pleine !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92224317841408
+    m_Localized: "La bo\xEEte est pleine."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92318307999744
+    m_Localized: "La bo\xEEte contient un produit diff\xE9rent."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92423127851008
+    m_Localized: "Taille de bo\xEEte incompatible."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92578585534464
+    m_Localized: "Le rack contient un produit diff\xE9rent."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 683213758447616
+    m_Localized: Le rack est plein !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 457185107927040
+    m_Localized: "Niveau sup\xE9rieur !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467368643158016
+    m_Localized: "{0} recrut\xE9 avec succ\xE8s !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467478592643072
+    m_Localized: "{0} licenci\xE9 !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467651964198912
+    m_Localized: "D\xE9verrouillez d'abord l'entrep\xF4t !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467988183801856
+    m_Localized: Aucun comptoir disponible pour ce caissier !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 468400232226816
+    m_Localized: Aucun emplacement disponible pour ce {EmployeeType} !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 467813864333312
+    m_Localized: Vous n'avez pas assez d'argent !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498326742261760
+    m_Localized: "Ce pr\xEAt est d\xE9j\xE0 actif."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652818342002688
+    m_Localized: "R\xE9compense r\xE9cup\xE9r\xE9e !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670737037836288
+    m_Localized: Le panier est vide !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670795917475840
+    m_Localized: "Paiement termin\xE9 !"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

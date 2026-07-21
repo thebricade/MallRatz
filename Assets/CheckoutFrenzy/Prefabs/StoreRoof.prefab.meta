@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 74299273ee11f20499ba6298917de40b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/StoreRoof.prefab
+  uploadId: 897610

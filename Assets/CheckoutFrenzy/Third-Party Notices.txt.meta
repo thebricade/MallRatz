@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 57e4ef49ee428c44a97126602dcdb1a9
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Third-Party Notices.txt
+  uploadId: 897610

@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Customer_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: a7ba446bad0fa4742a59ed3872cfeb37, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 3351683237010735108
+  m_TableData:
+  - m_Id: 28486444040192
+    m_Localized: "\xA1Ay! Mi billetera est\xE1 sufriendo.\nPasar\xE9 del {productName}
+      por ahora."
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735108
+  - m_Id: 28483789045760
+    m_Localized: "Tendr\xE9 que pensarlo.\nEl {productName} est\xE1 algo caro."
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735108
+  - m_Id: 28481809334272
+    m_Localized: "\xBFHay alguna oferta para el {productName}\no una alternativa
+      m\xE1s barata?"
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735108
+  - m_Id: 28481104691200
+    m_Localized: Es demasiado por un {productName}.
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735108
+  - m_Id: 28480471351296
+    m_Localized: "\xBFSeguro que ese es el precio correcto para el {productName}?"
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735108
+  - m_Id: 28479829622784
+    m_Localized: Este {productName} se sale un poco de mi presupuesto.
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735108
+  - m_Id: 28479095619584
+    m_Localized: "\xA1Guau, qu\xE9 caro!\n\xBFEl {productName} suele costar esto?"
+    m_Metadata:
+      m_Items:
+      - rid: 3351683237010735108
+  - m_Id: 145255088128
+    m_Localized: "Est\xE1 bien, est\xE1 bien... pagar\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18485176483840
+    m_Localized: "\xA1Oye, con calma! Lo devolver\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22180433805312
+    m_Localized: "Me atrapaste... lo pagar\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22192815390720
+    m_Localized: "\xA1No hace falta golpear! Fue un error..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22207277350912
+    m_Localized: "Por favor, no llames a la polic\xEDa. Pagar\xE9 ahora."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22222410399744
+    m_Localized: "T\xFA ganas. \xA1Pagar\xE9, lo juro!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22234892648448
+    m_Localized: "Por favor, no se lo digas a nadie. Pagar\xE9 ahora."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22251669864448
+    m_Localized: "Est\xE1 bien, est\xE1 bien, rel\xE1jate... lo devolver\xE9 todo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22263413915648
+    m_Localized: "Sin problemas. Lo devolver\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22277678743552
+    m_Localized: "\xA1Tranquilo! Pagar\xE9 por eso."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25994494787584
+    m_Localized: Uf, no encuentro nada por ninguna parte.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26010269564928
+    m_Localized: "\xBFD\xF3nde est\xE1? He buscado por todas partes..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26064367697920
+    m_Localized: "Se supone que lo tienen aqu\xED..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26071183441920
+    m_Localized: "Esta tienda es un desastre.\n\xBFC\xF3mo voy a encontrar algo?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26073293176832
+    m_Localized: "\xBFEn serio? \xBFNada?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26074366918656
+    m_Localized: 'Estoy perdiendo el tiempo.
+
+      Mejor me voy a otro lado.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26075272888320
+    m_Localized: "Tal vez deber\xEDa preguntar a alguien...\npero odio pedir ayuda."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26077726556160
+    m_Localized: Probablemente ni siquiera lo tienen en stock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26079135842304
+    m_Localized: "No volver\xE9 jam\xE1s a esta tienda."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26080410910720
+    m_Localized: No puedo creer que no encuentre lo que busco.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28482484617216
+    m_Localized: "\xA1No puedo pagar eso!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28483155705856
+    m_Localized: "\xA1Eso es un robo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28484464328704
+    m_Localized: "\xBFHay productos similares que sean m\xE1s econ\xF3micos?"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3351683237010735108
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 28486444040192
+        - id: 28483789045760
+        - id: 28481809334272
+        - id: 28481104691200
+        - id: 28480471351296
+        - id: 28479829622784
+        - id: 28479095619584

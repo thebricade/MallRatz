@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6e62e5d853e27f4479deace40939442e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/CityKit/large_buildingE.prefab
+  uploadId: 897610

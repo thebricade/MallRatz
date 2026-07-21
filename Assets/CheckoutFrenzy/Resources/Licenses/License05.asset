@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977fe4f7b3506cf4faa369161394f02d, type: 3}
+  m_Name: License05
+  m_EditorClassIdentifier: 
+  licenseId: 5
+  name: License E
+  price: 8000
+  level: 9
+  isOwnedByDefault: 0
+  products:
+  - {fileID: 11400000, guid: bd4f5cc354b53af4ea4614384e93b1dc, type: 2}
+  - {fileID: 11400000, guid: 6278e57e6afecd941b7182e563a3b620, type: 2}
+  - {fileID: 11400000, guid: b9ba5861875194a4c9d67bf0cf2ff490, type: 2}
+  - {fileID: 11400000, guid: b6668af24c1aa5b4e91e6e3cb4a8c962, type: 2}
+  requiredLicense: {fileID: 11400000, guid: cc9994319fee39343a87d2da6ca50774, type: 2}

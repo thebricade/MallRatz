@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 584911cc313fb1b429ec4e1e7c04b5d4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Products/BottledWater01_B.prefab
+  uploadId: 897610

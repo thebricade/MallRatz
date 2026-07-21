@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d1aa00c26d4ef14d8d9da529cc7705b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/ScriptableObjects/BillTemplates/Salary_Cashier.asset
+  uploadId: 897610

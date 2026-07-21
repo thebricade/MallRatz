@@ -1,0 +1,342 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Monitor_de
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: de
+  m_SharedData: {fileID: 11400000, guid: 795bb12153a462845acb652347f2d4d9, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 3351683259623538695
+  m_TableData:
+  - m_Id: 78291100000256
+    m_Localized: Warenkorb{0:cond:>0?<color=#FFB414> ({0})|}
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538695
+  - m_Id: 647262998937600
+    m_Localized: "{0:VERF\xDCGBAR|NICHT VERF\xDCGBAR}"
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538695
+  - m_Id: 647590100123648
+    m_Localized: '{0:Erfordert {0}|}'
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538695
+  - m_Id: 747094325379072
+    m_Localized: 'Gehalt: {0}{1:F0} / {2:plural:Tag|{} Tage}'
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538695
+  - m_Id: 747097081036800
+    m_Localized: '{0:cond:Entlassen|Einstellen}'
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538695
+  - m_Id: 2156093100834816
+    m_Localized: Ausgestellt\u00A0am Tag\u00A0{0}
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538695
+  - m_Id: 2156161656733696
+    m_Localized: "F\xE4llig\\u00A0am Tag\\u00A0{0}"
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538695
+  - m_Id: 2166921900376064
+    m_Localized: "{0:F0}%\n{1}\n{2}{3:F0} / {4:plural:Tag|{} Tage}\n{2}{5:F0}\n+{2}{6:F0}
+      / versp\xE4tet"
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538695
+  - m_Id: 2190786726772736
+    m_Localized: 'PC wird hochgefahren
+
+      Bitte warten...
+
+      <mspace=0.1>[{0}]</mspace>
+
+      {1}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74564888715264
+    m_Localized: Markt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74725559918592
+    m_Localized: Verwalten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74757302411264
+    m_Localized: Finanzen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78177774100480
+    m_Localized: Produkte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78260301225984
+    m_Localized: "M\xF6bel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78334582349824
+    m_Localized: Lizenzen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78363749539840
+    m_Localized: Erweiterung
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78413066166272
+    m_Localized: Mitarbeiter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78457932636160
+    m_Localized: Rechnungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78485573099520
+    m_Localized: Kredite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78486487457792
+    m_Localized: "Schlie\xDFen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82017063821312
+    m_Localized: "W\xE4hlen Sie eine Kategorie, um die angezeigten Produkte zu filtern:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82043995447296
+    m_Localized: "W\xE4hlen Sie einen Bereich, um die angezeigten M\xF6bel zu filtern:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 305227662147584
+    m_Localized: Produktname
+    m_Metadata:
+      m_Items: []
+  - m_Id: 305257718530048
+    m_Localized: Menge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 305309253943296
+    m_Localized: Gesamt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306819706699776
+    m_Localized: Leeren
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306823959724032
+    m_Localized: Bezahlen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328991808471040
+    m_Localized: 'Offene Rechnungen: {0} | Gesamtbetrag: {1}{2:N2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326334523949056
+    m_Localized: Alle Rechnungen bezahlen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326336788873216
+    m_Localized: Aktive Kredite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345454451671040
+    m_Localized: 'Fortschritt: {0} von {1} Rechnungen'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345693598302208
+    m_Localized: "Herzlichen Gl\xFCckwunsch!\nSie haben keine aktiven Kredite."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357249266532352
+    m_Localized: 'Bereich: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357251539845120
+    m_Localized: 'Preis: {0}{1:N2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357252747804672
+    m_Localized: 'Menge: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357429911011328
+    m_Localized: 'Gesamt: {0}{1:N2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357448399503360
+    m_Localized: '{0} Stk/Packung'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357474173501440
+    m_Localized: In den Warenkorb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647876084547584
+    m_Localized: 'Erlaubnis zum Verkauf der folgenden Produkte:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647344049668096
+    m_Localized: Erfordert Stufe {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 648132507516928
+    m_Localized: Kaufen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 649797029642240
+    m_Localized: Sie besitzen diese Lizenz bereits.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692776406663168
+    m_Localized: Lager freischalten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692810292445184
+    m_Localized: "Mehr Platz f\xFCr Ihren Laden hinzuf\xFCgen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692813446561792
+    m_Localized: "Kundenkapazit\xE4t +{0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692815224946688
+    m_Localized: Vorherige Erweiterung gekauft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 693475169320960
+    m_Localized: Vorherige Erweiterung kaufen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 693672368717824
+    m_Localized: Sie besitzen diese Erweiterung bereits.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 747088851812352
+    m_Localized: 'Kosten: {0}{1:F0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156211069829120
+    m_Localized: Bezahlt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156424786395136
+    m_Localized: "Morgen f\xE4llig"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156483204661248
+    m_Localized: "Heute f\xE4llig"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156642491744256
+    m_Localized: Noch {0} Tage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156770933915648
+    m_Localized: Schonfrist endet morgen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156814273658880
+    m_Localized: Schonfrist endet heute
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156901599068160
+    m_Localized: Schonfrist ({0} Tage verbleibend)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2156992116342784
+    m_Localized: "\xDCberf\xE4llig"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157078254764032
+    m_Localized: + {0}{1:F0} = <b>{0}{2:F0}</b>
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157118243258368
+    m_Localized: Jetzt bezahlen oder + {0}{1:F0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2158411833720832
+    m_Localized: Rechnung bezahlen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2167723893243904
+    m_Localized: Freischaltung bei Stufe {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2168809794355200
+    m_Localized: "Zinssatz\nGesamtzahlungen\nZahlung\nGesamtr\xFCckzahlung\nStrafe
+      bei Verzug"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2168883391807488
+    m_Localized: Kredit aufnehmen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2190759400882176
+    m_Localized: Standby...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2199278544011264
+    m_Localized: Warten...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2199474002771968
+    m_Localized: 'Scannen...
+
+      <color=#00a4ff>Gesamt: {0}{1}</color>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2199556546674688
+    m_Localized: 'Barzahlung
+
+      <color=#00a4ff>Gesamt: {0}{1}</color>
+
+      Erhalten:
+      {0}{2}
+
+      <color=yellow>Wechselgeld: {0}{3}</color>
+
+      <color={4}>Geben:
+      {0}{5}</color>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2199662645788672
+    m_Localized: 'Kartenzahlung
+
+      <color=#00a4ff>Gesamt: {0}{1}</color>
+
+      Geben
+      Sie den Gesamtbetrag in das Zahlungsterminal ein.'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3351683259623538695
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 78291100000256
+        - id: 647262998937600
+        - id: 647590100123648
+        - id: 747094325379072
+        - id: 747097081036800
+        - id: 2156093100834816
+        - id: 2156161656733696
+        - id: 2166921900376064

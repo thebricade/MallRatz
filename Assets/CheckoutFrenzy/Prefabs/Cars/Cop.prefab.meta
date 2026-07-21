@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 769c808852330b849ac79ca8b1666d38
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Cars/Cop.prefab
+  uploadId: 897610

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b7c43988f464c294083f3f261feeb736
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Scripts/Core/CryingSnow.CheckoutFrenzy.Core.asmdef
+  uploadId: 897610

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b6c59cb2bab11db4d941157f240ab98a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Women/SciFi.prefab
+  uploadId: 897610

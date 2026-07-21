@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 601caaba1184da749a56a20e20152e0b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Resources/Furnitures/ShelvingUnit01.prefab
+  uploadId: 897610

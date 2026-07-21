@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4cf07e859647bfe45ba6e05d58734e3b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/Customers/Women/Soldier.prefab
+  uploadId: 897610

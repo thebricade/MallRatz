@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Customer_de
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: de
+  m_SharedData: {fileID: 11400000, guid: a7ba446bad0fa4742a59ed3872cfeb37, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 3351683259623538689
+  m_TableData:
+  - m_Id: 28479095619584
+    m_Localized: 'Wow, das ist teuer!
+
+      Ist {productName} normalerweise so teuer?'
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538689
+  - m_Id: 28479829622784
+    m_Localized: "Dieses {productName} liegt ein wenig au\xDFerhalb meines Budgets."
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538689
+  - m_Id: 28480471351296
+    m_Localized: "Sind Sie sicher, dass dies der richtige Preis f\xFCr {productName}
+      ist?"
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538689
+  - m_Id: 28481104691200
+    m_Localized: "Das ist viel zu viel f\xFCr ein {productName}."
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538689
+  - m_Id: 28481809334272
+    m_Localized: "Gibt es ein Angebot f\xFCr {productName}\noder eine g\xFCnstigere
+      Alternative?"
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538689
+  - m_Id: 28483789045760
+    m_Localized: "Dar\xFCber muss ich erst einmal nachdenken.\n{productName} ist
+      ein wenig teuer."
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538689
+  - m_Id: 28486444040192
+    m_Localized: "Autsch! Mein Geldbeutel weint.\nIch werde vorerst auf {productName}
+      verzichten m\xFCssen."
+    m_Metadata:
+      m_Items:
+      - rid: 3351683259623538689
+  - m_Id: 145255088128
+    m_Localized: In Ordnung, in Ordnung... ich werde bezahlen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18485176483840
+    m_Localized: "Wow, beruhige dich! Ich gebe es zur\xFCck."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22180433805312
+    m_Localized: "Du hast mich erwischt... ich bezahle daf\xFCr."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22192815390720
+    m_Localized: Nicht schlagen! Es war ein Fehler...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22207277350912
+    m_Localized: Bitte rufen Sie nicht die Polizei. Ich zahle jetzt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22222410399744
+    m_Localized: "Du hast gewonnen. Ich werde bezahlen, ich schw\xF6re es!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22234892648448
+    m_Localized: Bitte sag es niemandem. Ich werde jetzt bezahlen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22251669864448
+    m_Localized: "Okay, okay, ganz ruhig... ich werde alles zur\xFCckgeben."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22263413915648
+    m_Localized: "Kein Problem. Ich gebe es zur\xFCck."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22277678743552
+    m_Localized: "Ganz ruhig, Kumpel! Ich werde daf\xFCr bezahlen."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25994494787584
+    m_Localized: Ugh, ich kann nirgendwo etwas finden.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26010269564928
+    m_Localized: "Wo ist es? Ich habe \xFCberall gesucht..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26064367697920
+    m_Localized: Eigentlich sollten sie es hier haben...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26071183441920
+    m_Localized: 'Dieser Laden ist ein einziges Chaos.
+
+      Wie soll ich hier irgendetwas
+      finden?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26073293176832
+    m_Localized: Ernsthaft? Nichts?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26074366918656
+    m_Localized: 'Ich verschwende meine Zeit.
+
+      Ich sollte einfach woanders
+      hingehen.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26075272888320
+    m_Localized: 'Vielleicht sollte ich jemanden fragen...
+
+      aber ich hasse
+      es, um Hilfe zu bitten.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26077726556160
+    m_Localized: Wahrscheinlich haben sie es nicht einmal auf Lager.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26079135842304
+    m_Localized: Ich komme nie wieder in diesen Laden.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26080410910720
+    m_Localized: Ich kann nicht glauben, dass ich nicht finde, was ich suche.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28482484617216
+    m_Localized: Das kann ich mir nicht leisten!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28483155705856
+    m_Localized: Das ist reinster Wucher!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28484464328704
+    m_Localized: "\xC4hnliche Produkte, die erschwinglicher sind?"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3351683259623538689
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 28479095619584
+        - id: 28479829622784
+        - id: 28480471351296
+        - id: 28481104691200
+        - id: 28481809334272
+        - id: 28483789045760
+        - id: 28486444040192

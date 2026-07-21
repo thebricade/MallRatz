@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4168f3f3b1a2d7248b1591c9dc30c9fe
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Animations/Clips/Idle.anim
+  uploadId: 897610

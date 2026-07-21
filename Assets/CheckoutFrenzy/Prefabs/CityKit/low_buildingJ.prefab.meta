@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cbc3f1f6f8f9853418c7340f2cfdc777
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310321
+  packageName: Checkout Frenzy - Convenience Store Simulator
+  packageVersion: 2.0.0
+  assetPath: Assets/CheckoutFrenzy/Prefabs/CityKit/low_buildingJ.prefab
+  uploadId: 897610
