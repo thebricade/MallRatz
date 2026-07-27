@@ -58,6 +58,12 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private Sequence lidSequence;
         private Coroutine disablePhysicsRoutine;
 
+        /// <summary>
+        /// The shop this box currently sits within, resolved by world position since boxes are
+        /// spawned/thrown as root-level objects and can move between shops. Null if not within any shop.
+        /// </summary>
+        private StoreManager CurrentStore => StoreManager.GetStoreAt(transform.position);
+
         protected override void Awake()
         {
             base.Awake();
@@ -73,25 +79,26 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private IEnumerator Start()
         {
-            DataManager.Instance.OnSave += HandleOnSave;
+            var store = CurrentStore;
+            if (store != null) store.DataManager.OnSave += HandleOnSave;
 
-            yield return new WaitUntil(() => DataManager.Instance.IsLoaded);
+            yield return new WaitUntil(() => store == null || store.DataManager.IsLoaded);
 
             SetActivePhysics(true);
         }
 
         private void OnDestroy()
         {
-            if (DataManager.Instance != null)
+            if (CurrentStore != null && CurrentStore.DataManager != null)
             {
-                DataManager.Instance.OnSave -= HandleOnSave;
+                CurrentStore.DataManager.OnSave -= HandleOnSave;
             }
         }
 
         private void HandleOnSave()
         {
             var furnitureBoxData = new EntityData(this);
-            DataManager.Instance.Data.SavedFurnitureBoxes.Add(furnitureBoxData);
+            CurrentStore?.DataManager.Data.SavedFurnitureBoxes.Add(furnitureBoxData);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -246,7 +253,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void SpawnFurniture()
         {
-            var furniturePrefab = DataManager.Instance.GetFurnitureById(furnitureId);
+            var furniturePrefab = CurrentStore?.DataManager.GetFurnitureById(furnitureId);
 
             if (furniturePrefab == null)
             {
@@ -265,13 +272,13 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         #region Box Info
         public Sprite GetIcon()
         {
-            var content = DataManager.Instance.GetFurnitureById(furnitureId);
+            var content = CurrentStore?.DataManager.GetFurnitureById(furnitureId);
             return content?.Icon;
         }
 
         public IEnumerable<BoxDetail> GetDetails()
         {
-            var content = DataManager.Instance.GetFurnitureById(furnitureId);
+            var content = CurrentStore?.DataManager.GetFurnitureById(furnitureId);
             if (content == null) return new List<BoxDetail>();
 
             return new List<BoxDetail>

@@ -53,4 +53,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   maxCleanables: 10
-  controlMode: 0
+  controlMode: 1

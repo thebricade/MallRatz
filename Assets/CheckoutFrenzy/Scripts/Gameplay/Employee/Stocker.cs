@@ -32,13 +32,13 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         {
             if (shelfToStock == null)
             {
-                shelfToStock = StoreManager.Instance.GetShelfToStock();
+                shelfToStock = StoreManager.GetStoreAt(transform.position)?.GetShelfToStock();
                 if (shelfToStock != null) shelfToStock.IsTargeted = true;
             }
 
             if (sourceRack == null && shelfToStock != null)
             {
-                sourceRack = WarehouseManager.Instance.GetRackWithProduct(shelfToStock.AssignedProduct);
+                sourceRack = StoreManager.GetStoreAt(transform.position)?.WarehouseManager?.GetRackWithProduct(shelfToStock.AssignedProduct);
             }
         }
 

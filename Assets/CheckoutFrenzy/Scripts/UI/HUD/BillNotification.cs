@@ -31,19 +31,23 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void Start()
         {
-            FinanceManager.Instance.OnBillsUpdated += UpdateNotification;
-            FinanceManager.Instance.OnBillPaid += UpdateNotification;
-            FinanceManager.Instance.OnBillCreated += UpdateNotification;
+            var store = ClientShopContext.Instance.MyStore;
+            if (store == null) return;
+
+            store.FinanceManager.OnBillsUpdated += UpdateNotification;
+            store.FinanceManager.OnBillPaid += UpdateNotification;
+            store.FinanceManager.OnBillCreated += UpdateNotification;
             UpdateNotification();
         }
 
         private void OnDestroy()
         {
-            if (FinanceManager.Instance != null)
+            var store = ClientShopContext.Instance.MyStore;
+            if (store != null && store.FinanceManager != null)
             {
-                FinanceManager.Instance.OnBillsUpdated -= UpdateNotification;
-                FinanceManager.Instance.OnBillPaid -= UpdateNotification;
-                FinanceManager.Instance.OnBillCreated -= UpdateNotification;
+                store.FinanceManager.OnBillsUpdated -= UpdateNotification;
+                store.FinanceManager.OnBillPaid -= UpdateNotification;
+                store.FinanceManager.OnBillCreated -= UpdateNotification;
             }
 
             shakeTween?.Kill();
@@ -51,8 +55,11 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void UpdateNotification()
         {
-            var bills = DataManager.Instance.Data.Bills;
-            int today = DataManager.Instance.Data.TotalDays;
+            var store = ClientShopContext.Instance.MyStore;
+            if (store == null) return;
+
+            var bills = store.DataManager.Data.Bills;
+            int today = store.DataManager.Data.TotalDays;
 
             bool hasDueSoon = false;
             bool hasInGrace = false;

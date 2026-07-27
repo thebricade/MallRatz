@@ -1,0 +1,16 @@
+{
+    "name": "MallRatz.Multiplayer.Core",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b7c43988f464c294083f3f261feeb736"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

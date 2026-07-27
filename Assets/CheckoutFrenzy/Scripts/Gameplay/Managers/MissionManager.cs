@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -8,7 +8,9 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 {
     public class MissionManager : MonoBehaviour
     {
-        public static MissionManager Instance { get; private set; }
+        // No longer a singleton: one MissionManager instance lives on each ShopPlot,
+        // tracking that shop's own mission progress via its sibling DataManager.
+        private DataManager dataManager;
 
         [Header("Messages")]
         [SerializeField, Tooltip("Shown when the player collects the reward for completing a mission.")]
@@ -20,7 +22,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void Awake()
         {
-            Instance = this;
+            dataManager = GetComponent<DataManager>();
 
             // Create a dictionary with missionId as the key and Mission object as the value
             missionDict = Resources.LoadAll<Mission>("Missions")
@@ -42,7 +44,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             if (currentMission == null || currentMission.goalType != goalType) return;
 
             // Exit if the mission is already completed
-            if (DataManager.Instance.Data.CurrentMission.IsComplete) return;
+            if (dataManager.Data.CurrentMission.IsComplete) return;
 
             // Flag to track if the target item matches
             bool targetMatch = false;
@@ -54,7 +56,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             }
             else if (currentMission.goalType == MissionGoal.License)
             {
-                targetMatch = DataManager.Instance.Data.OwnedLicenses.Contains(currentMission.targetId);
+                targetMatch = dataManager.Data.OwnedLicenses.Contains(currentMission.targetId);
             }
             else
             {
@@ -63,17 +65,17 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             }
 
             // Update progress if the target matches
-            if (targetMatch) DataManager.Instance.Data.CurrentMission.Progress += progressAmount;
+            if (targetMatch) dataManager.Data.CurrentMission.Progress += progressAmount;
 
             // Clamp the progress to the goal amount
-            if (DataManager.Instance.Data.CurrentMission.Progress >= currentMission.goalAmount)
+            if (dataManager.Data.CurrentMission.Progress >= currentMission.goalAmount)
             {
-                DataManager.Instance.Data.CurrentMission.Progress = currentMission.goalAmount;
-                DataManager.Instance.Data.CurrentMission.IsComplete = true;
+                dataManager.Data.CurrentMission.Progress = currentMission.goalAmount;
+                dataManager.Data.CurrentMission.IsComplete = true;
             }
 
             // Trigger the OnMissionUpdated event with the current and updated mission data
-            OnMissionUpdated?.Invoke(currentMission, DataManager.Instance.Data.CurrentMission);
+            OnMissionUpdated?.Invoke(currentMission, dataManager.Data.CurrentMission);
         }
 
         /// <summary>
@@ -83,9 +85,9 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         public Mission GetCurrentMission()
         {
             // Check if the current mission data exists
-            if (DataManager.Instance.Data.CurrentMission == null) return null;
+            if (dataManager.Data.CurrentMission == null) return null;
 
-            int missionId = DataManager.Instance.Data.CurrentMission.MissionID;
+            int missionId = dataManager.Data.CurrentMission.MissionID;
 
             // Try to get the mission from the mission DB using the mission id
             if (missionDict.TryGetValue(missionId, out Mission mission))
@@ -106,22 +108,22 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             Mission currentMission = GetCurrentMission();
             if (currentMission == null) return;
 
-            DataManager.Instance.PlayerMoney += currentMission.reward;
+            dataManager.PlayerMoney += currentMission.reward;
             UIEvents.RaiseMessage(rewardCollectedMessage.GetLocalizedString());
             AudioManager.Instance.PlaySFX(AudioID.Kaching);
 
             int? nextMissionId = missionDict.Keys
-                .Where(id => id > DataManager.Instance.Data.CurrentMission.MissionID)
+                .Where(id => id > dataManager.Data.CurrentMission.MissionID)
                 .OrderBy(id => id)
                 .Cast<int?>()
                 .FirstOrDefault();
 
             Mission nextMission = nextMissionId.HasValue ? missionDict[nextMissionId.Value] : null;
 
-            DataManager.Instance.Data.CurrentMission =
+            dataManager.Data.CurrentMission =
                 nextMission != null ? new MissionData(nextMission.missionId) : null;
 
-            OnMissionUpdated?.Invoke(nextMission, DataManager.Instance.Data.CurrentMission);
+            OnMissionUpdated?.Invoke(nextMission, dataManager.Data.CurrentMission);
 
             if (nextMission != null && nextMission.goalType == MissionGoal.License)
             {

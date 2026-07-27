@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using Cinemachine;
 using SimpleInputNamespace;
 using DG.Tweening;
@@ -24,6 +25,9 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         [SerializeField, Tooltip("Maximum angle the player can look up or down.")]
         private float lookXLimit = 45.0f;
+
+        [SerializeField, Tooltip("Sensitivity applied to raw mouse delta from the New Input System. Used for PC look instead of SimpleInput's Mouse X/Y axes, which can freeze at 0 while the cursor is locked in Play Mode on macOS Editor.")]
+        private float rawMouseSensitivity = 0.1f;
 
         [SerializeField, Tooltip("Maximum distance for interaction.")]
         private float interactDistance = 3.5f;
@@ -183,6 +187,11 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void HandleMovement()
         {
+            // Guard against FishNet's NetworkTransform disabling the CharacterController on
+            // non-owner instances (its CharacterController integration takes over movement
+            // application for those instances instead).
+            if (!controller.enabled) return;
+
             // Gravity handling
             if (controller.isGrounded && playerVelocity.y < 0f)
             {
@@ -207,8 +216,23 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         {
             if (!IsMovementBlocked())
             {
-                float lookY = SimpleInput.GetAxis(yLookAxis) * lookSpeed;
-                float lookX = SimpleInput.GetAxis(xLookAxis) * lookSpeed;
+                float lookX;
+                float lookY;
+
+                if (!isMobileControl && Mouse.current != null)
+                {
+                    // Read raw mouse delta from the New Input System instead of SimpleInput's
+                    // legacy "Mouse X"/"Mouse Y" axes, which can freeze at 0 while the cursor
+                    // is locked in Play Mode on macOS Editor.
+                    Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+                    lookX = mouseDelta.x * rawMouseSensitivity;
+                    lookY = mouseDelta.y * rawMouseSensitivity;
+                }
+                else
+                {
+                    lookY = SimpleInput.GetAxis(yLookAxis) * lookSpeed;
+                    lookX = SimpleInput.GetAxis(xLookAxis) * lookSpeed;
+                }
 
                 rotationX -= lookY;
                 rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);

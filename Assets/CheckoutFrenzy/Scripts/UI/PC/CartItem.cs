@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using CryingSnow.CheckoutFrenzy.Core;
@@ -41,7 +41,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
             // Add a listener to the remove button to remove the item from the cart and destroy the cart item GameObject.
             removeButton.onClick.AddListener(() =>
             {
-                PC.Instance.RemoveFromCart(purchasable); // Remove from cart data.
+                ClientShopContext.Instance.MyStore.PC.RemoveFromCart(purchasable); // Remove from cart data.
                 Destroy(gameObject); // Remove the cart item UI element.
             });
         }

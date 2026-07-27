@@ -51,7 +51,10 @@ namespace CryingSnow.CheckoutFrenzy.UI
             productUIs.ForEach(ui => Destroy(ui.gameObject));
             productUIs.Clear();
 
-            var products = WarehouseManager.Instance.GetProducts(shelf.DisplaySection);
+            var warehouseManager = ClientShopContext.Instance.MyStore?.WarehouseManager;
+            var products = warehouseManager != null
+                ? warehouseManager.GetProducts(shelf.DisplaySection)
+                : new Dictionary<Product, int>();
 
             if (products.Count == 0)
             {

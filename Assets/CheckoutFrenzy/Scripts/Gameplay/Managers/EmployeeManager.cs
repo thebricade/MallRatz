@@ -9,7 +9,10 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 {
     public class EmployeeManager : MonoBehaviour
     {
-        public static EmployeeManager Instance { get; private set; }
+        // No longer a singleton: one EmployeeManager instance lives on each ShopPlot,
+        // managing that shop's own employees via its sibling StoreManager/DataManager/FinanceManager.
+        private StoreManager storeManager;
+        private DataManager dataManager;
 
         [Header("Messages")]
         [SerializeField, Tooltip("Shown when an employee is successfully hired.")]
@@ -53,7 +56,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void Awake()
         {
-            Instance = this;
+            storeManager = GetComponent<StoreManager>();
+            dataManager = GetComponent<DataManager>();
 
             EmployeeLookup = employeePrefabs
                 .GroupBy(e => e.Type)
@@ -62,13 +66,13 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private IEnumerator Start()
         {
-            StoreManager.Instance.OnDayStarted += HandleDayStarted;
+            storeManager.OnDayStarted += HandleDayStarted;
 
             // Ensure checkout counters are registered before spawning employees,
             // necessary for assigning cashiers to counters.
             yield return new WaitForSeconds(0.1f);
 
-            foreach (var hiredEmployee in DataManager.Instance.Data.HiredEmployees)
+            foreach (var hiredEmployee in dataManager.Data.HiredEmployees)
             {
                 SpawnEmployee(hiredEmployee, GetEmployeePrefab(hiredEmployee));
             }
@@ -76,14 +80,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void OnDisable()
         {
-            StoreManager.Instance.OnDayStarted -= HandleDayStarted;
+            storeManager.OnDayStarted -= HandleDayStarted;
         }
 
         private void HandleDayStarted(int currentDay)
         {
-            for (int i = DataManager.Instance.Data.HiredEmployees.Count - 1; i >= 0; i--)
+            for (int i = dataManager.Data.HiredEmployees.Count - 1; i >= 0; i--)
             {
-                var hiredEmployee = DataManager.Instance.Data.HiredEmployees[i];
+                var hiredEmployee = dataManager.Data.HiredEmployees[i];
 
                 var employeePrefab = GetEmployeePrefab(hiredEmployee);
 
@@ -91,14 +95,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
                 if (currentDay % salaryBill.FrequencyInDays != 0) continue;
 
-                if (DataManager.Instance.PlayerMoney < salaryBill.Amount)
+                if (dataManager.PlayerMoney < salaryBill.Amount)
                 {
                     FireEmployee(hiredEmployee);
                     OnUnpaidEmployeeFired?.Invoke();
                 }
                 else
                 {
-                    FinanceManager.Instance.CreateBillFromTemplate(salaryBill, currentDay);
+                    storeManager.FinanceManager.CreateBillFromTemplate(salaryBill, currentDay);
                 }
             }
         }
@@ -117,8 +121,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             if (!SpawnEmployee(employeeData, employeePrefab)) return;
 
-            DataManager.Instance.Data.HiredEmployees.Add(employeeData);
-            DataManager.Instance.PlayerMoney -= cost;
+            dataManager.Data.HiredEmployees.Add(employeeData);
+            dataManager.PlayerMoney -= cost;
 
             UIEvents.RaiseMessage(
                 hiredMessage.GetLocalizedString(employeeData.Type.ToString())
@@ -129,7 +133,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private bool IsWarehouseUnlocked()
         {
-            if (!DataManager.Instance.Data.IsWarehouseUnlocked)
+            if (!dataManager.Data.IsWarehouseUnlocked)
             {
                 UIEvents.RaiseMessage(warehouseLockedMessage.GetLocalizedString(), Color.red);
                 return false;
@@ -140,7 +144,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private bool IsFundSufficient(int cost)
         {
-            if (DataManager.Instance.PlayerMoney < cost)
+            if (dataManager.PlayerMoney < cost)
             {
                 UIEvents.RaiseMessage(insufficientFundsMessage.GetLocalizedString(), Color.red);
                 return false;
@@ -154,7 +158,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             switch (data.Type)
             {
                 case EmployeeType.Cashier:
-                    var counter = StoreManager.Instance.GetCounterAtIndex(data.PointIndex);
+                    var counter = storeManager.GetCounterAtIndex(data.PointIndex);
                     if (counter == null)
                     {
                         UIEvents.RaiseMessage(noCounterMessage.GetLocalizedString(), Color.red);
@@ -215,7 +219,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         public void FireEmployee(EmployeeData employeeData)
         {
-            DataManager.Instance.Data.HiredEmployees.Remove(employeeData);
+            dataManager.Data.HiredEmployees.Remove(employeeData);
 
             UIEvents.RaiseMessage(
                 firedMessage.GetLocalizedString(employeeData.Type.ToString()),
@@ -225,7 +229,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             switch (employeeData.Type)
             {
                 case EmployeeType.Cashier:
-                    var occupiedCounter = StoreManager.Instance.GetCounterAtIndex(employeeData.PointIndex);
+                    var occupiedCounter = storeManager.GetCounterAtIndex(employeeData.PointIndex);
                     occupiedCounter.AssignCashier(null);
                     break;
 

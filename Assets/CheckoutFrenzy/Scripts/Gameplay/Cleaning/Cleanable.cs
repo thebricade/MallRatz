@@ -39,9 +39,15 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private Cleaner activeCleaner;
         private IInteractor interactor;
 
+        // Cleanables are always spawned as root-level objects (fresh spawns or restored from save),
+        // never parented under a shop's hierarchy, so resolve the owning shop by world position.
+        private StoreManager storeManager;
+
         protected override void Awake()
         {
             base.Awake();
+
+            storeManager = StoreManager.GetStoreAt(transform.position);
 
             messParticle = GetComponentInChildren<ParticleSystem>();
             audioSource = GetComponentInChildren<AudioSource>();
@@ -55,8 +61,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void Start()
         {
-            StoreManager.Instance.RegisterCleanable(this);
-            DataManager.Instance.OnSave += HandleSave;
+            storeManager?.RegisterCleanable(this);
+            if (storeManager != null) storeManager.DataManager.OnSave += HandleSave;
         }
 
         private void SpawnMessVisuals()
@@ -127,8 +133,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                     interactor = null;
                 }
 
-                StoreManager.Instance.UnregisterCleanable(this);
-                DataManager.Instance.OnSave -= HandleSave;
+                storeManager?.UnregisterCleanable(this);
+                if (storeManager != null) storeManager.DataManager.OnSave -= HandleSave;
 
                 Destroy(gameObject, 1f);
             }
@@ -137,7 +143,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private void HandleSave()
         {
             var cleanableData = new EntityData(this);
-            DataManager.Instance.Data.SavedCleanables.Add(cleanableData);
+            storeManager?.DataManager.Data.SavedCleanables.Add(cleanableData);
         }
     }
 }

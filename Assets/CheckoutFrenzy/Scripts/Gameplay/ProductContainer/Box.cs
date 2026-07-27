@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -82,6 +82,10 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private Coroutine disablePhysicsRoutine;
 
+        // Boxes are spawned/thrown as root-level objects and can end up in different shops,
+        // so resolve the owning shop by world position rather than hierarchy.
+        private StoreManager CurrentStore => StoreManager.GetStoreAt(transform.position);
+
         protected override void Awake()
         {
             base.Awake();
@@ -96,18 +100,19 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private IEnumerator Start()
         {
-            DataManager.Instance.OnSave += HandleOnSave;
+            var store = CurrentStore;
+            if (store != null) store.DataManager.OnSave += HandleOnSave;
 
-            yield return new WaitUntil(() => DataManager.Instance.IsLoaded);
+            yield return new WaitUntil(() => store == null || store.DataManager.IsLoaded);
 
             if (!IsStored) SetActivePhysics(true);
         }
 
         private void OnDestroy()
         {
-            if (DataManager.Instance != null)
+            if (CurrentStore != null && CurrentStore.DataManager != null)
             {
-                DataManager.Instance.OnSave -= HandleOnSave;
+                CurrentStore.DataManager.OnSave -= HandleOnSave;
             }
         }
 
@@ -116,7 +121,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             if (IsStored) return;
 
             var boxData = new BoxData(this);
-            DataManager.Instance.Data.SavedBoxes.Add(boxData);
+            CurrentStore?.DataManager.Data.SavedBoxes.Add(boxData);
         }
 
         private void OnCollisionEnter(Collision collision)

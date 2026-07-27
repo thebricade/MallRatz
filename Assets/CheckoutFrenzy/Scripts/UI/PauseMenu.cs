@@ -114,7 +114,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void SaveGame()
         {
-            DataManager.Instance.SaveGameData();
+            ClientShopContext.Instance.MyStore?.DataManager.SaveGameData();
             AudioManager.Instance.PlaySFX(AudioID.Click);
 
             // If the sequence is running, don't start another one
@@ -137,7 +137,8 @@ namespace CryingSnow.CheckoutFrenzy.UI
                 StartCoroutine(LoadMainMenuAsync())
             );
 
-            DataManager.Instance.SaveGameData();
+            DataManager instanceData = ClientShopContext.Instance.MyStore?.DataManager;
+            if (instanceData != null) instanceData.SaveGameData();
             AudioManager.Instance.PlaySFX(AudioID.Click);
         }
 

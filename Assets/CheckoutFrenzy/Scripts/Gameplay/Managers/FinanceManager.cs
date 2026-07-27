@@ -8,7 +8,10 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 {
     public class FinanceManager : MonoBehaviour
     {
-        public static FinanceManager Instance { get; private set; }
+        // No longer a singleton: one FinanceManager instance lives on each ShopPlot,
+        // managing that shop's own bills and loans via its sibling StoreManager/DataManager.
+        private StoreManager storeManager;
+        private DataManager dataManager;
 
         [Header("Messages")]
         [SerializeField, Tooltip("Shown when the player doesn't have enough money to pay bills.")]
@@ -27,25 +30,26 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         public event System.Action OnLoanTaken;
         public event System.Action OnLoansUpdated;
 
-        private List<Bill> bills => DataManager.Instance.Data.Bills;
-        private List<Loan> loans => DataManager.Instance.Data.Loans;
+        private List<Bill> bills => dataManager.Data.Bills;
+        private List<Loan> loans => dataManager.Data.Loans;
 
-        private int currentDay => DataManager.Instance.Data.TotalDays;
+        private int currentDay => dataManager.Data.TotalDays;
 
         private void Awake()
         {
-            Instance = this;
+            storeManager = GetComponent<StoreManager>();
+            dataManager = GetComponent<DataManager>();
         }
 
         private void Start()
         {
-            StoreManager.Instance.OnDayStarted += HandleDayStarted;
+            storeManager.OnDayStarted += HandleDayStarted;
         }
 
         private void OnDestroy()
         {
-            if (StoreManager.Instance != null)
-                StoreManager.Instance.OnDayStarted -= HandleDayStarted;
+            if (storeManager != null)
+                storeManager.OnDayStarted -= HandleDayStarted;
         }
 
         private void HandleDayStarted(int currentDay)
@@ -68,7 +72,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                 }
                 else if (bill.IsOverdue(currentDay))
                 {
-                    DataManager.Instance.PlayerMoney -= bill.GetTotalAmountDue(currentDay);
+                    dataManager.PlayerMoney -= bill.GetTotalAmountDue(currentDay);
                     bill.Status = BillStatus.Charged;
                 }
             }
@@ -125,11 +129,11 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             if (bill.Type == BillType.Rent)
             {
-                bill.Amount += DataManager.Instance.Data.ExpansionLevel * 10m;
+                bill.Amount += dataManager.Data.ExpansionLevel * 10m;
             }
             else if (bill.Type == BillType.Electricity)
             {
-                bill.Amount += DataManager.Instance.Data.ExpansionLevel * 5m;
+                bill.Amount += dataManager.Data.ExpansionLevel * 5m;
             }
 
             bills.Add(bill);
@@ -150,13 +154,13 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                 Principal = template.Principal,
                 InterestRate = template.InterestRate,
                 TotalPayments = template.TotalPayments,
-                StartDay = DataManager.Instance.Data.TotalDays + 1,
+                StartDay = dataManager.Data.TotalDays + 1,
                 PaymentInterval = template.PaymentInterval,
                 LatePayment = template.LateFeePerInstallment
             };
 
             loans.Add(loan);
-            DataManager.Instance.PlayerMoney += loan.Principal;
+            dataManager.PlayerMoney += loan.Principal;
             AudioManager.Instance.PlaySFX(AudioID.Kaching);
 
             OnLoanTaken?.Invoke();
@@ -180,13 +184,13 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         public bool PayBill(Bill bill)
         {
-            if (DataManager.Instance.PlayerMoney < bill.Amount)
+            if (dataManager.PlayerMoney < bill.Amount)
             {
                 UIEvents.RaiseMessage(insufficientFundsMessage.GetLocalizedString(), Color.red);
                 return false;
             }
 
-            DataManager.Instance.PlayerMoney -= bill.Amount;
+            dataManager.PlayerMoney -= bill.Amount;
             bill.Status = BillStatus.Paid;
 
             OnBillPaid?.Invoke();
@@ -198,13 +202,13 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         {
             decimal outstandingAmount = GetTotalOutstandingAmount();
 
-            if (DataManager.Instance.PlayerMoney < outstandingAmount)
+            if (dataManager.PlayerMoney < outstandingAmount)
             {
                 UIEvents.RaiseMessage(insufficientFundsMessage.GetLocalizedString(), Color.red);
                 return false;
             }
 
-            DataManager.Instance.PlayerMoney -= outstandingAmount;
+            dataManager.PlayerMoney -= outstandingAmount;
             GetActiveBills().ForEach(b => b.Status = BillStatus.Paid);
 
             OnBillsUpdated?.Invoke();

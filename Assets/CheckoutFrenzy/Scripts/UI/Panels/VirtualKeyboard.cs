@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -169,7 +169,10 @@ namespace CryingSnow.CheckoutFrenzy.UI
             greenSlider.onValueChanged.AddListener(UpdateColor);
             blueSlider.onValueChanged.AddListener(UpdateColor);
 
-            if (ColorUtility.TryParseHtmlString(DataManager.Instance.Data.NameColor, out var nameColor))
+            var myStore = ClientShopContext.Instance.MyStore;
+            if (myStore == null) return;
+
+            if (ColorUtility.TryParseHtmlString(myStore.DataManager.Data.NameColor, out var nameColor))
             {
                 redSlider.value = nameColor.r;
                 greenSlider.value = nameColor.g;

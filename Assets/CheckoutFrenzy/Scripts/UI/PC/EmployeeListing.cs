@@ -28,13 +28,14 @@ namespace CryingSnow.CheckoutFrenzy.UI
         [SerializeField] private LocalizedString localizedHireStatus;
 
         private string currencySymbol => GameConfig.Instance.ActiveCurrency.currencySymbol;
+        private StoreManager store => ClientShopContext.Instance.MyStore;
         private EmployeeData employeeData;
 
         public void Initialize(EmployeeData employeeData)
         {
             this.employeeData = employeeData;
 
-            var employee = EmployeeManager.Instance.GetEmployeePrefab(employeeData);
+            var employee = store.EmployeeManager.GetEmployeePrefab(employeeData);
 
             avatar.sprite = employee.Avatar;
             typeLabel.text = employee.Type.ToString();
@@ -42,13 +43,13 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
             localizedCost.Arguments = new object[] { currencySymbol, employee.Cost };
             localizedSalary.Arguments = new object[] { currencySymbol, employee.SalaryBill.Amount, employee.SalaryBill.FrequencyInDays };
-            localizedHireStatus.Arguments = new object[] { DataManager.Instance.Data.HiredEmployees.Contains(employeeData) };
+            localizedHireStatus.Arguments = new object[] { store.DataManager.Data.HiredEmployees.Contains(employeeData) };
 
             localizedCost.StringChanged += UpdateCostText;
             localizedSalary.StringChanged += UpdateSalaryText;
             localizedHireStatus.StringChanged += UpdateHireText;
 
-            EmployeeManager.Instance.OnUnpaidEmployeeFired += UpdateHireButton;
+            store.EmployeeManager.OnUnpaidEmployeeFired += UpdateHireButton;
 
             UpdateHireButton();
         }
@@ -59,9 +60,9 @@ namespace CryingSnow.CheckoutFrenzy.UI
             localizedSalary.StringChanged -= UpdateSalaryText;
             localizedHireStatus.StringChanged -= UpdateHireText;
 
-            if (EmployeeManager.Instance != null)
+            if (store != null && store.EmployeeManager != null)
             {
-                EmployeeManager.Instance.OnUnpaidEmployeeFired -= UpdateHireButton;
+                store.EmployeeManager.OnUnpaidEmployeeFired -= UpdateHireButton;
             }
         }
 
@@ -71,7 +72,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void UpdateHireButton()
         {
-            bool hired = DataManager.Instance.Data.HiredEmployees.Contains(employeeData);
+            bool hired = store.DataManager.Data.HiredEmployees.Contains(employeeData);
 
             hireButton.image.color = hired ? fireColor : hireColor;
 
@@ -81,8 +82,8 @@ namespace CryingSnow.CheckoutFrenzy.UI
             hireButton.onClick.RemoveAllListeners();
             hireButton.onClick.AddListener(() =>
             {
-                if (hired) EmployeeManager.Instance.FireEmployee(employeeData);
-                else EmployeeManager.Instance.HireEmployee(employeeData);
+                if (hired) store.EmployeeManager.FireEmployee(employeeData);
+                else store.EmployeeManager.HireEmployee(employeeData);
 
                 UpdateHireButton();
             });

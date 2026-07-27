@@ -11,8 +11,11 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void Start()
         {
-            StoreManager.Instance.OnCleanablesChanged += UpdateDirtinessFill;
-            UpdateDirtinessFill(StoreManager.Instance.Dirtiness);
+            var store = ClientShopContext.Instance.MyStore;
+            if (store == null) return;
+
+            store.OnCleanablesChanged += UpdateDirtinessFill;
+            UpdateDirtinessFill(store.Dirtiness);
         }
 
         private void UpdateDirtinessFill(float amount)

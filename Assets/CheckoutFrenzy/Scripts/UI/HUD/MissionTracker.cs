@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using TMPro;
@@ -41,6 +41,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private LocalizedString[] localizedStrings;
         private bool isMobileControl;
+        private StoreManager store => ClientShopContext.Instance.MyStore;
 
         private void Awake()
         {
@@ -68,11 +69,14 @@ namespace CryingSnow.CheckoutFrenzy.UI
             foreach (var ls in localizedStrings)
                 ls.StringChanged += OnLocalizationChanged;
 
-            MissionManager.Instance.OnMissionUpdated += UpdateDisplay; // Subscribe to mission update events.
+            if (store == null) return;
+
+            MissionManager missionManager = store.MissionManager;
+            missionManager.OnMissionUpdated += UpdateDisplay; // Subscribe to mission update events.
 
             // Get the current mission and mission data.
-            var mission = MissionManager.Instance.GetCurrentMission();
-            var missionData = DataManager.Instance.Data.CurrentMission;
+            var mission = missionManager.GetCurrentMission();
+            var missionData = store.DataManager.Data.CurrentMission;
             UpdateDisplay(mission, missionData); // Initial display update.
         }
 
@@ -81,14 +85,16 @@ namespace CryingSnow.CheckoutFrenzy.UI
             foreach (var ls in localizedStrings)
                 ls.StringChanged -= OnLocalizationChanged;
 
-            if (MissionManager.Instance != null)
-                MissionManager.Instance.OnMissionUpdated -= UpdateDisplay;
+            if (store != null && store.MissionManager != null)
+                store.MissionManager.OnMissionUpdated -= UpdateDisplay;
         }
 
         private void OnLocalizationChanged(string _)
         {
-            var mission = MissionManager.Instance.GetCurrentMission();
-            var missionData = DataManager.Instance.Data.CurrentMission;
+            if (store == null) return;
+
+            var mission = store.MissionManager.GetCurrentMission();
+            var missionData = store.DataManager.Data.CurrentMission;
 
             UpdateDisplay(mission, missionData);
         }
@@ -98,7 +104,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
             if (Input.GetKeyDown(rewardKey))
             {
                 if (!rewardButton.gameObject.activeSelf) return;
-                MissionManager.Instance.AdvanceMission();
+                store?.MissionManager.AdvanceMission();
             }
         }
 
@@ -128,18 +134,18 @@ namespace CryingSnow.CheckoutFrenzy.UI
             // Add target information based on the goal type.
             if (mission.goalType == MissionGoal.Sell || mission.goalType == MissionGoal.Restock)
             {
-                var product = DataManager.Instance.GetProductById(mission.targetId);
+                var product = store.DataManager.GetProductById(mission.targetId);
                 displayText += $"\n{product.Name}"; // Add product name.
             }
             else if (mission.goalType == MissionGoal.Furnish)
             {
-                var furniture = DataManager.Instance.GetFurnitureById(mission.targetId);
+                var furniture = store.DataManager.GetFurnitureById(mission.targetId);
                 if (furniture == null) Debug.Log($"Furniture ID: {mission.targetId}"); // Log if furniture not found.
                 displayText += $"\n{furniture.Name}"; // Add furniture name.
             }
             else if (mission.goalType == MissionGoal.License)
             {
-                var license = DataManager.Instance.GetLicenseById(mission.targetId);
+                var license = store.DataManager.GetLicenseById(mission.targetId);
                 displayText += $"\n{license.Name}";
             }
 
@@ -164,7 +170,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
                 if (isMobileControl)
                 {
                     rewardButton.onClick.RemoveAllListeners(); // Remove previous listeners.
-                    rewardButton.onClick.AddListener(MissionManager.Instance.AdvanceMission); // Add listener to advance mission.
+                    rewardButton.onClick.AddListener(store.MissionManager.AdvanceMission); // Add listener to advance mission.
                 }
             }
             else

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using TMPro;
@@ -103,7 +103,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
         private void UpdateCurrentPriceText(string localizedValue)
         {
             if (product == null) return;
-            decimal productPrice = DataManager.Instance.GetCustomProductPrice(product);
+            decimal productPrice = ClientShopContext.Instance.MyStore.DataManager.GetCustomProductPrice(product);
 
             currentPriceText.text = currentPriceLabel.GetLocalizedString(
                 currencySymbol,
@@ -144,7 +144,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
             productNameText.text = product.Name;
 
             decimal defaultPrice = product.Price;
-            decimal currentSavedPrice = DataManager.Instance.GetCustomProductPrice(product);
+            decimal currentSavedPrice = ClientShopContext.Instance.MyStore.DataManager.GetCustomProductPrice(product);
 
             float minValue = Mathf.FloorToInt((float)defaultPrice * 50f);
             float maxValue = Mathf.FloorToInt((float)defaultPrice * 200f);
@@ -180,7 +180,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
             confirmButton.onClick.RemoveAllListeners();
             confirmButton.onClick.AddListener(() =>
             {
-                DataManager.Instance.AddCustomProductPrice(customPrice);
+                ClientShopContext.Instance.MyStore.DataManager.AddCustomProductPrice(customPrice);
                 UIEvents.RaiseActionUI(ActionType.Return, false, null);
                 AudioManager.Instance.PlaySFX(AudioID.Click);
                 Close();

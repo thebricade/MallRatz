@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
@@ -9,7 +9,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 {
     public class DataManager : MonoBehaviour
     {
-        public static DataManager Instance { get; private set; }
+        // No longer a singleton: one DataManager instance lives on each ShopPlot,
+        // holding that shop's own persistent save data.
 
         [Header("Messages")]
         [SerializeField, Tooltip("The localized text shown when level up.")]
@@ -58,8 +59,6 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void Awake()
         {
-            Instance = this;
-
             LoadDatabases();
             LoadGameData();
 
@@ -88,17 +87,30 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             furnitureBoxPrefab = Resources.Load<FurnitureBox>("Boxes/FurnitureBox");
         }
 
+        /// <summary>
+        /// Identifies this shop's save slot. Each ShopPlot's DataManager derives a unique
+        /// slot from its position among its ShopPlot siblings, so every shop plot persists
+        /// its own independent save file instead of sharing one global save.
+        /// </summary>
+        private int ShopSlot => transform.GetSiblingIndex() + 1;
+
         private void LoadGameData()
         {
-            int slot = PlayerPrefs.GetInt("Slot", 1);
-            Data = SaveSystem.LoadData<GameData>($"GameData{slot}");
+            Data = SaveSystem.LoadData<GameData>($"GameData_Shop{ShopSlot}");
+
+            // Used to scope FindObjectsOfType lookups below to only this shop's own objects,
+            // since multiple DataManagers (one per shop) now co-exist in the same scene.
+            var storeManager = GetComponent<StoreManager>();
 
             if (Data != null)
             {
                 // 1. Restore Saved Furniture Pieces
-                foreach (var furniture in FindObjectsOfType<Furniture>())
+                foreach (var furniture in FindObjectsByType<Furniture>(FindObjectsSortMode.None))
                 {
-                    Destroy(furniture.gameObject);
+                    if (storeManager != null && storeManager.IsWithinStore(furniture.transform.position))
+                    {
+                        Destroy(furniture.gameObject);
+                    }
                 }
 
                 foreach (var savedFurniture in Data.SavedFurnitures)
@@ -211,8 +223,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             OnSave?.Invoke();
 
-            int slot = PlayerPrefs.GetInt("Slot", 1);
-            SaveSystem.SaveData<GameData>(Data, $"GameData{slot}");
+            SaveSystem.SaveData<GameData>(Data, $"GameData_Shop{ShopSlot}");
         }
 
         public Product GetProductById(int id)

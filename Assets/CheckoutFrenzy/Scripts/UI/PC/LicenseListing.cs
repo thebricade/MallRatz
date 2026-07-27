@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using TMPro;
@@ -41,6 +41,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
         [SerializeField] private LocalizedString licenseReqLabel;
 
         private string currencySymbol => GameConfig.Instance.ActiveCurrency.currencySymbol;
+        private StoreManager store => ClientShopContext.Instance.MyStore;
 
         private License license;
 
@@ -92,10 +93,10 @@ namespace CryingSnow.CheckoutFrenzy.UI
             else
             {
                 // Subscribe to the OnLevelUp event to update purchase availability.
-                DataManager.Instance.OnLevelUp += UpdatePurchaseAvailability;
-                UpdatePurchaseAvailability(DataManager.Instance.Data.CurrentLevel);
+                store.DataManager.OnLevelUp += UpdatePurchaseAvailability;
+                UpdatePurchaseAvailability(store.DataManager.Data.CurrentLevel);
 
-                StoreManager.Instance.OnLicensePurchased += HandleLicensePurchased;
+                store.OnLicensePurchased += HandleLicensePurchased;
             }
 
             RefreshLocalization();
@@ -105,7 +106,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
         {
             if (license == null) return;
 
-            bool meetsLevelRequirement = DataManager.Instance.Data.CurrentLevel >= license.Level;
+            bool meetsLevelRequirement = store.DataManager.Data.CurrentLevel >= license.Level;
 
             bool hasRequiredLicense = license.RequiredLicense == null ||
                                       license.RequiredLicense.IsOwnedByDefault ||
@@ -159,7 +160,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
         {
             foreach (var product in license.Products)
             {
-                if (!DataManager.Instance.Data.LicensedProducts.Contains(product.ProductID))
+                if (!store.DataManager.Data.LicensedProducts.Contains(product.ProductID))
                 {
                     return false;
                 }
@@ -184,7 +185,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void HandleLicensePurchased(License _)
         {
-            UpdatePurchaseAvailability(DataManager.Instance.Data.CurrentLevel);
+            UpdatePurchaseAvailability(store.DataManager.Data.CurrentLevel);
         }
 
         /// <summary>
@@ -199,8 +200,8 @@ namespace CryingSnow.CheckoutFrenzy.UI
             {
                 purchaseButton.onClick.RemoveAllListeners();
                 purchaseButton.onClick.AddListener(() => HandlePurchase(license));
-                DataManager.Instance.OnLevelUp -= UpdatePurchaseAvailability;
-                StoreManager.Instance.OnLicensePurchased -= HandleLicensePurchased;
+                store.DataManager.OnLevelUp -= UpdatePurchaseAvailability;
+                store.OnLicensePurchased -= HandleLicensePurchased;
             }
         }
 
@@ -210,7 +211,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
         /// <param name="license">The License being purchased.</param>
         private void HandlePurchase(License license)
         {
-            bool isPurchased = StoreManager.Instance.PurchaseLicense(license); // Attempt purchase.
+            bool isPurchased = store.PurchaseLicense(license); // Attempt purchase.
             if (isPurchased) DisablePurchasing(); // Update UI if purchase successful.
         }
 

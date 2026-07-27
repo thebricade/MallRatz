@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using TMPro;
@@ -37,6 +37,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
         [SerializeField] private LocalizedString alreadyOwnedLabel;
 
         private Expansion expansion;
+        private StoreManager store => ClientShopContext.Instance.MyStore;
         private string currencySymbol => GameConfig.Instance.ActiveCurrency.currencySymbol;
 
         // Cached localized strings to build composite text blocks
@@ -67,11 +68,11 @@ namespace CryingSnow.CheckoutFrenzy.UI
             purchasePreviousLabel.StringChanged -= OnPurchasePrevChanged;
             alreadyOwnedLabel.StringChanged -= OnOwnedChanged;
 
-            if (DataManager.Instance != null)
-                DataManager.Instance.OnLevelUp -= UpdateRequirements;
+            if (store != null)
+                store.DataManager.OnLevelUp -= UpdateRequirements;
 
-            if (StoreManager.Instance != null)
-                StoreManager.Instance.OnExpansionPurchased -= UpdateRequirements;
+            if (store != null)
+                store.OnExpansionPurchased -= UpdateRequirements;
         }
 
         private void OnPriceChanged(string s) { priceStr = s; UpdateUI(); }
@@ -95,14 +96,14 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
             RefreshAvailabilityArgs();
 
-            if (StoreManager.Instance.IsExpansionPurchased(expansion))
+            if (store.IsExpansionPurchased(expansion))
             {
                 UpdateUI();
             }
             else
             {
-                DataManager.Instance.OnLevelUp += UpdateRequirements;
-                StoreManager.Instance.OnExpansionPurchased += UpdateRequirements;
+                store.DataManager.OnLevelUp += UpdateRequirements;
+                store.OnExpansionPurchased += UpdateRequirements;
                 UpdateRequirements(0);
             }
         }
@@ -117,8 +118,8 @@ namespace CryingSnow.CheckoutFrenzy.UI
         {
             if (expansion == null) return;
 
-            bool isLevelMet = DataManager.Instance.Data.CurrentLevel >= expansion.RequiredLevel;
-            bool isCurrentExpansion = StoreManager.Instance.IsCurrentExpansion(expansion);
+            bool isLevelMet = store.DataManager.Data.CurrentLevel >= expansion.RequiredLevel;
+            bool isCurrentExpansion = store.IsCurrentExpansion(expansion);
             bool isAvailable = isLevelMet && isCurrentExpansion;
 
             availabilityLabel.Arguments = new object[] { isAvailable };
@@ -139,9 +140,9 @@ namespace CryingSnow.CheckoutFrenzy.UI
             if (expansion.AdditionalCustomers > 0) desc += $"\n\u2022 {capacityStr}";
             descriptionText.text = desc;
 
-            bool isPurchased = StoreManager.Instance.IsExpansionPurchased(expansion);
-            bool isLevelMet = DataManager.Instance.Data.CurrentLevel >= expansion.RequiredLevel;
-            bool isCurrentExpansion = StoreManager.Instance.IsCurrentExpansion(expansion);
+            bool isPurchased = store.IsExpansionPurchased(expansion);
+            bool isLevelMet = store.DataManager.Data.CurrentLevel >= expansion.RequiredLevel;
+            bool isCurrentExpansion = store.IsCurrentExpansion(expansion);
             bool isAvailable = isLevelMet && isCurrentExpansion;
 
             if (isPurchased)
@@ -178,12 +179,12 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void HandlePurchase()
         {
-            if (StoreManager.Instance.PurchaseExpansion())
+            if (store.PurchaseExpansion())
             {
                 UpdateUI();
 
-                if (DataManager.Instance != null) DataManager.Instance.OnLevelUp -= UpdateRequirements;
-                if (StoreManager.Instance != null) StoreManager.Instance.OnExpansionPurchased -= UpdateRequirements;
+                store.DataManager.OnLevelUp -= UpdateRequirements;
+                store.OnExpansionPurchased -= UpdateRequirements;
             }
         }
     }

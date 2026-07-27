@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -65,6 +65,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private List<Collider> others = new List<Collider>();
 
+        /// <summary>
+        /// The shop this furniture currently sits within, resolved by world position rather than
+        /// hierarchy since furniture is spawned/placed as a root-level object and can be moved
+        /// between shops by the player. Returns null if not within any shop's bounds. Public so
+        /// child components (e.g. Shelf, Rack) can resolve their owning shop through their parent.
+        /// </summary>
+        public StoreManager CurrentStore => StoreManager.GetStoreAt(transform.position);
+
         protected override void Awake()
         {
             base.Awake();
@@ -77,7 +85,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         protected virtual void Start()
         {
             // Subscribe to the OnSave event to save this furniture's data.
-            DataManager.Instance.OnSave += HandleOnSave;
+            if (CurrentStore != null) CurrentStore.DataManager.OnSave += HandleOnSave;
         }
 
         private void HandleOnSave()
@@ -122,14 +130,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             };
 
             // Add the furniture data to the list of saved furniture.
-            DataManager.Instance.Data.SavedFurnitures.Add(furnitureData);
+            if (CurrentStore != null) CurrentStore.DataManager.Data.SavedFurnitures.Add(furnitureData);
         }
 
         private void OnDestroy()
         {
-            if (DataManager.Instance != null)
+            if (CurrentStore != null && CurrentStore.DataManager != null)
             {
-                DataManager.Instance.OnSave -= HandleOnSave;
+                CurrentStore.DataManager.OnSave -= HandleOnSave;
             }
         }
 
@@ -262,7 +270,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             interactor = null;
 
             // Update the NavMesh surface so Customer AI can pathfind around the placed furniture correctly.
-            StoreManager.Instance.UpdateNavMeshSurface();
+            CurrentStore?.UpdateNavMeshSurface();
         }
 
         private void Rotate()
@@ -279,12 +287,15 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void Pack()
         {
+            var store = CurrentStore;
+            if (store == null) return;
+
             interactor.StateManager.PopState();
 
             Transform holdPoint = interactor.HoldPoint;
 
             var furnitureBox = Instantiate(
-                StoreManager.Instance.FurnitureBoxPrefab,
+                store.FurnitureBoxPrefab,
                 holdPoint.position,
                 holdPoint.rotation
             );

@@ -74,10 +74,16 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         // True only when the amount paid meets or exceeds the total price.
         private bool isPaymentComplete;
 
+        // CheckoutCounter is a fixed child within a shop's hierarchy, so a cached hierarchy
+        // lookup is sufficient here.
+        private StoreManager storeManager;
+
         private void Start()
         {
+            storeManager = GetComponentInParent<StoreManager>();
+
             UpdateMonitorText();
-            StoreManager.Instance.RegisterCounter(this);
+            storeManager?.RegisterCounter(this);
         }
 
         private void OnDestroy()
@@ -246,7 +252,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             ScanItem(item);
 
-            DataManager.Instance.AddExperience();
+            storeManager?.DataManager.AddExperience();
 
             if (checkoutItems.Count == 0)
             {
@@ -262,14 +268,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             item.transform.DOMove(transform.TransformPoint(packingPoint), 0.3f)
                 .OnComplete(() => Destroy(item.gameObject));
 
-            decimal price = DataManager.Instance.GetCustomProductPrice(item.Product);
+            decimal price = storeManager?.DataManager.GetCustomProductPrice(item.Product) ?? 0m;
             totalPrice += price;
             UpdateMonitorText();
 
             if (!HasCashier) AudioManager.Instance.PlaySFX(AudioID.Scanner);
 
-            MissionManager.Instance.UpdateMission(MissionGoal.Revenue, (int)(price * 100));
-            MissionManager.Instance.UpdateMission(MissionGoal.Sell, 1, item.Product.ProductID);
+            storeManager?.MissionManager.UpdateMission(MissionGoal.Revenue, (int)(price * 100));
+            storeManager?.MissionManager.UpdateMission(MissionGoal.Sell, 1, item.Product.ProductID);
         }
 
         private IEnumerator AutoScan()
@@ -326,7 +332,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             {
                 // Auto-complete transaction if there is a cashier
                 yield return new WaitForSeconds(1f);
-                DataManager.Instance.PlayerMoney += totalPrice;
+                DataManager dataManager = storeManager?.DataManager;
+                if (dataManager != null) dataManager.PlayerMoney += totalPrice;
                 isPaymentComplete = true;
             }
             else
@@ -355,7 +362,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void UpdateGivenChange(int amount)
         {
-            decimal playerBalance = DataManager.Instance.PlayerMoney + customerMoney;
+            decimal playerBalance = (storeManager?.DataManager.PlayerMoney ?? 0m) + customerMoney;
             decimal totalChange = givenChange.Sum(change => change.amount) / 100m;
 
             if (playerBalance < totalChange + (amount / 100m)) return;
@@ -392,8 +399,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             if (isPaymentComplete)
             {
                 decimal paymentAmount = customerMoney - totalChange;
-                DataManager.Instance.PlayerMoney += paymentAmount;
-                MissionManager.Instance.UpdateMission(MissionGoal.Checkout, 1);
+                if (storeManager != null) storeManager.DataManager.PlayerMoney += paymentAmount;
+                storeManager?.MissionManager.UpdateMission(MissionGoal.Checkout, 1);
                 CheckoutEvents.RaiseCashRegisterToggleRequested(false);
             }
             else
@@ -408,8 +415,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             if (isPaymentComplete)
             {
-                DataManager.Instance.PlayerMoney += amount;
-                MissionManager.Instance.UpdateMission(MissionGoal.Checkout, 1);
+                if (storeManager != null) storeManager.DataManager.PlayerMoney += amount;
+                storeManager?.MissionManager.UpdateMission(MissionGoal.Checkout, 1);
                 CheckoutEvents.RaisePaymentTerminalToggleRequested(false);
             }
             else

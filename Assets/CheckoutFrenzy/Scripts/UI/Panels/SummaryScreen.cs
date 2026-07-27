@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using CryingSnow.CheckoutFrenzy.Core;
@@ -51,11 +51,14 @@ namespace CryingSnow.CheckoutFrenzy.UI
         /// <param name="onContinue">The action to be performed when the continue button is clicked. Passes a boolean indicating if the day was skipped.</param>
         private void HandleSummaryRequested(SummaryData data, System.Action<bool> onContinue)
         {
+            var myStore = ClientShopContext.Instance.MyStore;
+            if (myStore == null) return;
+
             string values = $"{data.TotalCustomers}";                                          // 1. Total Customers
             values += $"\n{currencySymbol}{data.PreviousBalance:N2}";                          // 2. Previous Balance
             values += $"\n<color=green>+{currencySymbol}{data.TotalRevenues:N2}";              // 3. Total Revenues (green text)
             values += $"\n<color=red>-{currencySymbol}{data.TotalSpending:N2}";                // 4. Total Spending (red text)
-            values += $"\n<color=white>{currencySymbol}{DataManager.Instance.PlayerMoney:N2}"; // 5. Current Balance (white text)
+            values += $"\n<color=white>{currencySymbol}{myStore.DataManager.PlayerMoney:N2}"; // 5. Current Balance (white text)
             valuesText.text = values;
 
             continueButton.onClick.RemoveAllListeners();

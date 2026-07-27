@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,7 +11,9 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 {
     public class PC : Interactable
     {
-        public static PC Instance { get; private set; }
+        // No longer a singleton: one PC lives on each ShopPlot. Resolved as a fixed child within
+        // a shop's hierarchy via a cached hierarchy lookup.
+        private StoreManager storeManager;
 
         [Header("Localization: Messages")]
         [SerializeField, Tooltip("Shown when attempting to checkout with an empty cart.")]
@@ -55,18 +57,18 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         protected override void Awake()
         {
-            Instance = this;
+            storeManager = GetComponentInParent<StoreManager>();
             base.Awake();
             monitorText.text = $"<size=0.5>{standbyLabel.GetLocalizedString()}</size>";
         }
 
         private void Start()
         {
-            DataManager.Instance.OnSave += () =>
+            storeManager.DataManager.OnSave += () =>
             {
                 // Calculate the total price of all pending purchase orders and save it to GameData.
                 decimal totalPrice = CalculateOrderPrice(purchaseOrders);
-                DataManager.Instance.Data.PendingOrdersValue = totalPrice;
+                storeManager.DataManager.Data.PendingOrdersValue = totalPrice;
             };
         }
 
@@ -186,7 +188,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             decimal totalPrice = CalculateOrderPrice(newOrders);
 
             // Check if the player has enough money to complete the order.
-            if (DataManager.Instance.PlayerMoney >= totalPrice)
+            if (storeManager.DataManager.PlayerMoney >= totalPrice)
             {
                 // Process each order in the list.
                 foreach (var order in newOrders)
@@ -196,12 +198,12 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                     if (order is Product product)
                     {
                         // Update the "Restock" mission progress for the product.
-                        MissionManager.Instance.UpdateMission(MissionGoal.Restock, 1, product.ProductID);
+                        storeManager.MissionManager.UpdateMission(MissionGoal.Restock, 1, product.ProductID);
                     }
                     else if (order is Furniture furniture)
                     {
                         // Update the "Furnish" mission progress for the furniture.
-                        MissionManager.Instance.UpdateMission(MissionGoal.Furnish, 1, furniture.FurnitureID);
+                        storeManager.MissionManager.UpdateMission(MissionGoal.Furnish, 1, furniture.FurnitureID);
                     }
                 }
 
@@ -210,7 +212,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                 StartCoroutine(ProcessOrder());
 
                 // Deduct the total price from the player's money.
-                DataManager.Instance.PlayerMoney -= totalPrice;
+                storeManager.DataManager.PlayerMoney -= totalPrice;
 
                 // Display a success message to the player.
                 UIEvents.RaiseMessage(checkoutCompletedMessage.GetLocalizedString());
@@ -294,7 +296,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         /// <param name="order">The order to be delivered.</param>
         private void DeliverOrder(IPurchasable order)
         {
-            Transform deliveryPoint = StoreManager.Instance.DeliveryPoint;
+            Transform deliveryPoint = storeManager.DeliveryPoint;
 
             if (order is Product product)
             {
@@ -308,7 +310,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             {
                 // Instantiate the furniture (in a box) at the delivery point.
                 var furnitureBox = Instantiate(
-                    StoreManager.Instance.FurnitureBoxPrefab,
+                    storeManager.FurnitureBoxPrefab,
                     deliveryPoint.position,
                     deliveryPoint.rotation
                 );

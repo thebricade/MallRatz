@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -117,33 +117,52 @@ namespace CryingSnow.CheckoutFrenzy.UI
         private List<BillUI> billUIs = new List<BillUI>();
         private List<ActiveLoanUI> activeLoanUIs = new List<ActiveLoanUI>();
 
+        // This UI is a single global canvas shared across all shops, so it binds to
+        // whichever shop the local player currently owns via ClientShopContext.
+        private StoreManager store;
+        private bool isInitialized;
+
         private void Start()
         {
-            StoreManager.Instance.OnLicensePurchased += UpdateProductListing;
+            if (ClientShopContext.Instance.MyStore != null)
+            {
+                InitializeForStore(ClientShopContext.Instance.MyStore);
+            }
+            else
+            {
+                ClientShopContext.Instance.OnMyStoreChanged += InitializeForStore;
+            }
+        }
 
-            FinanceManager.Instance.OnBillCreated += CreateBillUI;
-            FinanceManager.Instance.OnBillsUpdated += UpdateBillUIs;
-            FinanceManager.Instance.OnBillPaid += UpdateBillSummaryUI;
-            FinanceManager.Instance.OnLoanTaken += RefreshLoanInfoUI;
-            FinanceManager.Instance.OnLoansUpdated += RefreshLoanInfoUI;
+        private void InitializeForStore(StoreManager myStore)
+        {
+            if (isInitialized || myStore == null) return;
+            isInitialized = true;
+
+            store = myStore;
+            var dataManager = store.DataManager;
+
+            store.OnLicensePurchased += UpdateProductListing;
+
+            store.FinanceManager.OnBillCreated += CreateBillUI;
+            store.FinanceManager.OnBillsUpdated += UpdateBillUIs;
+            store.FinanceManager.OnBillPaid += UpdateBillSummaryUI;
+            store.FinanceManager.OnLoanTaken += RefreshLoanInfoUI;
+            store.FinanceManager.OnLoansUpdated += RefreshLoanInfoUI;
 
             // Initialize Product Screen
-            var dataManager = DataManager.Instance;
-            if (dataManager != null)
+            foreach (var product in dataManager.ProductDB)
             {
-                foreach (var product in dataManager.ProductDB)
+                if (dataManager.Data.LicensedProducts.Contains(product.ProductID))
                 {
-                    if (dataManager.Data.LicensedProducts.Contains(product.ProductID))
-                    {
-                        CreateProductListing(product);
-                    }
+                    CreateProductListing(product);
                 }
             }
 
             InitializeDropdown<ProductCategory>(categoryDropdown, "All Categories", OnCategoryChanged);
 
             // Initialize Furniture Screen
-            foreach (var furniture in DataManager.Instance.FurnitureDB)
+            foreach (var furniture in dataManager.FurnitureDB)
             {
                 var furnitureListing = Instantiate(furnitureListingPrefab, furnitureListingParent);
                 furnitureListing.Initialize(furniture);
@@ -153,27 +172,27 @@ namespace CryingSnow.CheckoutFrenzy.UI
             InitializeDropdown<DisplaySection>(sectionDropdown, "All Sections", OnSectionChanged);
 
             // Initialize Cart Screen
-            clearCartButton.onClick.AddListener(() => PC.Instance.ClearCart());
-            checkoutButton.onClick.AddListener(() => PC.Instance.Checkout());
-            PC.Instance.OnCartChanged += HandleCartChanged;
+            clearCartButton.onClick.AddListener(() => store.PC.ClearCart());
+            checkoutButton.onClick.AddListener(() => store.PC.Checkout());
+            store.PC.OnCartChanged += HandleCartChanged;
             totalPriceText.text = $": {currencySymbol}0.00";
 
             // Initialize License Screen
-            foreach (var license in DataManager.Instance.LicenseDB)
+            foreach (var license in dataManager.LicenseDB)
             {
                 var licenseListing = Instantiate(licenseListingPrefab, licenseListingParent);
                 licenseListing.Initialize(license);
             }
 
             // Initialize Expansion Screen
-            foreach (var expansion in StoreManager.Instance.Expansions)
+            foreach (var expansion in store.Expansions)
             {
                 var expansionListing = Instantiate(expansionListingPrefab, expansionListingParent);
                 expansionListing.Initialize(expansion);
             }
 
             // Initialize Employee Screen
-            foreach (var kvp in EmployeeManager.Instance.EmployeeLookup)
+            foreach (var kvp in store.EmployeeManager.EmployeeLookup)
             {
                 var type = kvp.Key;
                 var employees = kvp.Value;
@@ -193,14 +212,14 @@ namespace CryingSnow.CheckoutFrenzy.UI
             }
 
             // Initialize Bill Screen
-            foreach (var bill in DataManager.Instance.Data.Bills)
+            foreach (var bill in dataManager.Data.Bills)
             {
                 CreateBillUI(bill);
             }
 
             payAllBillsButton.onClick.AddListener(() =>
             {
-                if (FinanceManager.Instance.PayAllBills())
+                if (store.FinanceManager.PayAllBills())
                 {
                     AudioManager.Instance.PlaySFX(AudioID.Kaching);
                     UpdateBillSummaryUI();
@@ -210,7 +229,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
             UpdateBillSummaryUI();
 
             // Initialize Loan Screen
-            foreach (var loanTemplate in DataManager.Instance.LoanTemplateDB)
+            foreach (var loanTemplate in dataManager.LoanTemplateDB)
             {
                 var loanListing = Instantiate(loanListingPrefab, loanListingParent);
                 loanListing.Initialize(loanTemplate);
@@ -245,25 +264,25 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void OnDestroy()
         {
-            // Unsubscribe from FinanceManager
-            if (FinanceManager.Instance != null)
-            {
-                FinanceManager.Instance.OnBillCreated -= CreateBillUI;
-                FinanceManager.Instance.OnBillsUpdated -= UpdateBillUIs;
-                FinanceManager.Instance.OnBillPaid -= UpdateBillSummaryUI;
-                FinanceManager.Instance.OnLoanTaken -= RefreshLoanInfoUI;
-            }
+            ClientShopContext.Instance.OnMyStoreChanged -= InitializeForStore;
 
-            // Unsubscribe from StoreManager
-            if (StoreManager.Instance != null)
+            if (store != null)
             {
-                StoreManager.Instance.OnLicensePurchased -= UpdateProductListing;
+                if (store.FinanceManager != null)
+                {
+                    store.FinanceManager.OnBillCreated -= CreateBillUI;
+                    store.FinanceManager.OnBillsUpdated -= UpdateBillUIs;
+                    store.FinanceManager.OnBillPaid -= UpdateBillSummaryUI;
+                    store.FinanceManager.OnLoanTaken -= RefreshLoanInfoUI;
+                }
+
+                store.OnLicensePurchased -= UpdateProductListing;
             }
 
             // Unsubscribe from PC
-            if (PC.Instance != null)
+            if (store != null && store.PC != null)
             {
-                PC.Instance.OnCartChanged -= HandleCartChanged;
+                store.PC.OnCartChanged -= HandleCartChanged;
             }
         }
 
@@ -379,7 +398,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
             {
                 var billUI = billUIs[i];
 
-                if (!DataManager.Instance.Data.Bills.Contains(billUI.Bill))
+                if (!store.DataManager.Data.Bills.Contains(billUI.Bill))
                 {
                     billUIs.RemoveAt(i);
                     Destroy(billUI.gameObject);
@@ -394,9 +413,9 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void UpdateBillSummaryUI()
         {
-            var activeBills = FinanceManager.Instance.GetActiveBills();
+            var activeBills = store.FinanceManager.GetActiveBills();
             int count = activeBills.Count;
-            decimal sum = FinanceManager.Instance.GetTotalOutstandingAmount();
+            decimal sum = store.FinanceManager.GetTotalOutstandingAmount();
 
             billSummaryFormat.Arguments = new object[] { count, currencySymbol, sum };
             billSummaryFormat.RefreshString();
@@ -410,7 +429,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
             foreach (var ui in activeLoanUIs) Destroy(ui.gameObject);
             activeLoanUIs.Clear();
 
-            var loans = DataManager.Instance.Data.Loans;
+            var loans = store.DataManager.Data.Loans;
 
             noLoansOverlay.SetActive(loans.Count == 0);
 

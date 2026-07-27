@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Cinemachine;
 using TMPro;
 using CryingSnow.CheckoutFrenzy.Core;
@@ -13,6 +13,10 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private CinemachineVirtualCamera roofCamera;
 
         private TextMeshPro tmp;
+
+        // StoreTitle is a fixed part of a shop's hierarchy (on the roof), so a cached hierarchy
+        // lookup is sufficient here.
+        private StoreManager storeManager;
 
         public string Text
         {
@@ -30,23 +34,26 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         {
             base.Awake();
             tmp = GetComponent<TextMeshPro>();
+            storeManager = GetComponentInParent<StoreManager>();
         }
 
         private void Start()
         {
-            Text = DataManager.Instance.Data.StoreName;
+            if (storeManager == null) return;
 
-            if (ColorUtility.TryParseHtmlString(DataManager.Instance.Data.NameColor, out var nameColor))
+            Text = storeManager.DataManager.Data.StoreName;
+
+            if (ColorUtility.TryParseHtmlString(storeManager.DataManager.Data.NameColor, out var nameColor))
             {
                 Color = nameColor;
             }
 
-            DataManager.Instance.OnSave += () =>
+            storeManager.DataManager.OnSave += () =>
             {
-                DataManager.Instance.Data.StoreName = Text;
+                storeManager.DataManager.Data.StoreName = Text;
 
                 var nameColor = "#" + ColorUtility.ToHtmlStringRGB(Color);
-                DataManager.Instance.Data.NameColor = nameColor;
+                storeManager.DataManager.Data.NameColor = nameColor;
             };
         }
 

@@ -30,18 +30,21 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         protected override void LocateTargets()
         {
+            var warehouseManager = StoreManager.GetStoreAt(transform.position)?.WarehouseManager;
+
             if (filledBox == null)
             {
                 filledBox = FindObjectsByType<Box>(FindObjectsSortMode.None)
                     .FirstOrDefault(box =>
                         box.Quantity > 0 &&
                         box.transform.parent == null &&
-                        !WarehouseManager.Instance.IsWithinWarehouse(box.transform.position));
+                        warehouseManager != null &&
+                        !warehouseManager.IsWithinWarehouse(box.transform.position));
             }
 
             if (emptyRack == null && filledBox != null)
             {
-                emptyRack = WarehouseManager.Instance.GetAvailableRack(filledBox.Product);
+                emptyRack = warehouseManager?.GetAvailableRack(filledBox.Product);
                 if (emptyRack != null) emptyRack.IsTargeted = true;
             }
         }

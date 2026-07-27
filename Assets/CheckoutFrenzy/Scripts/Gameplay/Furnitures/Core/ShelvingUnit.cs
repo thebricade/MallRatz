@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using CryingSnow.CheckoutFrenzy.Core;
@@ -31,7 +31,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         {
             base.Start();
 
-            StoreManager.Instance.ValidateShelvingUnit(this);
+            CurrentStore?.ValidateShelvingUnit(this);
         }
 
         public virtual void Open(bool forced, bool playSFX) { }
@@ -47,14 +47,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             // If the shelving unit is starting to move, unregister it from the store manager.
             // This prevent other customers from targeting it.
-            if (isMoving) StoreManager.Instance.UnregisterShelvingUnit(this);
+            if (isMoving) CurrentStore?.UnregisterShelvingUnit(this);
         }
 
         protected override void Place()
         {
             base.Place();
 
-            StoreManager.Instance.ValidateShelvingUnit(this);
+            CurrentStore?.ValidateShelvingUnit(this);
         }
 
         /// <summary>
@@ -76,19 +76,21 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         /// <param name="savedShelves">A list of ShelfData objects containing the saved product information.</param>
         public void RestoreProductsOnShelves(List<ShelfData> savedShelves)
         {
+            var dataManager = CurrentStore?.DataManager;
+
             for (int i = 0; i < savedShelves.Count; i++)
             {
                 Shelf shelf = Shelves[i];
                 ShelfData shelfData = savedShelves[i];
 
-                Product assignedProduct = DataManager.Instance.GetProductById(shelfData.AssignedProductID);
+                Product assignedProduct = dataManager?.GetProductById(shelfData.AssignedProductID);
                 shelf.SetLabel(assignedProduct);
 
                 // Skip this shelf if it is empty.
                 if (shelfData.IsEmpty) continue;
 
                 // Retrieve the Product from the DataManager using the saved ID.
-                Product product = DataManager.Instance.GetProductById(shelfData.ProductID);
+                Product product = dataManager?.GetProductById(shelfData.ProductID);
 
                 // Restore shelf's products.
                 shelf.RestoreProducts(product, shelfData.Quantity);

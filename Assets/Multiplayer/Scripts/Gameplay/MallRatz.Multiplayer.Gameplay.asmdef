@@ -1,0 +1,19 @@
+{
+    "name": "MallRatz.Multiplayer.Gameplay",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7c88a4a7926ee5145ad2dfa06f454c67",
+        "GUID:b7c43988f464c294083f3f261feeb736",
+        "GUID:bdf94647c6ca91e4a8c6aaa802f3a7d3",
+        "GUID:eec0964c48f6f4e40bc3ec2257ccf8c5"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

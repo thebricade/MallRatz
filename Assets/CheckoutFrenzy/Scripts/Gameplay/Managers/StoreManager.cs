@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,7 +11,43 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
     [RequireComponent(typeof(NavMeshSurface))]
     public class StoreManager : MonoBehaviour
     {
-        public static StoreManager Instance { get; private set; }
+        // Registry of every StoreManager currently active, used for spatial lookups.
+        // This is intentionally NOT a singleton: each shop plot owns its own StoreManager instance.
+        private static readonly List<StoreManager> allStores = new List<StoreManager>();
+
+        /// <summary>
+        /// Finds the StoreManager whose bounds contain the given world position.
+        /// Used by gameplay objects (furniture, boxes, employees) that are not parented
+        /// under a specific shop's hierarchy but still need to resolve which shop they belong to.
+        /// </summary>
+        /// <param name="worldPosition">The world position to test.</param>
+        /// <returns>The owning StoreManager, or null if the position isn't within any shop's bounds.</returns>
+        public static StoreManager GetStoreAt(Vector3 worldPosition)
+        {
+            for (int i = 0; i < allStores.Count; i++)
+            {
+                if (allStores[i].IsWithinStore(worldPosition)) return allStores[i];
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// The DataManager for this specific shop. Both components live on the same ShopPlot root.
+        /// </summary>
+        public DataManager DataManager { get; private set; }
+
+        /// <summary>
+        /// The MissionManager, EmployeeManager, and FinanceManager for this specific shop.
+        /// All shop-scoped managers live as sibling components on the same ShopPlot root.
+        /// </summary>
+        public MissionManager MissionManager { get; private set; }
+        public EmployeeManager EmployeeManager { get; private set; }
+        public FinanceManager FinanceManager { get; private set; }
+        public WarehouseManager WarehouseManager { get; private set; }
+
+        /// <summary>The PC (order terminal) within this shop.</summary>
+        public PC PC { get; private set; }
 
         [Header("Messages")]
         [SerializeField, Tooltip("Shown when the player doesn't have enough money.")]
@@ -75,7 +111,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         /// plus the sum of additional customers provided by purchased expansions.
         /// </summary>
         private int maxCustomers => GameConfig.Instance.BaseMaxCustomers + expansions
-            .Take(DataManager.Instance.Data.ExpansionLevel)
+            .Take(DataManager.Data.ExpansionLevel)
             .Sum(expansion => expansion.AdditionalCustomers);
 
         private Coroutine spawnCustomerCoroutine;
@@ -89,21 +125,27 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private void Awake()
         {
-            Instance = this;
+            DataManager = GetComponent<DataManager>();
+            MissionManager = GetComponent<MissionManager>();
+            EmployeeManager = GetComponent<EmployeeManager>();
+            FinanceManager = GetComponent<FinanceManager>();
+            WarehouseManager = GetComponent<WarehouseManager>();
+            PC = GetComponentInChildren<PC>(true);
 
             navMeshSurface = GetComponent<NavMeshSurface>();
 
             openTime = GameConfig.Instance.OpenTime;
         }
 
+        private void OnEnable() => allStores.Add(this);
+        private void OnDisable() => allStores.Remove(this);
+
         private IEnumerator Start()
         {
-            // Wait until the DataManager is initialized and its data is loaded.
-            yield return new WaitUntil(() =>
-                DataManager.Instance != null && DataManager.Instance.IsLoaded
-            );
+            // Wait until this shop's DataManager is initialized and its data is loaded.
+            yield return new WaitUntil(() => DataManager != null && DataManager.IsLoaded);
 
-            DataManager.Instance.OnSave += () =>
+            DataManager.OnSave += () =>
             {
                 // Calculate and store the total value of products currently held by customers but not yet paid for.
                 decimal productsValue = 0m;
@@ -111,18 +153,18 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                 {
                     foreach (var product in customer.Inventory)
                     {
-                        decimal price = DataManager.Instance.GetCustomProductPrice(product);
+                        decimal price = DataManager.GetCustomProductPrice(product);
                         productsValue += price;
                     }
                 }
 
-                DataManager.Instance.Data.UnpaidProductsValue = productsValue;
+                DataManager.Data.UnpaidProductsValue = productsValue;
             };
 
             // Restore purchased Expansions
             for (int i = 0; i < expansions.Count; i++)
             {
-                bool isPurchased = i < DataManager.Instance.Data.ExpansionLevel;
+                bool isPurchased = i < DataManager.Data.ExpansionLevel;
                 expansions[i].SetPurchasedState(isPurchased);
             }
 
@@ -169,10 +211,11 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                     var spawnPoint = spawnPoints[randomSpawnIndex];
 
                     var customer = Instantiate(customerPrefab, spawnPoint.position, spawnPoint.rotation);
+                    customer.AssignStore(this);
                     customers.Add(customer);
                     customer.OnLeave += () => customers.Remove(customer);
 
-                    DataManager.Instance.Data.CurrentSummary.TotalCustomers++;
+                    DataManager.Data.CurrentSummary.TotalCustomers++;
                 }
             }
         }
@@ -207,13 +250,16 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         }
 
         /// <summary>
-        /// Checks if the given position is within the bounds of the store.
+        /// Checks if the given world position is within the bounds of this specific shop.
+        /// Bounds are authored in local space so the same prefab produces correct
+        /// per-instance world bounds regardless of where each shop plot is placed.
         /// </summary>
-        /// <param name="position">The position to check.</param>
+        /// <param name="position">The world position to check.</param>
         /// <returns>True if the position is within the store bounds, otherwise false.</returns>
         public bool IsWithinStore(Vector3 position)
         {
-            return storeBounds.Contains(position);
+            Vector3 localPosition = transform.InverseTransformPoint(position);
+            return storeBounds.Contains(localPosition);
         }
 
         /// <summary>
@@ -226,7 +272,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         /// <returns>True if the license was purchased successfully, otherwise false.</returns>
         public bool PurchaseLicense(License license)
         {
-            if (DataManager.Instance.PlayerMoney < license.Price)
+            if (DataManager.PlayerMoney < license.Price)
             {
                 UIEvents.RaiseMessage(insufficientFundsMessage.GetLocalizedString(), Color.red);
                 return false;
@@ -235,14 +281,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             // Grants the purchased license
             foreach (var product in license.Products)
             {
-                DataManager.Instance.Data.LicensedProducts.Add(product.ProductID);
+                DataManager.Data.LicensedProducts.Add(product.ProductID);
             }
 
-            DataManager.Instance.Data.OwnedLicenses.Add(license.LicenseID);
+            DataManager.Data.OwnedLicenses.Add(license.LicenseID);
 
-            DataManager.Instance.PlayerMoney -= (decimal)license.Price;
+            DataManager.PlayerMoney -= (decimal)license.Price;
 
-            MissionManager.Instance.UpdateMission(MissionGoal.License, 1, license.LicenseID);
+            MissionManager.UpdateMission(MissionGoal.License, 1, license.LicenseID);
 
             OnLicensePurchased?.Invoke(license);
 
@@ -259,7 +305,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         public bool IsExpansionPurchased(Expansion expansion)
         {
             int expansionIndex = expansions.IndexOf(expansion);
-            return expansionIndex < DataManager.Instance.Data.ExpansionLevel;
+            return expansionIndex < DataManager.Data.ExpansionLevel;
         }
 
         /// <summary>
@@ -270,7 +316,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         public bool IsCurrentExpansion(Expansion expansion)
         {
             int expansionIndex = expansions.IndexOf(expansion);
-            return expansionIndex == DataManager.Instance.Data.ExpansionLevel;
+            return expansionIndex == DataManager.Data.ExpansionLevel;
         }
 
         /// <summary>
@@ -282,25 +328,25 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         /// <returns>True if the expansion was purchased successfully, otherwise false.</returns>
         public bool PurchaseExpansion()
         {
-            var expansion = expansions[DataManager.Instance.Data.ExpansionLevel];
+            var expansion = expansions[DataManager.Data.ExpansionLevel];
 
-            if (DataManager.Instance.PlayerMoney < expansion.UnlockPrice)
+            if (DataManager.PlayerMoney < expansion.UnlockPrice)
             {
                 UIEvents.RaiseMessage(insufficientFundsMessage.GetLocalizedString(), Color.red);
                 return false;
             }
 
             expansion.SetPurchasedState(true);
-            DataManager.Instance.Data.ExpansionLevel++;
+            DataManager.Data.ExpansionLevel++;
 
-            if (!DataManager.Instance.Data.IsWarehouseUnlocked)
-                DataManager.Instance.Data.IsWarehouseUnlocked = expansion.UnlockWarehouse;
+            if (!DataManager.Data.IsWarehouseUnlocked)
+                DataManager.Data.IsWarehouseUnlocked = expansion.UnlockWarehouse;
 
-            DataManager.Instance.PlayerMoney -= (decimal)expansion.UnlockPrice;
+            DataManager.PlayerMoney -= (decimal)expansion.UnlockPrice;
 
             UpdateNavMeshSurface();
 
-            OnExpansionPurchased?.Invoke(DataManager.Instance.Data.ExpansionLevel);
+            OnExpansionPurchased?.Invoke(DataManager.Data.ExpansionLevel);
 
             AudioManager.Instance.PlaySFX(AudioID.Kaching);
             AudioManager.Instance.PlaySFX(AudioID.Construction);
@@ -311,9 +357,15 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private IEnumerator EndDay()
         {
             isTodayEnded = true;
-            lastTotalDays = DataManager.Instance.Data.TotalDays;
+            lastTotalDays = DataManager.Data.TotalDays;
 
-            TimeManager.Instance.AllowTimeUpdate = false;
+            // The world runs on a single global day/night cycle: every shop closes at the
+            // same in-game time. Only the local player's own claimed shop should pause the
+            // shared clock and show a summary popup; every other shop silently rolls over
+            // to the next day without any UI or player input.
+            bool isMyStore = ClientShopContext.Instance != null && ClientShopContext.Instance.MyStore == this;
+
+            if (isMyStore) TimeManager.Instance.AllowTimeUpdate = false;
 
             if (spawnCustomerCoroutine != null)
             {
@@ -325,27 +377,44 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             yield return new WaitWhile(() => customers.Count > 0);
 
-            StoreEvents.RaiseSummaryRequested(DataManager.Instance.Data.CurrentSummary, (skip) =>
+            if (isMyStore)
             {
-                if (skip) SkipToNextDay();
-                else StartCoroutine(ShowSkipDialog());
+                StoreEvents.RaiseSummaryRequested(DataManager.Data.CurrentSummary, (skip) =>
+                {
+                    if (skip) SkipToNextDay();
+                    else StartCoroutine(ShowSkipDialog());
 
-                TimeManager.Instance.AllowTimeUpdate = true;
-            });
+                    TimeManager.Instance.AllowTimeUpdate = true;
+                });
+            }
+            else
+            {
+                // Not the local player's shop: silently roll this shop over to the next
+                // day without ever touching the shared global clock. The clock itself is
+                // only ever fast-forwarded by the player's own claimed shop, so a busy
+                // shop doesn't jump the world forward while the player is still reading
+                // their own summary popup.
+                AdvanceToNextDay();
+            }
 
             AudioManager.Instance.StopBGMQueue();
         }
 
+        private void AdvanceToNextDay()
+        {
+            if (lastTotalDays == DataManager.Data.TotalDays) DataManager.Data.TotalDays++;
+
+            RestartDay();
+        }
+
         private void SkipToNextDay()
         {
-            if (lastTotalDays == DataManager.Instance.Data.TotalDays) DataManager.Instance.Data.TotalDays++;
-
             int hour = openTime.StartHour;
             int minute = openTime.StartMinute;
 
             TimeManager.Instance.SetTime(hour, minute);
 
-            RestartDay();
+            AdvanceToNextDay();
         }
 
         private IEnumerator ShowSkipDialog()
@@ -379,9 +448,9 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         {
             isTodayEnded = false;
 
-            DataManager.Instance.Data.CurrentSummary = new SummaryData(DataManager.Instance.PlayerMoney);
+            DataManager.Data.CurrentSummary = new SummaryData(DataManager.PlayerMoney);
 
-            OnDayStarted?.Invoke(DataManager.Instance.Data.TotalDays);
+            OnDayStarted?.Invoke(DataManager.Data.TotalDays);
 
             spawnCustomerCoroutine = StartCoroutine(SpawnCustomer());
 
@@ -438,7 +507,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                     !shelf.IsTargeted &&
                     shelf.AssignedProduct != null &&
                     (shelf.Product == null || !shelf.IsFull) &&
-                    WarehouseManager.Instance.GetRackWithProduct(shelf.AssignedProduct) != null
+                    WarehouseManager != null && WarehouseManager.GetRackWithProduct(shelf.AssignedProduct) != null
                 )
                 .OrderBy(shelf => shelf.Quantity)
                 .FirstOrDefault();
@@ -478,7 +547,9 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
+            Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.DrawWireCube(storeBounds.center, storeBounds.size);
+            Gizmos.matrix = Matrix4x4.identity;
         }
 #endif
     }

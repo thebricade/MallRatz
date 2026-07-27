@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using CryingSnow.CheckoutFrenzy.Core;
@@ -50,14 +50,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private void Start()
         {
             // Subscribe to the OnPriceChanged event from StoreManager
-            DataManager.Instance.OnPriceChanged += HandlePriceChanged;
+            if (ShelvingUnit?.CurrentStore != null) ShelvingUnit.CurrentStore.DataManager.OnPriceChanged += HandlePriceChanged;
             UpdateInfoText();
         }
 
         private void OnDisable()
         {
             // Unsubscribe from the OnPriceChanged event when disabled
-            DataManager.Instance.OnPriceChanged -= HandlePriceChanged;
+            if (ShelvingUnit?.CurrentStore != null) ShelvingUnit.CurrentStore.DataManager.OnPriceChanged -= HandlePriceChanged;
         }
 
         public override void Interact(IInteractor interactor) { }
@@ -126,7 +126,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             if (Product != null)
             {
-                decimal price = DataManager.Instance.GetCustomProductPrice(Product);
+                decimal price = ShelvingUnit.CurrentStore.DataManager.GetCustomProductPrice(Product);
                 infoText.text = $"[{Quantity}/{Capacity}] ${price:F2}";
             }
             else

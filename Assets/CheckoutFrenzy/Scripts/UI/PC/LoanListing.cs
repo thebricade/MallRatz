@@ -33,6 +33,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
         private TextMeshProUGUI lockerLabel;
 
         private string currencySymbol => GameConfig.Instance.ActiveCurrency.currencySymbol;
+        private StoreManager store => ClientShopContext.Instance.MyStore;
         private LoanTemplate loanTemplate;
 
         public void Initialize(LoanTemplate template)
@@ -65,10 +66,10 @@ namespace CryingSnow.CheckoutFrenzy.UI
             unlockLevelLocalizedString.StringChanged += OnUnlockLabelChanged;
 
             takeButton.onClick.RemoveAllListeners();
-            takeButton.onClick.AddListener(() => FinanceManager.Instance.AddLoanFromTemplate(template));
+            takeButton.onClick.AddListener(() => store.FinanceManager.AddLoanFromTemplate(template));
 
-            DataManager.Instance.OnLevelUp += TryUnlock;
-            TryUnlock(DataManager.Instance.Data.CurrentLevel);
+            store.DataManager.OnLevelUp += TryUnlock;
+            TryUnlock(store.DataManager.Data.CurrentLevel);
         }
 
         private void OnDestroy()
@@ -78,9 +79,9 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
             takeButton.onClick.RemoveAllListeners();
 
-            if (DataManager.Instance != null)
+            if (store != null)
             {
-                DataManager.Instance.OnLevelUp -= TryUnlock;
+                store.DataManager.OnLevelUp -= TryUnlock;
             }
         }
 
@@ -111,7 +112,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
             if (levelMet)
             {
-                DataManager.Instance.OnLevelUp -= TryUnlock;
+                store.DataManager.OnLevelUp -= TryUnlock;
             }
         }
     }

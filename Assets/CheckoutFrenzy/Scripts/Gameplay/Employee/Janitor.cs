@@ -64,7 +64,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             if (cleanable == null)
             {
-                cleanable = StoreManager.Instance.GetNearestCleanable(transform.position);
+                cleanable = StoreManager.GetStoreAt(transform.position)?.GetNearestCleanable(transform.position);
             }
         }
 

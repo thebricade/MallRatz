@@ -22,7 +22,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         {
             base.Start();
 
-            WarehouseManager.Instance.ValidateStorageRack(this);
+            CurrentStore?.WarehouseManager?.ValidateStorageRack(this);
         }
 
         protected override void SetMovingState(bool isMoving)
@@ -34,18 +34,20 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             // If the storage rack is starting to move, unregister it from the warehouse manager.
             // This prevent employees from targeting it.
-            if (isMoving) WarehouseManager.Instance.UnregisterStorageRack(this);
+            if (isMoving) CurrentStore?.WarehouseManager?.UnregisterStorageRack(this);
         }
 
         protected override void Place()
         {
             base.Place();
 
-            WarehouseManager.Instance.ValidateStorageRack(this);
+            CurrentStore?.WarehouseManager?.ValidateStorageRack(this);
         }
 
         public void RestoreBoxesOnRacks(List<RackData> savedRacks)
         {
+            var dataManager = CurrentStore?.DataManager;
+
             for (int i = 0; i < savedRacks.Count; i++)
             {
                 RackData rackData = savedRacks[i];
@@ -54,7 +56,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
                 if (rackData.IsEmpty) continue;
 
                 // Retrieve the Product from the DataManager using the saved ID.
-                Product product = DataManager.Instance.GetProductById(rackData.ProductID);
+                Product product = dataManager?.GetProductById(rackData.ProductID);
 
                 // Get the corresponding Shelf and restore it's products.
                 Rack rack = Racks[i];

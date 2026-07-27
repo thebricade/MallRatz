@@ -46,7 +46,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         public Bill Bill { get; private set; }
 
-        private int currentDay => DataManager.Instance.Data.TotalDays;
+        private int currentDay => ClientShopContext.Instance.MyStore.DataManager.Data.TotalDays;
         private string currencySymbol => GameConfig.Instance.ActiveCurrency.currencySymbol;
 
         private void OnEnable()
@@ -87,7 +87,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
             payButton.onClick.AddListener(() =>
             {
-                if (FinanceManager.Instance.PayBill(Bill))
+                if (ClientShopContext.Instance.MyStore.FinanceManager.PayBill(Bill))
                 {
                     AudioManager.Instance.PlaySFX(AudioID.Kaching);
                     UpdateUI();

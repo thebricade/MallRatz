@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,6 +35,13 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private CheckoutCounter checkoutCounter;
         private int queueNumber = int.MaxValue;
         private bool isPicking;
+
+        // Customers are spawned as root-level objects by a specific shop's StoreManager, which
+        // assigns itself here immediately after spawning. This is a stable reference set once,
+        // rather than a spatial lookup, since customers wander (e.g. to the exit) and shouldn't
+        // lose their owning shop just because they briefly leave its bounds.
+        private StoreManager store;
+        public void AssignStore(StoreManager store) => this.store = store;
 
         #region Unity Lifecycle
         private void Awake()
@@ -85,7 +92,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
         private IEnumerator CheckEnteringStore()
         {
-            while (!StoreManager.Instance.IsWithinStore(transform.position))
+            while (!store.IsWithinStore(transform.position))
             {
                 yield return new WaitForSeconds(0.1f);
             }
@@ -151,7 +158,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             StopAllCoroutines();
 
             // If the customer was interacting with a shelving unit, re-register it with the store manager.
-            if (shelvingUnit != null) StoreManager.Instance.RegisterShelvingUnit(shelvingUnit);
+            if (shelvingUnit != null) store.RegisterShelvingUnit(shelvingUnit);
 
             StartCoroutine(Leave());
         }
@@ -165,12 +172,12 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 
             if (thief != null)
             {
-                StoreManager.Instance.UnregisterThief(this);
+                store.UnregisterThief(this);
             }
 
             OnLeave?.Invoke();
 
-            var exitPoint = StoreManager.Instance.GetExitPoint();
+            var exitPoint = store.GetExitPoint();
             yield return MoveTo(exitPoint);
 
             yield return new WaitForEndOfFrame();
@@ -182,7 +189,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private IEnumerator FindShelvingUnit()
         {
             // Get a new shelving unit from the store manager.
-            var newShelvingUnit = StoreManager.Instance.GetShelvingUnit();
+            var newShelvingUnit = store.GetShelvingUnit();
 
             // If there's a current shelving unit that's different from the new one and is open, close it.
             if (shelvingUnit != null && shelvingUnit != newShelvingUnit && shelvingUnit.IsOpen)
@@ -197,7 +204,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             if (shelvingUnit == null) yield break;
 
             // Unregister the shelving unit from the store manager so other customers don't target it.
-            StoreManager.Instance.UnregisterShelvingUnit(shelvingUnit);
+            store.UnregisterShelvingUnit(shelvingUnit);
 
             // Set the agent's destination to the front of the shelving unit.
             agent.SetDestination(shelvingUnit.Front);
@@ -230,7 +237,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             // If no shelf is available or the shelving unit is moving, re-register the shelving unit and exit.
             if (shelf == null || shelvingUnit.IsMoving)
             {
-                StoreManager.Instance.RegisterShelvingUnit(shelvingUnit);
+                store.RegisterShelvingUnit(shelvingUnit);
                 yield break;
             }
 
@@ -302,7 +309,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             }
 
             // Re-register the shelving unit with the store manager.
-            StoreManager.Instance.RegisterShelvingUnit(shelvingUnit);
+            store.RegisterShelvingUnit(shelvingUnit);
         }
 
         private bool IsWillingToBuy(Product product)
@@ -314,7 +321,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             decimal maxAcceptablePrice = product.MarketPrice * (decimal)priceToleranceFactor;
 
             // 3. Compare against the price the player has set in the store.
-            decimal customPrice = DataManager.Instance.GetCustomProductPrice(product);
+            decimal customPrice = store.DataManager.GetCustomProductPrice(product);
 
             // 4. Return true if the price is acceptable, false if it's "overpriced".
             return customPrice <= maxAcceptablePrice;
@@ -334,7 +341,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             var shelf = shelvingUnit.GetShelf();
             if (shelf == null || shelvingUnit.IsMoving)
             {
-                StoreManager.Instance.RegisterShelvingUnit(shelvingUnit);
+                store.RegisterShelvingUnit(shelvingUnit);
                 yield break;
             }
 
@@ -346,7 +353,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             if (product != null)
             {
                 inventory.Add(product);
-                StoreManager.Instance.RegisterThief(this);
+                store.RegisterThief(this);
 
                 var productObj = shelf.TakeProductModel();
 
@@ -394,12 +401,12 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             overheadUI.ShowThiefIcon();
 
             // Re-register the shelving unit with the store manager.
-            StoreManager.Instance.RegisterShelvingUnit(shelvingUnit);
+            store.RegisterShelvingUnit(shelvingUnit);
         }
 
         private IEnumerator CheckLeavingStoreAsThief()
         {
-            while (StoreManager.Instance.IsWithinStore(transform.position))
+            while (store.IsWithinStore(transform.position))
             {
                 yield return new WaitForSeconds(0.1f);
             }
@@ -437,14 +444,14 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             if (IsCaught) return;
 
             IsCaught = true;
-            StoreManager.Instance.UnregisterThief(this);
+            store.UnregisterThief(this);
             StopAllCoroutines();
             StartCoroutine(CaughtSequence());
         }
 
         private IEnumerator CaughtSequence()
         {
-            StoreManager.Instance.UnregisterThief(this);
+            store.UnregisterThief(this);
 
             animator.SetBool("IsMoving", false);
             animator.SetFloat("Speed", 0f);
@@ -467,7 +474,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             if (thief != null)
                 Destroy(thief.gameObject);
 
-            DataManager.Instance.PlayerMoney += inventory.Sum(p => p.Price);
+            DataManager dataManager = store.DataManager;
+            dataManager.PlayerMoney += inventory.Sum(p => p.Price);
             inventory.Clear();
             AudioManager.Instance.PlaySFX(AudioID.Kaching);
 
@@ -478,7 +486,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         #region Checkout & Payment
         private IEnumerator Checkout()
         {
-            checkoutCounter = StoreManager.Instance.FindOptimalCounter(transform.position);
+            checkoutCounter = store.FindOptimalCounter(transform.position);
             checkoutCounter.LiningCustomers.Add(this);
             yield return UpdateQueue();
             yield return checkoutCounter.PlaceProducts(this);

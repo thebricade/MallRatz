@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using TMPro;
@@ -93,7 +93,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
             decreaseButton.onClick.AddListener(() => UpdateAmount(-1));
             increaseButton.onClick.AddListener(() => UpdateAmount(1));
-            addToCartButton.onClick.AddListener(() => PC.Instance.AddToCart(furniture, amount));
+            addToCartButton.onClick.AddListener(() => ClientShopContext.Instance.MyStore.PC.AddToCart(furniture, amount));
         }
 
         /// <summary>

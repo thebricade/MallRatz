@@ -7,20 +7,13 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
 {
     public class WarehouseManager : MonoBehaviour
     {
-        public static WarehouseManager Instance { get; private set; }
-
-        [SerializeField, Tooltip("The 3D bounding box of the warehouse.")]
+        [SerializeField, Tooltip("The 3D bounding box of the warehouse, in local space relative to this shop.")]
         private Bounds warehouseBounds;
 
         // List of valid storage racks within the warehouse's boundaries.
         private HashSet<StorageRack> storageRacks = new HashSet<StorageRack>();
         public void RegisterStorageRack(StorageRack storageRack) => storageRacks.Add(storageRack);
         public void UnregisterStorageRack(StorageRack storageRack) => storageRacks.Remove(storageRack);
-
-        private void Awake()
-        {
-            Instance = this;
-        }
 
         /// <summary>
         /// Validates the position of a StorageRack. 
@@ -44,7 +37,8 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         /// <returns>True if the position is within the warehouse bounds, otherwise false.</returns>
         public bool IsWithinWarehouse(Vector3 position)
         {
-            return warehouseBounds.Contains(position);
+            Vector3 localPosition = transform.InverseTransformPoint(position);
+            return warehouseBounds.Contains(localPosition);
         }
 
         public Dictionary<Product, int> GetProducts(DisplaySection section)
@@ -77,6 +71,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
+            Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.DrawWireCube(warehouseBounds.center, warehouseBounds.size);
         }
 #endif

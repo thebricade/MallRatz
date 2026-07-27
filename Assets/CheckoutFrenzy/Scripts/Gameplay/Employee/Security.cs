@@ -40,7 +40,7 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         {
             if (thief == null)
             {
-                thief = StoreManager.Instance.GetNearestThief(transform.position);
+                thief = StoreManager.GetStoreAt(transform.position)?.GetNearestThief(transform.position);
             }
         }
 

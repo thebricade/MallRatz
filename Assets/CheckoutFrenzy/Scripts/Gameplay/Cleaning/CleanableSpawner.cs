@@ -22,13 +22,22 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
         [SerializeField, Tooltip("List of Cleanable prefabs that can be randomly selected and spawned.")]
         private List<Cleanable> cleanablePrefabs;
 
+        // CleanableSpawner is a fixed child within a shop's hierarchy, so a cached hierarchy
+        // lookup is sufficient here.
+        private StoreManager storeManager;
+
+        private void Awake()
+        {
+            storeManager = GetComponentInParent<StoreManager>();
+        }
+
         private IEnumerator Start()
         {
             while (true)
             {
                 yield return new WaitForSeconds(spawnInterval);
 
-                if (StoreManager.Instance.CanSpawnCleanable && Random.value < chanceToSpawn)
+                if (storeManager != null && storeManager.CanSpawnCleanable && Random.value < chanceToSpawn)
                 {
                     var cleanablePrefab = cleanablePrefabs[Random.Range(0, cleanablePrefabs.Count)];
 

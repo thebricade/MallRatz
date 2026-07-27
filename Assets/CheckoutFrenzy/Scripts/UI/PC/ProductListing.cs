@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
@@ -106,7 +106,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
             decreaseButton.onClick.AddListener(() => UpdateAmount(-1));
             increaseButton.onClick.AddListener(() => UpdateAmount(1));
-            addToCartButton.onClick.AddListener(() => PC.Instance.AddToCart(product, amount));
+            addToCartButton.onClick.AddListener(() => ClientShopContext.Instance.MyStore.PC.AddToCart(product, amount));
         }
 
         /// <summary>

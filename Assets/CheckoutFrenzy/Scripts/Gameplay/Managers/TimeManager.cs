@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using DG.Tweening;
@@ -69,7 +69,6 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             sun.cullingMask = 0;
             RenderSettings.sun = sun;
 
-            totalMinutes = DataManager.Instance.Data.TotalMinutes;
             wasNightTime = !nightTime.IsWithinRange(TotalMinutes);
             UpdateSunRotation();
         }
@@ -83,7 +82,6 @@ namespace CryingSnow.CheckoutFrenzy.Gameplay
             if (totalMinutes >= MinutesPerDay)
             {
                 totalMinutes = 0f;
-                DataManager.Instance.Data.TotalDays++;
             }
 
             UpdateSunRotation();

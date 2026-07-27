@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Localization;
 using TMPro;
 using CryingSnow.CheckoutFrenzy.Core;
@@ -37,7 +37,7 @@ namespace CryingSnow.CheckoutFrenzy.UI
 
         private void UpdateDisplay()
         {
-            int day = DataManager.Instance.Data.TotalDays;
+            int day = ClientShopContext.Instance.MyStore?.DataManager.Data.TotalDays ?? 0;
             string time = TimeManager.Instance.GetFormattedTime();
 
             dayTimeFormat.Arguments = new object[] { day, time };

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using TMPro;
@@ -22,21 +22,25 @@ namespace CryingSnow.CheckoutFrenzy.UI
         private Image levelFill;
 
         private string currencySymbol => GameConfig.Instance.ActiveCurrency.currencySymbol;
+        private DataManager dataManager;
 
         private void Start()
         {
+            dataManager = ClientShopContext.Instance.MyStore?.DataManager;
+            if (dataManager == null) return;
+
             levelFormat.StringChanged += OnLevelStringChanged;
 
-            DataManager.Instance.OnMoneyChanged += UpdateMoneyDisplay;  // Subscribe to money changed events.
-            DataManager.Instance.OnLevelUp += UpdateLevelDisplay;       // Subscribe to level up events.
-            DataManager.Instance.OnExperienceGain += UpdateLevelFill;   // Subscribe to experience gain events.
+            dataManager.OnMoneyChanged += UpdateMoneyDisplay;  // Subscribe to money changed events.
+            dataManager.OnLevelUp += UpdateLevelDisplay;       // Subscribe to level up events.
+            dataManager.OnExperienceGain += UpdateLevelFill;   // Subscribe to experience gain events.
 
-            UpdateMoneyDisplay(DataManager.Instance.PlayerMoney);       // Initial update of money display.
-            UpdateLevelDisplay(DataManager.Instance.Data.CurrentLevel); // Initial update of level display.
+            UpdateMoneyDisplay(dataManager.PlayerMoney);       // Initial update of money display.
+            UpdateLevelDisplay(dataManager.Data.CurrentLevel); // Initial update of level display.
 
             // Calculate and update the level fill bar.
-            float currentExp = (float)DataManager.Instance.Data.CurrentExperience;
-            int expForNextLevel = DataManager.Instance.CalculateExperienceForNextLevel();
+            float currentExp = (float)dataManager.Data.CurrentExperience;
+            int expForNextLevel = dataManager.CalculateExperienceForNextLevel();
             float progress = currentExp / expForNextLevel;
             UpdateLevelFill(progress);
         }
@@ -45,9 +49,12 @@ namespace CryingSnow.CheckoutFrenzy.UI
         {
             levelFormat.StringChanged -= OnLevelStringChanged;
 
-            if (DataManager.Instance != null) DataManager.Instance.OnMoneyChanged -= UpdateMoneyDisplay;
-            if (DataManager.Instance != null) DataManager.Instance.OnLevelUp -= UpdateLevelDisplay;
-            if (DataManager.Instance != null) DataManager.Instance.OnExperienceGain -= UpdateLevelFill;
+            if (dataManager != null)
+            {
+                dataManager.OnMoneyChanged -= UpdateMoneyDisplay;
+                dataManager.OnLevelUp -= UpdateLevelDisplay;
+                dataManager.OnExperienceGain -= UpdateLevelFill;
+            }
         }
 
         private void OnLevelStringChanged(string value)
