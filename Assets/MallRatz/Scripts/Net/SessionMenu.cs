@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -22,13 +23,59 @@ namespace MallRatz.Net
         string status = "";
         bool busy;
         ISession session;
+        GUIStyle stampStyle;
 
         void Awake() => Application.runInBackground = true;
+
+        // Everyone sends their build stamp when connecting, and the host turns away mismatched builds.
+        void Start()
+        {
+            var network = NetworkManager.Singleton;
+            if (network == null) return;
+            network.NetworkConfig.ConnectionApproval = true;
+            network.NetworkConfig.ConnectionData = Encoding.UTF8.GetBytes(BuildStamp.Payload);
+            network.ConnectionApprovalCallback = Approve;
+            network.OnClientDisconnectCallback += OnDisconnected;
+        }
+
+        void OnDestroy()
+        {
+            var network = NetworkManager.Singleton;
+            if (network == null) return;
+            network.ConnectionApprovalCallback = null;
+            network.OnClientDisconnectCallback -= OnDisconnected;
+        }
+
+        static void Approve(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+        {
+            string payload = request.Payload != null ? Encoding.UTF8.GetString(request.Payload) : "";
+            bool matches = BuildStamp.Matches(payload, out string theirs);
+            response.Approved = matches;
+            response.CreatePlayerObject = matches;
+            if (!matches)
+                response.Reason = $"Wrong version: the host is on {BuildStamp.Commit} and you're on {theirs}. Grab the host's latest zip.";
+        }
+
+        // Turned away (or the host left): say why, and leave the session so Join works again.
+        void OnDisconnected(ulong clientId)
+        {
+            var network = NetworkManager.Singleton;
+            if (network.IsServer || clientId != network.LocalClientId) return;
+            status = string.IsNullOrEmpty(network.DisconnectReason) ? "Disconnected." : network.DisconnectReason;
+            if (session != null)
+            {
+                _ = session.LeaveAsync();
+                session = null;
+            }
+        }
 
         void OnGUI()
         {
             var network = NetworkManager.Singleton;
             if (network == null) return;
+
+            stampStyle ??= new GUIStyle(GUI.skin.label) { alignment = TextAnchor.LowerRight };
+            GUI.Label(new Rect(Screen.width - 410, Screen.height - 24, 400, 20), BuildStamp.Label, stampStyle);
 
             GUILayout.BeginArea(new Rect(Screen.width - 290, 10, 280, 300));
             GUILayout.BeginVertical(GUI.skin.box);
