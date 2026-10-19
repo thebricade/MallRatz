@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/MallRatz/Scenes/Greybox.unity
+    guid: fb4be710961548945843536f79abceb8
+  - enabled: 1
     path: Assets/CheckoutFrenzy/Scenes/MainMenu.unity
     guid: 8a09cccff1b6ac04f9c44d21b75b4efb
   - enabled: 1
