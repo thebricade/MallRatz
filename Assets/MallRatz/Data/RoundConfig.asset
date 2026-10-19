@@ -15,9 +15,14 @@ MonoBehaviour:
   roundSeconds: 480
   closingSeconds: 60
   wishListTarget: 0.6
+  cardStartsWithFriends: 1
+  spenderCountdownSeconds: 10
+  spenderPocketCash: 15
   wishList:
   - {fileID: 11400000, guid: b22f7af54af258b4f8b698354feb333a, type: 2}
   - {fileID: 11400000, guid: ae8c07c774d18b24caeabbca36266b50, type: 2}
   - {fileID: 11400000, guid: a7d9a422cdc77ff4b9ab35a736584e7e, type: 2}
   - {fileID: 11400000, guid: 42a8b8d10a6581642b5050d233ae0a86, type: 2}
   - {fileID: 11400000, guid: f696336f7b35ef347970a28e95c01f08, type: 2}
+  - {fileID: 11400000, guid: 24d60d429ec1e0a4caf4f2a55f38db49, type: 2}
+  - {fileID: 11400000, guid: dff5bd523d876184c903fdaa904ba6d0, type: 2}

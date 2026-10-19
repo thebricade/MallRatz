@@ -33,6 +33,8 @@ namespace MallRatz.Editor
         static readonly Color WallColor = new(0.9f, 0.88f, 0.84f);
         static readonly Color JunkShop = new(1f, 0.85f, 0.55f);
         static readonly Color CardShop = new(0.6f, 0.8f, 1f);
+        static readonly Color SneakerShop = new(0.85f, 0.85f, 0.8f);
+        static readonly Color ToyShop = new(0.75f, 1f, 0.7f);
         static readonly Color Fixture = new(0.45f, 0.4f, 0.38f);
 
         [MenuItem("MallRatz/Build Greybox Scene")]
@@ -53,25 +55,40 @@ namespace MallRatz.Editor
             var booster = Item("Booster Pack", 5, 6, 0.1f);
             var fish = Item("Singing Fish Plaque", 25, 9, 0.8f);
             var sneakers = Item("Light-up Sneakers", 80, 7, 0.6f);
-            bool vaseIsNew = AssetDatabase.LoadAssetAtPath<ItemDefinition>(ItemPath("Fancy Vase")) == null;
-            var vase = Item("Fancy Vase", 90, 6, 4f, bulky: true);
-            var config = Config(new List<ItemDefinition> { shrimp, booster, fish, sneakers, vase });
-            // Older configs predate the vase. Only add it once, so taking it off by hand sticks.
-            if (vaseIsNew && !config.wishList.Contains(vase))
+            // Wish-list items added after the first config was made. Each is added to an existing config
+            // only the run its asset is created, so taking one off by hand sticks.
+            var laterWishes = new List<ItemDefinition>();
+            ItemDefinition LaterWish(string name, int price, int uselessness, float carryWeight, bool bulky = false)
             {
-                config.wishList.Add(vase);
+                bool isNew = AssetDatabase.LoadAssetAtPath<ItemDefinition>(ItemPath(name)) == null;
+                var item = Item(name, price, uselessness, carryWeight, bulky);
+                if (isNew) laterWishes.Add(item);
+                return item;
+            }
+            var vase = LaterWish("Fancy Vase", 90, 6, 4f, bulky: true);
+            var crocs = LaterWish("Limited-Edition Crocs", 60, 9, 0.8f);
+            var capybara = LaterWish("Giant Plush Capybara", 70, 9, 3f, bulky: true);
+            var shoeCleaner = Item("Shoe Cleaning Kit", 15, 2, 0.4f);
+            var spinner = Item("Fidget Spinner", 5, 6, 0.1f);
+            var config = Config(new List<ItemDefinition> { shrimp, booster, fish, sneakers, vase, crocs, capybara });
+            foreach (var wish in laterWishes)
+            {
+                if (config.wishList.Contains(wish)) continue;
+                config.wishList.Add(wish);
                 EditorUtility.SetDirty(config);
             }
             var playerPrefab = PlayerPrefab();
 
-            // Concourse runs along X at z < 2; the two shops sit north of it.
-            Block("Floor", new Vector3(0f, -0.5f, 0f), new Vector3(40f, 1f, 24f), Floor);
+            // Concourse runs along X between z = -12 and z = 2, with two shops north of it and two south.
+            Block("Floor", new Vector3(0f, -0.5f, -5f), new Vector3(40f, 1f, 34f), Floor);
             Block("Wall N", new Vector3(0f, 1.5f, 12f), new Vector3(40f, 3f, 0.3f), WallColor);
-            Block("Wall S", new Vector3(0f, 1.5f, -12f), new Vector3(40f, 3f, 0.3f), WallColor);
-            Block("Wall W", new Vector3(-20f, 1.5f, 0f), new Vector3(0.3f, 3f, 24f), WallColor);
-            Block("Wall E", new Vector3(20f, 1.5f, 0f), new Vector3(0.3f, 3f, 24f), WallColor);
-            Shop("Junk Emporium", -11.5f, JunkShop, "mini inflatable shrimp", new Color(1f, 0.5f, 0.6f));
-            Shop("Card Shop", 11.5f, CardShop, "holo card keychain", new Color(0.6f, 0.95f, 1f));
+            Block("Wall S", new Vector3(0f, 1.5f, -22f), new Vector3(40f, 3f, 0.3f), WallColor);
+            Block("Wall W", new Vector3(-20f, 1.5f, -5f), new Vector3(0.3f, 3f, 34f), WallColor);
+            Block("Wall E", new Vector3(20f, 1.5f, -5f), new Vector3(0.3f, 3f, 34f), WallColor);
+            Shop("Junk Emporium", -11.5f, north: true, JunkShop, "mini inflatable shrimp", new Color(1f, 0.5f, 0.6f));
+            Shop("Card Shop", 11.5f, north: true, CardShop, "holo card keychain", new Color(0.6f, 0.95f, 1f));
+            Shop("Sneaker Store", -11.5f, north: false, SneakerShop, "sneaker keychain", new Color(1f, 0.55f, 0.1f));
+            Shop("Toy Store", 11.5f, north: false, ToyShop, "mini plush", new Color(0.75f, 0.55f, 1f));
 
             // Junk Emporium: two shelves of wish-list junk and one expensive decoy.
             Block("Shelf A1", new Vector3(-16f, 0.5f, 6f), new Vector3(1f, 1f, 4f), Fixture);
@@ -80,7 +97,6 @@ namespace MallRatz.Editor
                 .transform.rotation = Quaternion.Euler(90f, 0f, 0f);
             Product(fish, PrimitiveType.Cube, new Vector3(-16f, 1.2f, 7f), new Vector3(0.6f, 0.4f, 0.1f), new Color(0.3f, 0.6f, 0.4f));
             Product(blender, PrimitiveType.Cylinder, new Vector3(-7f, 1.25f, 5f), new Vector3(0.3f, 0.25f, 0.3f), new Color(0.8f, 0.8f, 0.85f));
-            Product(sneakers, PrimitiveType.Cube, new Vector3(-7f, 1.1f, 7f), new Vector3(0.5f, 0.2f, 0.3f), new Color(0.9f, 0.2f, 0.9f));
             RegisterAt(new Vector3(-11.5f, 0f, 10.5f));
             VaseOnPedestal(vase, new Vector3(-11.5f, 0f, 5f));
 
@@ -91,6 +107,24 @@ namespace MallRatz.Editor
             RegisterAt(new Vector3(11.5f, 0f, 10.5f));
             CanPyramid(new Vector3(8f, 0f, 3.5f));
 
+            // Sneaker Store: the hyped pairs, a decoy, and a wobbly shoebox tower by the door.
+            Block("Shelf C1", new Vector3(-16f, 0.5f, -16f), new Vector3(1f, 1f, 4f), Fixture);
+            Block("Shelf C2", new Vector3(-7f, 0.5f, -16f), new Vector3(1f, 1f, 4f), Fixture);
+            Product(sneakers, PrimitiveType.Cube, new Vector3(-16f, 1.1f, -17f), new Vector3(0.5f, 0.2f, 0.3f), new Color(0.9f, 0.2f, 0.9f));
+            Product(crocs, PrimitiveType.Cube, new Vector3(-16f, 1.1f, -15f), new Vector3(0.45f, 0.2f, 0.3f), new Color(0.3f, 0.9f, 0.4f));
+            Product(shoeCleaner, PrimitiveType.Cube, new Vector3(-7f, 1.1f, -16f), new Vector3(0.3f, 0.2f, 0.2f), new Color(0.95f, 0.95f, 0.95f));
+            RegisterAt(new Vector3(-11.5f, 0f, -20.5f), facing: 1f);
+            ShoeboxTower(new Vector3(-9f, 0f, -14f));
+
+            // Toy Store: a plush too big to run with, a decoy, and a bin of bouncy balls by the door.
+            Block("Shelf D1", new Vector3(16f, 0.5f, -16f), new Vector3(1f, 1f, 4f), Fixture);
+            Block("Shelf D2", new Vector3(7f, 0.5f, -16f), new Vector3(1f, 1f, 4f), Fixture);
+            Product(capybara, PrimitiveType.Capsule, new Vector3(16f, 1.4f, -16f), new Vector3(0.7f, 0.45f, 0.7f), new Color(0.65f, 0.45f, 0.3f))
+                .transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+            Product(spinner, PrimitiveType.Cylinder, new Vector3(7f, 1.03f, -16f), new Vector3(0.15f, 0.03f, 0.15f), new Color(0.2f, 0.6f, 1f));
+            RegisterAt(new Vector3(11.5f, 0f, -20.5f), facing: 1f);
+            BouncyBallBin(new Vector3(9f, 0f, -14f));
+
             // Concourse traps.
             SmoothieSpill(new Vector3(0f, 0f, -3f));
             Cart(new Vector3(-6f, 0f, -6f));
@@ -99,18 +133,20 @@ namespace MallRatz.Editor
             // Gacha machine: capsule toys that bait a Friend's weakness.
             CapsuleMachineAt(new Vector3(-5f, 0f, -0.5f));
 
-            // Customer service, where Returns refunds what the Spender dropped.
-            ReturnsDeskAt(new Vector3(0f, 0f, -11.2f));
+            // Customer service, in the gap between the south shops, where Returns refunds what the Spender dropped.
+            ReturnsDeskAt(new Vector3(0f, 0f, -14f));
 
-            // Places to hide the card: three in the concourse, two in each shop.
+            // Places to hide the card: three in the concourse, two in each north shop, one in each south shop.
             var bin = new Color(0.35f, 0.4f, 0.35f);
             Stash("Trash Can", PrimitiveType.Cylinder, new Vector3(15f, 0f, -4f), new Vector3(0.6f, 0.5f, 0.6f), bin);
             Stash("Potted Plant", PrimitiveType.Cylinder, new Vector3(-16f, 0f, -2f), new Vector3(0.8f, 0.4f, 0.8f), new Color(0.3f, 0.6f, 0.3f));
-            Stash("Lockers", PrimitiveType.Cube, new Vector3(-14f, 0f, -11.4f), new Vector3(2f, 2f, 0.6f), new Color(0.5f, 0.55f, 0.65f));
+            Stash("Lockers", PrimitiveType.Cube, new Vector3(-17f, 0f, -11.4f), new Vector3(2f, 2f, 0.6f), new Color(0.5f, 0.55f, 0.65f));
             Stash("Bargain Bin", PrimitiveType.Cube, new Vector3(-18.5f, 0f, 10.5f), new Vector3(1.2f, 0.8f, 1.2f), JunkShop * 0.8f);
             Stash("Toy Bin", PrimitiveType.Cube, new Vector3(-4.5f, 0f, 10.5f), new Vector3(1.2f, 0.7f, 1.2f), new Color(0.9f, 0.4f, 0.2f));
             Stash("Display Case", PrimitiveType.Cube, new Vector3(17.5f, 0f, 10.8f), new Vector3(1.6f, 1.2f, 0.6f), CardShop * 0.8f);
             Stash("Box of Bulk Commons", PrimitiveType.Cube, new Vector3(18.5f, 0f, 3.5f), new Vector3(0.8f, 0.6f, 0.8f), new Color(0.75f, 0.6f, 0.4f));
+            Stash("Try-on Bench", PrimitiveType.Cube, new Vector3(-18f, 0f, -20.6f), new Vector3(2f, 0.5f, 0.6f), new Color(0.55f, 0.35f, 0.25f));
+            Stash("Ball Pit", PrimitiveType.Cube, new Vector3(17.5f, 0f, -20.2f), new Vector3(2f, 0.6f, 1.6f), new Color(0.95f, 0.85f, 0.3f));
 
             // Round: the clock, the Spender's wallet and card, and where people spawn.
             var roundObject = new GameObject("Round Manager");
@@ -219,20 +255,23 @@ namespace MallRatz.Editor
             return list;
         }
 
-        static void Shop(string name, float centerX, Color color, string trinketName, Color trinketColor)
+        // A 17 x 10 shop on the north (z 2 to 12) or south (z -22 to -12) side of the concourse.
+        static void Shop(string name, float centerX, bool north, Color color, string trinketName, Color trinketColor)
         {
             const float width = 17f, door = 4f;
-            Block(name + " Floor", new Vector3(centerX, 0.01f, 7f), new Vector3(width, 0.02f, 10f), color).GetComponent<Collider>().enabled = false;
+            float frontZ = north ? 2f : -12f;
+            float centerZ = north ? 7f : -17f;
+            Block(name + " Floor", new Vector3(centerX, 0.01f, centerZ), new Vector3(width, 0.02f, 10f), color).GetComponent<Collider>().enabled = false;
 
-            // Front wall at z = 2 with a door in the middle.
+            // Front wall facing the concourse, with a door in the middle.
             float side = (width - door) / 2f;
-            Block(name + " Front L", new Vector3(centerX - (door + side) / 2f, 1.5f, 2f), new Vector3(side, 3f, 0.3f), WallColor);
-            Block(name + " Front R", new Vector3(centerX + (door + side) / 2f, 1.5f, 2f), new Vector3(side, 3f, 0.3f), WallColor);
+            Block(name + " Front L", new Vector3(centerX - (door + side) / 2f, 1.5f, frontZ), new Vector3(side, 3f, 0.3f), WallColor);
+            Block(name + " Front R", new Vector3(centerX + (door + side) / 2f, 1.5f, frontZ), new Vector3(side, 3f, 0.3f), WallColor);
             float inner = centerX + Mathf.Sign(centerX) * -width / 2f;
-            Block(name + " Side", new Vector3(inner, 1.5f, 7f), new Vector3(0.3f, 3f, 10f), WallColor);
+            Block(name + " Side", new Vector3(inner, 1.5f, centerZ), new Vector3(0.3f, 3f, 10f), WallColor);
 
             var zone = new GameObject(name);
-            zone.transform.position = new Vector3(centerX, 1.5f, 7f);
+            zone.transform.position = new Vector3(centerX, 1.5f, centerZ);
             zone.AddComponent<BoxCollider>().size = new Vector3(width, 3f, 10f);
             var shop = zone.AddComponent<ShopZone>();
             Set(shop, "shopName", name);
@@ -240,11 +279,12 @@ namespace MallRatz.Editor
             Set(shop, "trinketColor", trinketColor);
         }
 
-        static void RegisterAt(Vector3 position)
+        // Facing -1 puts the queue south of the counter (north shops), +1 north of it (south shops).
+        static void RegisterAt(Vector3 position, float facing = -1f)
         {
             Block("Register Counter", position + new Vector3(0f, 0.5f, 0f), new Vector3(2f, 1f, 0.8f), Fixture);
             var register = new GameObject("Register");
-            register.transform.position = position + new Vector3(0f, 1f, -1.4f);
+            register.transform.position = position + new Vector3(0f, 1f, 1.4f * facing);
             register.AddComponent<BoxCollider>().size = new Vector3(3f, 2f, 2f);
             register.AddComponent<NetworkObject>();
             register.AddComponent<Register>();
@@ -353,23 +393,61 @@ namespace MallRatz.Editor
             Set(machine.AddComponent<TripOnImpact>(), "minImpactSpeed", 2f);
             Set(machine.AddComponent<Resettable>(), "resetDelay", 30f);
 
+            var trap = machine.AddComponent<GumballMachine>();
+            Set(trap, "globe", globe.GetComponent<SphereCollider>());
+            SetArray(trap, "gumballs", Balls("Gumball", 20, globe.transform.position, 0.12f, 0.05f));
+        }
+
+        // The same trap as a toy-store bin: a heap of bouncy balls on top that spills when it tips or
+        // takes a hard hit. Fewer, bigger balls than the gumball machine.
+        static void BouncyBallBin(Vector3 position)
+        {
+            var bin = new GameObject("Bouncy Ball Bin");
+            bin.transform.position = position;
+            Part(bin, "Bin", PrimitiveType.Cylinder, new Vector3(0f, 0.4f, 0f), new Vector3(0.7f, 0.4f, 0.7f), new Color(0.3f, 0.6f, 0.95f));
+            var heap = Part(bin, "Heap", PrimitiveType.Sphere, new Vector3(0f, 0.85f, 0f), Vector3.one * 0.6f, new Color(1f, 0.4f, 0.3f));
+            bin.AddComponent<Rigidbody>().mass = 15f;
+            Networked(bin);
+            Set(bin.AddComponent<Resettable>(), "resetDelay", 30f);
+
+            var trap = bin.AddComponent<GumballMachine>();
+            Set(trap, "globe", heap.GetComponent<SphereCollider>());
+            Set(trap, "centerOfMass", new Vector3(0f, 0.6f, 0f));
+            SetArray(trap, "gumballs", Balls("Bouncy Ball", 12, heap.transform.position, 0.2f, 0.08f));
+        }
+
+        static Object[] Balls(string name, int count, Vector3 position, float size, float mass)
+        {
             Color[] flavours = { new(1f, 0.3f, 0.3f), new(1f, 0.85f, 0.2f), new(0.3f, 0.8f, 0.3f), new(0.3f, 0.5f, 1f), new(1f, 0.5f, 0.85f) };
-            var gumballs = new Object[20];
-            for (int i = 0; i < gumballs.Length; i++)
+            var balls = new Object[count];
+            for (int i = 0; i < count; i++)
             {
-                var ball = Prim($"Gumball {i + 1}", PrimitiveType.Sphere, globe.transform.position, Vector3.one * 0.12f, flavours[i % flavours.Length]);
+                var ball = Prim($"{name} {i + 1}", PrimitiveType.Sphere, position, Vector3.one * size, flavours[i % flavours.Length]);
                 var body = ball.AddComponent<Rigidbody>();
-                body.mass = 0.05f;
+                body.mass = mass;
                 body.linearDamping = 0.2f;
                 body.angularDamping = 0.8f;
                 ball.GetComponent<Collider>().sharedMaterial = Bouncy();
                 Networked(ball);
-                gumballs[i] = ball.AddComponent<Gumball>();
+                balls[i] = ball.AddComponent<Gumball>();
             }
+            return balls;
+        }
 
-            var trap = machine.AddComponent<GumballMachine>();
-            Set(trap, "globe", globe.GetComponent<SphereCollider>());
-            SetArray(trap, "gumballs", gumballs);
+        // A collapsing display for the sneaker store: shoeboxes stacked in a slightly crooked column.
+        static void ShoeboxTower(Vector3 basePosition)
+        {
+            var box = new Vector3(0.45f, 0.22f, 0.3f);
+            for (int i = 0; i < 6; i++)
+            {
+                var offset = new Vector3((i % 2 == 0 ? 1f : -1f) * 0.04f, box.y * (i + 0.5f), 0f);
+                var shoebox = Prim("Shoebox", PrimitiveType.Cube, basePosition + offset, box, i % 2 == 0 ? new Color(0.9f, 0.5f, 0.2f) : new Color(0.25f, 0.25f, 0.3f));
+                shoebox.transform.rotation = Quaternion.Euler(0f, i * 7f, 0f);
+                shoebox.AddComponent<Rigidbody>().mass = 0.6f;
+                Networked(shoebox);
+                Set(shoebox.AddComponent<TripOnImpact>(), "minImpactSpeed", 2f);
+                Set(shoebox.AddComponent<Resettable>(), "resetDelay", 25f);
+            }
         }
 
         static GameObject Part(GameObject parent, string name, PrimitiveType shape, Vector3 localPosition, Vector3 scale, Color color)
@@ -530,6 +608,7 @@ namespace MallRatz.Editor
                 case Object reference: property.objectReferenceValue = reference; break;
                 case float number: property.floatValue = number; break;
                 case int number: property.intValue = number; break;
+                case Vector3 vector: property.vector3Value = vector; break;
                 case Color color: property.colorValue = color; break;
                 case string text: property.stringValue = text; break;
             }
