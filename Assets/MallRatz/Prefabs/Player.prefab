@@ -201,9 +201,13 @@ GameObject:
   - component: {fileID: 4302848737186533811}
   - component: {fileID: 9100146577164619784}
   - component: {fileID: 7676501114552884668}
+  - component: {fileID: 984534959117937831}
+  - component: {fileID: 7746165627467487407}
   - component: {fileID: 3246400480126627760}
   - component: {fileID: 8175147564749339530}
+  - component: {fileID: 8335384751560815337}
   - component: {fileID: 3946341477246609069}
+  - component: {fileID: 1957501763197273766}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -470,6 +474,60 @@ MonoBehaviour:
   tripSeconds: 2
   getUpGraceSeconds: 3
   toppleSpeed: 4
+  wrigglesToEscape: 8
+--- !u!114 &984534959117937831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191215458266585360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6808deb37e366eb40a1ffdb7050cb4fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MallRatz::MallRatz.Items.Wallet
+  ShowTopMostFoldoutHeaderGroup: 1
+  startingBalance: 0
+--- !u!114 &7746165627467487407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191215458266585360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb94a96a1e5f6643bb9c60f8e151705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MallRatz::MallRatz.Players.Willpower
+  ShowTopMostFoldoutHeaderGroup: 1
+  drainPerSecond: 2.5
+  regenPerSecond: 0.5
+  buddyReach: 4
+  buddyRegenPerSecond: 2
+  temptedBelow: 30
+  temptReach: 2.5
+  temptAmount: 30
+  weaknessMultiplier: 1.5
+  temptsPerRound: 3
+  temptCooldown: 5
+  baitReach: 3
+  baitDrainPerSecond: 3
+  giftMultiplier: 2
+  reasonReach: 5
+  reasonRegenPerSecond: 4
+  pepTalkReach: 3
+  pepTalkAmount: 40
+  pepTalkCooldown: 15
+  reasonDrainMultiplier: 0.5
+  reasonTalkSpeed: 2
+  maxTurnedShare: 0.5
+  pocketCash: 100
+  talkReach: 2
+  talkSeconds: 4
+  stillTolerance: 0.4
+  willpowerAfterTalk: 50
 --- !u!114 &3246400480126627760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,10 +555,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: MallRatz::MallRatz.Players.Carrier
   ShowTopMostFoldoutHeaderGroup: 1
   carryAnchor: {fileID: 2318193600923851750}
-  reach: 1.8
+  reach: 2.2
   maxCarrySeconds: 5
   cooldownSeconds: 20
   throwSpeed: 6
+--- !u!114 &8335384751560815337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191215458266585360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9158e7f6736534985814232e9efae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MallRatz::MallRatz.Players.Pickpocket
+  ShowTopMostFoldoutHeaderGroup: 1
+  reach: 1.6
+  seconds: 1.5
+  behindAngle: 110
+  failCooldown: 3
 --- !u!114 &3946341477246609069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,3 +594,17 @@ MonoBehaviour:
   turnSpeed: 720
   gravity: -20
   pushForce: 300
+--- !u!114 &1957501763197273766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191215458266585360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4873c8619819444b812733a35e7e7183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MallRatz::MallRatz.UI.PlayerVisuals
+  bodyRenderer: {fileID: 0}
+  tagHeight: 1.5

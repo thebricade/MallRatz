@@ -34,7 +34,8 @@ namespace MallRatz.UI
             GUILayout.Space(6);
             foreach (var player in MallRatzPlayer.All)
             {
-                string role = player.Role == PlayerRole.Friend ? $"Friend ({player.FriendRole})" : "Spender";
+                string role = player.Role == PlayerRole.Friend ? $"Friend ({player.FriendRole})"
+                    : player.Willpower.IsTurned ? "Spender (gave in)" : "Spender";
                 string you = player.IsOwner ? " (you)" : "";
                 GUILayout.Label($"{player.DisplayName}{you}: {role}, {player.Body.State}");
             }
@@ -44,7 +45,7 @@ namespace MallRatz.UI
                 GUILayout.Space(6);
                 GUILayout.Label(round.Winner == PlayerRole.Spender ? "The Spender wins." : "The Friends win.");
                 GUILayout.Label("Receipt of shame:");
-                foreach (var item in round.Receipt) GUILayout.Label($"  {item.Definition.displayName}  ${item.Definition.price}");
+                foreach (var item in round.Receipt) GUILayout.Label($"  {item.Definition.displayName}  ${item.Definition.price}{Chipped(item)}");
             }
 
             if (network.IsServer)
@@ -62,18 +63,37 @@ namespace MallRatz.UI
             if (me != null)
             {
                 GUILayout.Space(6);
-                GUILayout.Label($"Hand: {Describe(me.Hands.Held)}   Card: {(me.Hands.Card ? "yes" : "no")}{(me.IsInShop ? "   In a shop" : "")}");
+                var stash = round.Card != null ? round.Card.StashedIn : null;
+                string cardState = me.Hands.Card ? "yes" : me.Role == PlayerRole.Friend && stash != null ? $"hidden in the {stash.Label.ToLower()}" : "no";
+                GUILayout.Label($"Hand: {Describe(me.Hands.Held)}   Card: {cardState}{(me.IsInShop ? "   In a shop" : "")}");
                 var register = Register.At(me.transform.position);
                 if (register != null && register.IsBusy) GUILayout.Label($"Scanning {register.Progress01:P0}");
                 if (me.Body.State == BodyState.Carried) GUILayout.Label($"Mash Space to wriggle free ({me.Body.WrigglesLeft} left)");
                 var grabHint = me.GetComponent<Carrier>().GrabHint();
                 if (grabHint != null) GUILayout.Label(grabHint);
+                if (round.IsMallOpen) GUILayout.Label(me.Willpower.Hint());
+                var pocketHint = me.GetComponent<Pickpocket>().Hint();
+                if (pocketHint != null) GUILayout.Label(pocketHint);
+                foreach (var player in MallRatzPlayer.All)
+                    if (player.GetComponent<Pickpocket>().Victim == me) GUILayout.Label("Someone's in your pocket! Turn around!");
+                var gacha = CapsuleMachine.At(me.transform.position);
+                if (gacha != null && me.Role == PlayerRole.Spender)
+                    GUILayout.Label(me.Hands.Held == null ? $"E to pull a capsule toy (${gacha.Price})" : "Empty your hands to pull a capsule toy");
+                if (me.Hands.Held is Trinket && me.Role == PlayerRole.Spender)
+                    GUILayout.Label("Wave it near Friends: whoever it matches will stare. T near them makes it a gift.");
+                if (ReturnsDesk.At(me.transform.position) != null && me.Hands.Held is ShopItem { IsPaid: true })
+                    GUILayout.Label(ReturnsDesk.CanRefund(me) ? "E to refund it" : "Only Returns can refund here");
             }
 
             GUILayout.Space(6);
-            GUILayout.Label("WASD move, Shift run, E pick up / drop / scan at a register");
+            GUILayout.Label("WASD move, Shift run, E pick up / set down / scan at a register");
             GUILayout.Label("Q throw (or toss who you're carrying), G throw the card");
             GUILayout.Label("F grab / set down the Spender (Bouncer only), Space wriggle free");
+            GUILayout.Label("E at a stash: Friends hide or take the card, the Spender searches");
+            GUILayout.Label("R pickpocket the card from behind (Spender)");
+            GUILayout.Label("T: Spenders tempt a Friend; Friends talk someone who gave in back round");
+            GUILayout.Label("E at the capsule machine: pull a toy that baits a Friend's weakness (Spenders)");
+            GUILayout.Label("E at Customer Service with something she bought: refund it (Returns)");
 
             GUILayout.EndVertical();
             GUILayout.EndArea();
@@ -82,8 +102,11 @@ namespace MallRatz.UI
         static string Describe(Holdable held) => held switch
         {
             null => "empty",
-            ShopItem item => $"{item.Definition.displayName} (${item.Definition.price})",
+            ShopItem item => $"{item.Definition.displayName} (${item.Definition.price}){Chipped(item)}{(item.Definition.bulky ? ", too heavy to run" : "")}",
+            Trinket toy => toy.DisplayName,
             _ => held.name,
         };
+
+        static string Chipped(ShopItem item) => item.Worth < 1f ? $", {item.Worth:P0} intact" : "";
     }
 }

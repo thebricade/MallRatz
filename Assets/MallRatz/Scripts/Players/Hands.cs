@@ -61,9 +61,16 @@ namespace MallRatz.Players
         [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Owner)]
         void InteractRpc()
         {
+            var player = GetComponent<MallRatzPlayer>();
             var register = Register.At(transform.position);
-            if (register != null && register.ServerTryStartScan(GetComponent<MallRatzPlayer>())) return;
-            if (Held != null) Held.ServerDetach(Vector3.zero);
+            if (register != null && register.ServerTryStartScan(player)) return;
+            var desk = ReturnsDesk.At(transform.position);
+            if (desk != null && desk.ServerTryStartRefund(player)) return;
+            var gacha = CapsuleMachine.At(transform.position);
+            if (gacha != null && gacha.ServerTryPull(player)) return;
+            var stash = CardStash.At(transform.position);
+            if (stash != null && stash.ServerTryUse(player)) return;
+            if (Held != null) Held.ServerPutDown();
             else ServerPickUpNearest();
         }
 
@@ -77,6 +84,7 @@ namespace MallRatz.Players
         // Host only from here down.
         bool ServerPickUpNearest()
         {
+            bool spender = IsSpender;
             Holdable nearest = null;
             float nearestDistance = float.MaxValue;
             var center = transform.position + transform.forward * (reach * 0.5f);
@@ -84,16 +92,21 @@ namespace MallRatz.Players
             {
                 var holdable = hit.attachedRigidbody ? hit.attachedRigidbody.GetComponent<Holdable>() : null;
                 if (holdable == null || holdable.IsHeld) continue;
-                if (holdable is PaymentCard ? Card != null : Held != null) continue;
+                bool rebag = spender && holdable is ShopItem { IsPaid: true };
+                if (holdable is PaymentCard ? Card != null : Held != null && !rebag) continue;
                 float distance = (holdable.transform.position - center).sqrMagnitude;
                 if (distance < nearestDistance) (nearest, nearestDistance) = (holdable, distance);
             }
 
             if (nearest is PaymentCard card) return ServerTakeCard(card);
             if (nearest == null) return false;
-            nearest.ServerAttach(this, HoldSlot.Hand);
+            // Her own shopping goes straight back in her bag.
+            if (spender && nearest is ShopItem { IsPaid: true } paid) ServerBag(paid);
+            else nearest.ServerAttach(this, HoldSlot.Hand);
             return true;
         }
+
+        bool IsSpender => GetComponent<MallRatzPlayer>().Role == PlayerRole.Spender;
 
         public bool ServerTakeCard(PaymentCard card)
         {
@@ -102,11 +115,18 @@ namespace MallRatz.Players
             return true;
         }
 
-        // On a trip: whatever is in hand and the card go flying. Paid items stay in the bag.
+        // On a trip: whatever is in hand and the card go flying, and the Spender's latest purchase spills
+        // out of her bag, which is how Returns gets hold of something to refund.
         internal void ServerDropAll(Vector3 velocity)
         {
             if (Held != null) Held.ServerDetach(velocity);
             if (Card != null) Card.ServerDetach(velocity);
+            if (!IsSpender) return;
+
+            ShopItem latest = null;
+            foreach (var item in Bag)
+                if (latest == null || item.PurchaseOrder > latest.PurchaseOrder) latest = item;
+            if (latest != null) latest.ServerDetach(velocity + Random.insideUnitSphere);
         }
 
         internal void ServerBag(ShopItem item) => item.ServerAttach(this, HoldSlot.Bag);

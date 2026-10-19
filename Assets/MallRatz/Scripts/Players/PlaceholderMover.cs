@@ -1,4 +1,6 @@
+using MallRatz.Items;
 using MallRatz.Net;
+using MallRatz.Traps;
 using UnityEngine;
 
 namespace MallRatz.Players
@@ -40,7 +42,8 @@ namespace MallRatz.Players
                 return;
             }
 
-            float speed = (Running ? runSpeed : walkSpeed) * player.Hands.SpeedMultiplier;
+            bool canRun = !(player.Hands.Held is ShopItem held && held.Definition.bulky);
+            float speed = (Running && canRun ? runSpeed : walkSpeed) * player.Hands.SpeedMultiplier;
             if (player.FriendRole == FriendRole.Bouncer) speed *= bouncerSpeedMultiplier;
             var planar = Vector3.ClampMagnitude(MoveInput, 1f) * speed;
 
@@ -59,7 +62,10 @@ namespace MallRatz.Players
         void OnControllerColliderHit(ControllerColliderHit hit)
         {
             var rb = hit.rigidbody;
-            if (!player.IsOwner || rb == null || hit.moveDirection.y < -0.3f) return;
+            if (!player.IsOwner || rb == null) return;
+            // Checked before the downward bail-out below, since running over one means stepping onto it.
+            if (rb.TryGetComponent<Gumball>(out var gumball)) gumball.SteppedOn(this);
+            if (hit.moveDirection.y < -0.3f) return;
             var push = new Vector3(hit.moveDirection.x, 0f, hit.moveDirection.z) * pushForce * Time.deltaTime;
             // Props are simulated on the host, so clients ask it to do the shoving.
             var prop = rb.GetComponent<NetworkProp>();

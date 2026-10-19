@@ -70,14 +70,17 @@ namespace MallRatz.Items
 
         void OnSlotChanged(HoldSlot previous, HoldSlot current) => Apply();
 
-        void Apply()
+        // False while it's out of play, like a shattered vase: hidden, solid to nothing, not simulated.
+        protected virtual bool Present => true;
+
+        protected void Apply()
         {
             bool held = IsHeld;
-            prop.Suspended = held;
-            if (held || !IsServer) body.isKinematic = true;
-            else body.isKinematic = false;
-            foreach (var c in colliders) c.enabled = !held;
-            foreach (var r in renderers) r.enabled = slot.Value != HoldSlot.Bag;
+            bool present = Present;
+            prop.Suspended = held || !present;
+            body.isKinematic = held || !present || !IsServer;
+            foreach (var c in colliders) c.enabled = !held && present;
+            foreach (var r in renderers) r.enabled = slot.Value != HoldSlot.Bag && present;
         }
 
         void LateUpdate()
@@ -104,12 +107,34 @@ namespace MallRatz.Items
             prop.SendNow();
         }
 
+        // Moves it without simulating the trip there, for things tucked out of play.
+        protected void ServerPlace(Vector3 position)
+        {
+            transform.position = position;
+            body.position = position;
+            prop.SendNow();
+        }
+
+        // Set it down on whatever is under it, instead of dropping it from chest height.
+        internal void ServerPutDown()
+        {
+            var bounds = renderers[0].bounds;
+            foreach (var r in renderers) bounds.Encapsulate(r.bounds);
+            if (Physics.Raycast(bounds.center, Vector3.down, out var hit, 3f, ~0, QueryTriggerInteraction.Ignore))
+                transform.position += Vector3.up * (hit.point.y - bounds.min.y + 0.01f);
+            ServerDetach(Vector3.zero);
+        }
+
         // Round reset: back on the shelf it started on.
         public virtual void ServerReturnHome()
         {
             if (IsHeld) ServerDetach(Vector3.zero);
-            body.linearVelocity = Vector3.zero;
-            body.angularVelocity = Vector3.zero;
+            // Out-of-play things are kinematic, and kinematic bodies don't take velocities.
+            if (!body.isKinematic)
+            {
+                body.linearVelocity = Vector3.zero;
+                body.angularVelocity = Vector3.zero;
+            }
             transform.SetPositionAndRotation(homePosition, homeRotation);
             body.position = homePosition;
             body.rotation = homeRotation;

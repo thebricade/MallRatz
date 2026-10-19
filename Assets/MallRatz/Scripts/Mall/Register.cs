@@ -57,15 +57,27 @@ namespace MallRatz.Mall
             if (scanner != null || player.Body.State != BodyState.Upright) return false;
             if (RoundManager.Instance != null && !RoundManager.Instance.IsMallOpen) return false;
             if (!(player.Hands.Held is ShopItem held) || held.IsPaid) return false;
-            var card = player.Hands.Card;
-            if (card == null || card.Wallet == null || card.Wallet.Balance < held.Definition.price) return false;
+            var wallet = WalletFor(player);
+            if (wallet == null || wallet.Balance < held.Definition.price) return false;
 
             scanner = player;
             item = held;
             progress.Value = 0.01f;
-            ScanStarted?.Invoke(this, player);
-            CardPingRpc();
+            // Cash leaves no trail: only the card pings.
+            if (player.Hands.Card != null)
+            {
+                ScanStarted?.Invoke(this, player);
+                CardPingRpc();
+            }
             return true;
+        }
+
+        // The card if they hold it, otherwise a Spender's own cash (hers, or a Friend's who gave in).
+        static Wallet WalletFor(MallRatzPlayer player)
+        {
+            var card = player.Hands.Card;
+            if (card != null) return card.Wallet;
+            return player.Role == PlayerRole.Spender ? player.PocketCash : null;
         }
 
         [Rpc(SendTo.Everyone)]
@@ -108,7 +120,9 @@ namespace MallRatz.Mall
             var buyer = scanner;
             var bought = item;
             Stop();
-            if (!buyer.Hands.Card.Wallet.ServerTrySpend(bought.Definition.price)) return;
+            var wallet = WalletFor(buyer);
+            if (!wallet.ServerTrySpend(bought.Definition.price)) return;
+            bought.PaidFrom = wallet;
             buyer.Hands.ServerBag(bought);
             Purchased?.Invoke(buyer, bought);
         }
@@ -118,7 +132,7 @@ namespace MallRatz.Mall
             && scanner.Body.State == BodyState.Upright
             && zone.bounds.Contains(scanner.transform.position)
             && scanner.Hands.Held == item
-            && scanner.Hands.Card != null;
+            && WalletFor(scanner) != null;
 
         void Stop()
         {

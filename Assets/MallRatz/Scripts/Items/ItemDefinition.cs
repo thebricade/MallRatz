@@ -11,5 +11,7 @@ namespace MallRatz.Items
         [Range(0, 10)] public int uselessness = 5;
         [Tooltip("Slows whoever carries it, held or bagged.")]
         [Min(0)] public float carryWeight = 1f;
+        [Tooltip("Too big or heavy to run with while it's in your hands.")]
+        public bool bulky;
     }
 }

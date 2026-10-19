@@ -18,7 +18,8 @@ using UnityEngine.Rendering;
 namespace MallRatz.Editor
 {
     // Builds the roadmap's first scene, networked: a concourse, two shops with registers, a smoothie
-    // spill, a cart, a can pyramid, and a player prefab that spawns once per person. Item and config
+    // spill, a cart, a can pyramid, a gumball machine, a fragile vase, customer service, places to hide
+    // the card, a capsule toy machine, and a player prefab that spawns once per person. Item and config
     // assets are only created if missing, so tuning them by hand survives a rebuild; the scene and the
     // player prefab are replaced.
     public static class GreyboxSceneBuilder
@@ -52,7 +53,15 @@ namespace MallRatz.Editor
             var booster = Item("Booster Pack", 5, 6, 0.1f);
             var fish = Item("Singing Fish Plaque", 25, 9, 0.8f);
             var sneakers = Item("Light-up Sneakers", 80, 7, 0.6f);
-            var config = Config(new List<ItemDefinition> { shrimp, booster, fish, sneakers });
+            bool vaseIsNew = AssetDatabase.LoadAssetAtPath<ItemDefinition>(ItemPath("Fancy Vase")) == null;
+            var vase = Item("Fancy Vase", 90, 6, 4f, bulky: true);
+            var config = Config(new List<ItemDefinition> { shrimp, booster, fish, sneakers, vase });
+            // Older configs predate the vase. Only add it once, so taking it off by hand sticks.
+            if (vaseIsNew && !config.wishList.Contains(vase))
+            {
+                config.wishList.Add(vase);
+                EditorUtility.SetDirty(config);
+            }
             var playerPrefab = PlayerPrefab();
 
             // Concourse runs along X at z < 2; the two shops sit north of it.
@@ -61,8 +70,8 @@ namespace MallRatz.Editor
             Block("Wall S", new Vector3(0f, 1.5f, -12f), new Vector3(40f, 3f, 0.3f), WallColor);
             Block("Wall W", new Vector3(-20f, 1.5f, 0f), new Vector3(0.3f, 3f, 24f), WallColor);
             Block("Wall E", new Vector3(20f, 1.5f, 0f), new Vector3(0.3f, 3f, 24f), WallColor);
-            Shop("Junk Emporium", -11.5f, JunkShop);
-            Shop("Card Shop", 11.5f, CardShop);
+            Shop("Junk Emporium", -11.5f, JunkShop, "mini inflatable shrimp", new Color(1f, 0.5f, 0.6f));
+            Shop("Card Shop", 11.5f, CardShop, "holo card keychain", new Color(0.6f, 0.95f, 1f));
 
             // Junk Emporium: two shelves of wish-list junk and one expensive decoy.
             Block("Shelf A1", new Vector3(-16f, 0.5f, 6f), new Vector3(1f, 1f, 4f), Fixture);
@@ -73,6 +82,7 @@ namespace MallRatz.Editor
             Product(blender, PrimitiveType.Cylinder, new Vector3(-7f, 1.25f, 5f), new Vector3(0.3f, 0.25f, 0.3f), new Color(0.8f, 0.8f, 0.85f));
             Product(sneakers, PrimitiveType.Cube, new Vector3(-7f, 1.1f, 7f), new Vector3(0.5f, 0.2f, 0.3f), new Color(0.9f, 0.2f, 0.9f));
             RegisterAt(new Vector3(-11.5f, 0f, 10.5f));
+            VaseOnPedestal(vase, new Vector3(-11.5f, 0f, 5f));
 
             // Card Shop: booster packs, a register, and the can pyramid by the door.
             Block("Shelf B1", new Vector3(16f, 0.5f, 7f), new Vector3(1f, 1f, 4f), Fixture);
@@ -84,6 +94,23 @@ namespace MallRatz.Editor
             // Concourse traps.
             SmoothieSpill(new Vector3(0f, 0f, -3f));
             Cart(new Vector3(-6f, 0f, -6f));
+            GumballMachineAt(new Vector3(4.5f, 0f, -1f));
+
+            // Gacha machine: capsule toys that bait a Friend's weakness.
+            CapsuleMachineAt(new Vector3(-5f, 0f, -0.5f));
+
+            // Customer service, where Returns refunds what the Spender dropped.
+            ReturnsDeskAt(new Vector3(0f, 0f, -11.2f));
+
+            // Places to hide the card: three in the concourse, two in each shop.
+            var bin = new Color(0.35f, 0.4f, 0.35f);
+            Stash("Trash Can", PrimitiveType.Cylinder, new Vector3(15f, 0f, -4f), new Vector3(0.6f, 0.5f, 0.6f), bin);
+            Stash("Potted Plant", PrimitiveType.Cylinder, new Vector3(-16f, 0f, -2f), new Vector3(0.8f, 0.4f, 0.8f), new Color(0.3f, 0.6f, 0.3f));
+            Stash("Lockers", PrimitiveType.Cube, new Vector3(-14f, 0f, -11.4f), new Vector3(2f, 2f, 0.6f), new Color(0.5f, 0.55f, 0.65f));
+            Stash("Bargain Bin", PrimitiveType.Cube, new Vector3(-18.5f, 0f, 10.5f), new Vector3(1.2f, 0.8f, 1.2f), JunkShop * 0.8f);
+            Stash("Toy Bin", PrimitiveType.Cube, new Vector3(-4.5f, 0f, 10.5f), new Vector3(1.2f, 0.7f, 1.2f), new Color(0.9f, 0.4f, 0.2f));
+            Stash("Display Case", PrimitiveType.Cube, new Vector3(17.5f, 0f, 10.8f), new Vector3(1.6f, 1.2f, 0.6f), CardShop * 0.8f);
+            Stash("Box of Bulk Commons", PrimitiveType.Cube, new Vector3(18.5f, 0f, 3.5f), new Vector3(0.8f, 0.6f, 0.8f), new Color(0.75f, 0.6f, 0.4f));
 
             // Round: the clock, the Spender's wallet and card, and where people spawn.
             var roundObject = new GameObject("Round Manager");
@@ -159,10 +186,13 @@ namespace MallRatz.Editor
             go.AddComponent<CharacterController>();
             go.AddComponent<Rigidbody>().isKinematic = true;
             go.AddComponent<MallRatzPlayer>();
+            // Pocket cash, for if they give in. Willpower fills it.
+            Set(go.GetComponent<Wallet>(), "startingBalance", 0);
             var hands = go.GetComponent<Hands>();
             Set(hands, "holdAnchor", Anchor(go.transform, "Hold Anchor", new Vector3(0f, 0.2f, 0.8f)));
             Set(hands, "cardAnchor", Anchor(go.transform, "Card Anchor", new Vector3(0.45f, 0f, 0.2f)));
             Set(go.AddComponent<Carrier>(), "carryAnchor", Anchor(go.transform, "Carry Anchor", new Vector3(0f, 1.3f, 0.9f)));
+            go.AddComponent<Pickpocket>();
             go.AddComponent<PlaceholderMover>();
             go.AddComponent<PlayerVisuals>();
 
@@ -189,7 +219,7 @@ namespace MallRatz.Editor
             return list;
         }
 
-        static void Shop(string name, float centerX, Color color)
+        static void Shop(string name, float centerX, Color color, string trinketName, Color trinketColor)
         {
             const float width = 17f, door = 4f;
             Block(name + " Floor", new Vector3(centerX, 0.01f, 7f), new Vector3(width, 0.02f, 10f), color).GetComponent<Collider>().enabled = false;
@@ -204,7 +234,10 @@ namespace MallRatz.Editor
             var zone = new GameObject(name);
             zone.transform.position = new Vector3(centerX, 1.5f, 7f);
             zone.AddComponent<BoxCollider>().size = new Vector3(width, 3f, 10f);
-            Set(zone.AddComponent<ShopZone>(), "shopName", name);
+            var shop = zone.AddComponent<ShopZone>();
+            Set(shop, "shopName", name);
+            Set(shop, "trinketName", trinketName);
+            Set(shop, "trinketColor", trinketColor);
         }
 
         static void RegisterAt(Vector3 position)
@@ -215,6 +248,49 @@ namespace MallRatz.Editor
             register.AddComponent<BoxCollider>().size = new Vector3(3f, 2f, 2f);
             register.AddComponent<NetworkObject>();
             register.AddComponent<Register>();
+        }
+
+        // The capsules are their own props, waiting out of play inside the cabinet until someone pulls.
+        static void CapsuleMachineAt(Vector3 position)
+        {
+            var cabinet = Block("Capsule Machine", position + new Vector3(0f, 0.8f, 0f), new Vector3(0.8f, 1.6f, 0.6f), new Color(0.95f, 0.45f, 0.7f));
+            var capsules = new Object[6];
+            for (int i = 0; i < capsules.Length; i++)
+            {
+                var capsule = Prim($"Capsule {i + 1}", PrimitiveType.Sphere, cabinet.transform.position, Vector3.one * 0.15f, Color.white);
+                capsule.AddComponent<Rigidbody>().mass = 0.1f;
+                Networked(capsule);
+                capsules[i] = capsule.AddComponent<Trinket>();
+            }
+
+            var machine = new GameObject("Capsule Toys");
+            machine.transform.position = position + Vector3.up;
+            machine.AddComponent<BoxCollider>().size = new Vector3(2.5f, 2f, 2.5f);
+            machine.AddComponent<NetworkObject>();
+            SetArray(machine.AddComponent<CapsuleMachine>(), "capsules", capsules);
+        }
+
+        static void ReturnsDeskAt(Vector3 position)
+        {
+            Block("Customer Service Counter", position + new Vector3(0f, 0.5f, 0f), new Vector3(3f, 1f, 0.8f), new Color(0.3f, 0.5f, 0.8f));
+            var desk = new GameObject("Customer Service");
+            desk.transform.position = position + new Vector3(0f, 1f, 1.4f);
+            desk.AddComponent<BoxCollider>().size = new Vector3(4f, 2f, 2f);
+            desk.AddComponent<NetworkObject>();
+            desk.AddComponent<ReturnsDesk>();
+        }
+
+        // A solid thing to hide the card in, with a zone around it to stand in.
+        static void Stash(string name, PrimitiveType shape, Vector3 floor, Vector3 scale, Color color)
+        {
+            // Primitive cylinders are 2 units tall, cubes 1.
+            float height = shape == PrimitiveType.Cylinder ? scale.y * 2f : scale.y;
+            Prim(name, shape, floor + Vector3.up * (height / 2f), scale, color);
+            var stash = new GameObject(name + " Stash");
+            stash.transform.position = floor + Vector3.up;
+            stash.AddComponent<BoxCollider>().size = new Vector3(scale.x + 2f, 2f, scale.z + 2f);
+            stash.AddComponent<NetworkObject>();
+            Set(stash.AddComponent<CardStash>(), "label", name);
         }
 
         static void SmoothieSpill(Vector3 position)
@@ -261,6 +337,49 @@ namespace MallRatz.Editor
             }
         }
 
+        // A top-heavy rigidbody made of several colliders, with a glass globe that breaks into loose
+        // gumballs. The gumballs are their own props, parked out of sight until it breaks.
+        static void GumballMachineAt(Vector3 position)
+        {
+            var red = new Color(0.85f, 0.15f, 0.15f);
+            var machine = new GameObject("Gumball Machine");
+            machine.transform.position = position;
+            Part(machine, "Base", PrimitiveType.Cube, new Vector3(0f, 0.05f, 0f), new Vector3(0.7f, 0.1f, 0.7f), red);
+            Part(machine, "Stem", PrimitiveType.Cube, new Vector3(0f, 0.5f, 0f), new Vector3(0.15f, 0.8f, 0.15f), new Color(0.8f, 0.8f, 0.85f));
+            Part(machine, "Head", PrimitiveType.Cube, new Vector3(0f, 1.05f, 0f), new Vector3(0.4f, 0.3f, 0.4f), red);
+            var globe = Part(machine, "Globe", PrimitiveType.Sphere, new Vector3(0f, 1.47f, 0f), Vector3.one * 0.55f, new Color(0.85f, 0.95f, 1f));
+            machine.AddComponent<Rigidbody>().mass = 35f;
+            Networked(machine);
+            Set(machine.AddComponent<TripOnImpact>(), "minImpactSpeed", 2f);
+            Set(machine.AddComponent<Resettable>(), "resetDelay", 30f);
+
+            Color[] flavours = { new(1f, 0.3f, 0.3f), new(1f, 0.85f, 0.2f), new(0.3f, 0.8f, 0.3f), new(0.3f, 0.5f, 1f), new(1f, 0.5f, 0.85f) };
+            var gumballs = new Object[20];
+            for (int i = 0; i < gumballs.Length; i++)
+            {
+                var ball = Prim($"Gumball {i + 1}", PrimitiveType.Sphere, globe.transform.position, Vector3.one * 0.12f, flavours[i % flavours.Length]);
+                var body = ball.AddComponent<Rigidbody>();
+                body.mass = 0.05f;
+                body.linearDamping = 0.2f;
+                body.angularDamping = 0.8f;
+                ball.GetComponent<Collider>().sharedMaterial = Bouncy();
+                Networked(ball);
+                gumballs[i] = ball.AddComponent<Gumball>();
+            }
+
+            var trap = machine.AddComponent<GumballMachine>();
+            Set(trap, "globe", globe.GetComponent<SphereCollider>());
+            SetArray(trap, "gumballs", gumballs);
+        }
+
+        static GameObject Part(GameObject parent, string name, PrimitiveType shape, Vector3 localPosition, Vector3 scale, Color color)
+        {
+            var part = Prim(name, shape, Vector3.zero, scale, color);
+            part.transform.SetParent(parent.transform, false);
+            part.transform.localPosition = localPosition;
+            return part;
+        }
+
         static Transform Anchor(Transform parent, string name, Vector3 localPosition)
         {
             var anchor = new GameObject(name).transform;
@@ -276,6 +395,20 @@ namespace MallRatz.Editor
             Networked(go);
             Set(go.AddComponent<ShopItem>(), "definition", definition);
             return go;
+        }
+
+        // Heavy and fragile, R.E.P.O.-style: a round belly on a flat foot, with a neck, on its own plinth.
+        static void VaseOnPedestal(ItemDefinition definition, Vector3 floor)
+        {
+            var porcelain = new Color(0.25f, 0.45f, 0.85f);
+            Block("Vase Pedestal", floor + new Vector3(0f, 0.45f, 0f), new Vector3(0.6f, 0.9f, 0.6f), Fixture);
+            var vase = Prim(definition.displayName, PrimitiveType.Sphere, floor + new Vector3(0f, 1.155f, 0f), new Vector3(0.45f, 0.5f, 0.45f), porcelain);
+            // Without a flat foot the belly would roll off the plinth at the slightest touch.
+            Part(vase, "Foot", PrimitiveType.Cylinder, new Vector3(0f, -0.45f, 0f), new Vector3(0.6f, 0.06f, 0.6f), porcelain);
+            Part(vase, "Neck", PrimitiveType.Cylinder, new Vector3(0f, 0.6f, 0f), new Vector3(0.5f, 0.4f, 0.5f), porcelain);
+            vase.AddComponent<Rigidbody>().mass = definition.carryWeight;
+            Networked(vase);
+            Set(vase.AddComponent<FragileItem>(), "definition", definition);
         }
 
         // A host-simulated physics prop.
@@ -341,9 +474,28 @@ namespace MallRatz.Editor
             return material;
         }
 
-        static ItemDefinition Item(string name, int price, int uselessness, float carryWeight)
+        static PhysicsMaterial Bouncy()
         {
-            string path = $"{Root}/Data/Items/{name}.asset";
+            string path = Root + "/Art/Greybox/Bouncy.asset";
+            var material = AssetDatabase.LoadAssetAtPath<PhysicsMaterial>(path);
+            if (material != null) return material;
+            EnsureFolder(Root + "/Art/Greybox");
+            material = new PhysicsMaterial("Bouncy")
+            {
+                bounciness = 0.6f,
+                staticFriction = 0.4f,
+                dynamicFriction = 0.3f,
+                bounceCombine = PhysicsMaterialCombine.Maximum,
+            };
+            AssetDatabase.CreateAsset(material, path);
+            return material;
+        }
+
+        static string ItemPath(string name) => $"{Root}/Data/Items/{name}.asset";
+
+        static ItemDefinition Item(string name, int price, int uselessness, float carryWeight, bool bulky = false)
+        {
+            string path = ItemPath(name);
             var item = AssetDatabase.LoadAssetAtPath<ItemDefinition>(path);
             if (item != null) return item;
             EnsureFolder(Root + "/Data/Items");
@@ -352,6 +504,7 @@ namespace MallRatz.Editor
             item.price = price;
             item.uselessness = uselessness;
             item.carryWeight = carryWeight;
+            item.bulky = bulky;
             AssetDatabase.CreateAsset(item, path);
             return item;
         }
@@ -376,6 +529,8 @@ namespace MallRatz.Editor
             {
                 case Object reference: property.objectReferenceValue = reference; break;
                 case float number: property.floatValue = number; break;
+                case int number: property.intValue = number; break;
+                case Color color: property.colorValue = color; break;
                 case string text: property.stringValue = text; break;
             }
             serialized.ApplyModifiedPropertiesWithoutUndo();

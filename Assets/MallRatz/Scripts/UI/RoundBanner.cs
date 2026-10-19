@@ -42,13 +42,37 @@ namespace MallRatz.UI
 
         void OnGUI()
         {
-            if (message == null || Time.time >= hideAt) return;
             style ??= new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontSize = 40, fontStyle = FontStyle.Bold };
-            var rect = new Rect(0f, Screen.height * 0.25f, Screen.width, 60f);
+            Countdown();
+            if (message == null || Time.time >= hideAt) return;
+            Shadowed(new Rect(0f, Screen.height * 0.25f, Screen.width, 60f), message);
+        }
+
+        // Hide and seek: the Spender's screen goes dark while she counts; the Friends get a hurry-up.
+        void Countdown()
+        {
+            var round = RoundManager.Instance;
+            var me = MallRatzPlayer.Local;
+            if (round == null || !round.IsSpawned || me == null || round.CountdownLeft <= 0f) return;
+            int seconds = Mathf.CeilToInt(round.CountdownLeft);
+
+            if (me.Role == PlayerRole.Spender)
+            {
+                GUI.color = Color.black;
+                GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), Texture2D.whiteTexture);
+                GUI.color = Color.white;
+                Shadowed(new Rect(0f, Screen.height * 0.4f, Screen.width, 60f), $"Counting to ten... {seconds}");
+                Shadowed(new Rect(0f, Screen.height * 0.4f + 60f, Screen.width, 60f), "Your Friends are hiding your card.");
+            }
+            else Shadowed(new Rect(0f, Screen.height * 0.12f, Screen.width, 60f), $"Hide the card! She opens her eyes in {seconds}");
+        }
+
+        void Shadowed(Rect rect, string text)
+        {
             GUI.color = Color.black;
-            GUI.Label(new Rect(rect.x + 2f, rect.y + 2f, rect.width, rect.height), message, style);
+            GUI.Label(new Rect(rect.x + 2f, rect.y + 2f, rect.width, rect.height), text, style);
             GUI.color = Color.white;
-            GUI.Label(rect, message, style);
+            GUI.Label(rect, text, style);
         }
     }
 }

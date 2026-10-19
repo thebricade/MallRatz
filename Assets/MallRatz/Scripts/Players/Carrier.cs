@@ -31,7 +31,9 @@ namespace MallRatz.Players
         void Update()
         {
             if (!IsServer || carried == null) return;
-            if (NetState.ServerTime >= carryUntil || self.Body.State != BodyState.Upright) ServerRelease(toss: false);
+            // A Bouncer who gives in mid-carry lets go.
+            if (NetState.ServerTime >= carryUntil || self.Body.State != BodyState.Upright || self.FriendRole != FriendRole.Bouncer)
+                ServerRelease(toss: false);
         }
 
         public bool CanGrab(MallRatzPlayer target)
@@ -50,9 +52,12 @@ namespace MallRatz.Players
             if (IsCarrying) return "Carrying her: F set down, Q toss";
             if (CooldownLeft > 0f) return $"Grab ready in {CooldownLeft:0}s";
 
+            // Friends who gave in count as Spenders too, so go by the nearest.
             MallRatzPlayer spender = null;
             foreach (var player in MallRatzPlayer.All)
-                if (player.Role == PlayerRole.Spender) spender = player;
+                if (player.Role == PlayerRole.Spender && (spender == null
+                    || (player.transform.position - transform.position).sqrMagnitude < (spender.transform.position - transform.position).sqrMagnitude))
+                    spender = player;
             if (spender == null) return "No Spender to grab";
             if (spender.Body.State == BodyState.Carried) return "She's already being carried";
             if (!spender.IsInShop && !spender.Hands.HoldsUnpaid) return "Hands off: she's in the hallway with nothing unpaid";

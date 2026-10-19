@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MallRatz.Items;
 using MallRatz.Mall;
 using MallRatz.Round;
 using Unity.Netcode;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace MallRatz.Players
 {
-    [RequireComponent(typeof(Hands), typeof(PlayerBody))]
+    [RequireComponent(typeof(Hands), typeof(PlayerBody), typeof(Willpower))]
     public class MallRatzPlayer : NetworkBehaviour
     {
         static readonly List<MallRatzPlayer> all = new();
@@ -22,6 +23,9 @@ namespace MallRatz.Players
         public FriendRole FriendRole => friendRole.Value;
         public Hands Hands { get; private set; }
         public PlayerBody Body { get; private set; }
+        public Willpower Willpower { get; private set; }
+        // Empty unless they've turned: a Friend who gives in shops with their own money.
+        public Wallet PocketCash { get; private set; }
         public bool IsInShop => ShopZone.At(transform.position) != null;
         public string DisplayName => $"Player {OwnerClientId + 1}";
 
@@ -29,6 +33,8 @@ namespace MallRatz.Players
         {
             Hands = GetComponent<Hands>();
             Body = GetComponent<PlayerBody>();
+            Willpower = GetComponent<Willpower>();
+            PocketCash = GetComponent<Wallet>();
         }
 
         public override void OnNetworkSpawn()

@@ -1,3 +1,4 @@
+using MallRatz.Round;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ namespace MallRatz.Players
         MallRatzPlayer controlled;
         PlaceholderMover mover;
         Carrier carrier;
+        Pickpocket pickpocket;
 
         public MallRatzPlayer Controlled => controlled;
 
@@ -20,6 +22,14 @@ namespace MallRatz.Players
             if (controlled != MallRatzPlayer.Local) Control(MallRatzPlayer.Local);
             var keyboard = Keyboard.current;
             if (keyboard == null || controlled == null) return;
+
+            // Eyes shut and counting while the Friends hide her card.
+            var round = RoundManager.Instance;
+            if (controlled.Role == PlayerRole.Spender && round != null && round.CountdownLeft > 0f)
+            {
+                mover.MoveInput = Vector3.zero;
+                return;
+            }
 
             var input = Vector2.zero;
             if (keyboard.wKey.isPressed) input.y += 1f;
@@ -39,6 +49,8 @@ namespace MallRatz.Players
             }
             if (keyboard.gKey.wasPressedThisFrame) controlled.Hands.ThrowCard();
             if (keyboard.fKey.wasPressedThisFrame) carrier.RequestGrabOrSetDown();
+            if (keyboard.rKey.wasPressedThisFrame) pickpocket.Request();
+            if (keyboard.tKey.wasPressedThisFrame) controlled.Willpower.Request();
         }
 
         void Control(MallRatzPlayer player)
@@ -46,6 +58,7 @@ namespace MallRatz.Players
             controlled = player;
             mover = player != null ? player.GetComponent<PlaceholderMover>() : null;
             carrier = player != null ? player.GetComponent<Carrier>() : null;
+            pickpocket = player != null ? player.GetComponent<Pickpocket>() : null;
         }
 
         Vector3 CameraRelative(Vector2 input)

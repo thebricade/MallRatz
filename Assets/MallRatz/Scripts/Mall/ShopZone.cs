@@ -10,10 +10,15 @@ namespace MallRatz.Mall
         static readonly List<ShopZone> all = new();
 
         [SerializeField] string shopName = "Shop";
+        [Tooltip("The capsule toy that baits a Friend whose weakness is this shop.")]
+        [SerializeField] string trinketName = "keychain";
+        [SerializeField] Color trinketColor = Color.white;
 
         BoxCollider zone;
 
         public string ShopName => shopName;
+        public string TrinketName => trinketName;
+        public Color TrinketColor => trinketColor;
 
         void Awake()
         {
@@ -21,7 +26,15 @@ namespace MallRatz.Mall
             zone.isTrigger = true;
         }
 
-        void OnEnable() => all.Add(this);
+        // Sorted by name, so an index means the same shop on every machine.
+        public static IReadOnlyList<ShopZone> ByName => all;
+
+        void OnEnable()
+        {
+            all.Add(this);
+            all.Sort((a, b) => string.CompareOrdinal(a.shopName, b.shopName));
+        }
+
         void OnDisable() => all.Remove(this);
 
         public static ShopZone At(Vector3 position)

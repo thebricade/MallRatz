@@ -16,8 +16,10 @@ namespace MallRatz.Round
     // The host runs the clock and the rules; everyone reads the result.
     public class RoundManager : NetworkBehaviour
     {
+        // Small groups get the roles at the front. Voice of Reason is the Friends' answer to willpower, so it
+        // comes early. Friends past these are plain Friends with no special tool.
         static readonly FriendRole[] FriendRoleOrder =
-            { FriendRole.Bouncer, FriendRole.Lookout, FriendRole.Returns, FriendRole.VoiceOfReason };
+            { FriendRole.Bouncer, FriendRole.VoiceOfReason, FriendRole.Returns, FriendRole.Lookout };
 
         public static RoundManager Instance { get; private set; }
 
@@ -35,6 +37,7 @@ namespace MallRatz.Round
 
         public RoundConfig Config => config;
         public Wallet Wallet => wallet;
+        public PaymentCard Card => card;
         public RoundPhase Phase => phase.Value;
         public PlayerRole Winner => winner.Value;
         public bool IsMallOpen => Phase == RoundPhase.Shopping || Phase == RoundPhase.Closing;
@@ -45,6 +48,11 @@ namespace MallRatz.Round
             RoundPhase.Results => 0f,
             _ => Mathf.Max(0f, (float)(closesAt.Value - NetState.ServerTime)),
         };
+
+        // While this runs down, the Spender is frozen at the entrance with her eyes shut.
+        public float CountdownLeft => IsMallOpen
+            ? Mathf.Max(0f, config.spenderCountdownSeconds - (config.roundSeconds - TimeLeft))
+            : 0f;
 
         // Everything bought this round, in order: the receipt of shame.
         public List<ShopItem> Receipt
@@ -59,21 +67,25 @@ namespace MallRatz.Round
             }
         }
 
-        // Share of the wish list's value bought so far. Duplicates only count as often as they're listed.
+        // Share of the wish list's value bought so far. Duplicates only count as often as they're listed,
+        // and chipped items count for less.
         public float WishListProgress
         {
             get
             {
-                int total = 0, bought = 0;
-                var unmatched = new List<ItemDefinition>();
-                foreach (var item in Receipt) unmatched.Add(item.Definition);
+                int total = 0;
+                float bought = 0f;
+                var unmatched = Receipt;
                 foreach (var wanted in config.wishList)
                 {
                     if (wanted == null) continue;
                     total += wanted.price;
-                    if (unmatched.Remove(wanted)) bought += wanted.price;
+                    int match = unmatched.FindIndex(item => item.Definition == wanted);
+                    if (match < 0) continue;
+                    bought += wanted.price * unmatched[match].Worth;
+                    unmatched.RemoveAt(match);
                 }
-                return total == 0 ? 0f : (float)bought / total;
+                return total == 0 ? 0f : bought / total;
             }
         }
 
@@ -155,30 +167,45 @@ namespace MallRatz.Round
             {
                 if (player.Role == PlayerRole.Spender || player.FriendRole != FriendRole.None) continue;
                 var free = System.Array.Find(FriendRoleOrder, candidate => !taken.Contains(candidate));
-                if (free == FriendRole.None) free = FriendRoleOrder[0];
+                if (free == FriendRole.None) continue;
                 taken.Add(free);
                 player.ServerSetRole(PlayerRole.Friend, free);
             }
         }
 
-        // One Spender, taking turns; everyone else gets the next Friend role in order.
+        // One Spender, taking turns; everyone else gets the next Friend role in order, then plain Friend.
         void ServerAssignRoles()
         {
             var players = MallRatzPlayer.All;
             if (players.Count == 0) return;
             int spender = spenderTurn.Value % players.Count;
             int friend = 0;
+            var friends = new List<MallRatzPlayer>();
             for (int i = 0; i < players.Count; i++)
             {
-                if (i == spender) players[i].ServerSetRole(PlayerRole.Spender, FriendRole.None);
-                else players[i].ServerSetRole(PlayerRole.Friend, FriendRoleOrder[friend++ % FriendRoleOrder.Length]);
+                if (i == spender)
+                {
+                    players[i].ServerSetRole(PlayerRole.Spender, FriendRole.None);
+                    continue;
+                }
+                players[i].ServerSetRole(PlayerRole.Friend, friend < FriendRoleOrder.Length ? FriendRoleOrder[friend++] : FriendRole.None);
+                friends.Add(players[i]);
             }
+            foreach (var player in players) player.Willpower.ServerReset();
 
-            // The Spender starts with her card.
-            if (card.Holder != players[spender].Hands)
+            // She handed her card to a Friend to hold. Playing alone, she keeps it.
+            Hands keeper;
+            if (config.cardStartsWithFriends && friends.Count > 0)
+            {
+                bool friendHasIt = friends.Exists(player => player.Hands == card.Holder);
+                keeper = friendHasIt ? card.Holder : friends[UnityEngine.Random.Range(0, friends.Count)].Hands;
+            }
+            else keeper = players[spender].Hands;
+
+            if (card.Holder != keeper)
             {
                 card.ServerReturnHome();
-                players[spender].Hands.ServerTakeCard(card);
+                keeper.ServerTakeCard(card);
             }
         }
 

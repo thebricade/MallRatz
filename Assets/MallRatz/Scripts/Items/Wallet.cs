@@ -25,8 +25,18 @@ namespace MallRatz.Items
             return true;
         }
 
+        // For damages: takes what it can, down to zero, and says how much that was.
+        public int ServerCharge(int amount)
+        {
+            int taken = Mathf.Clamp(amount, 0, balance.Value);
+            balance.Value -= taken;
+            return taken;
+        }
+
         public void ServerRefund(int amount) => balance.Value += Mathf.Max(0, amount);
 
         public void ServerResetBalance() => balance.Value = startingBalance;
+
+        public void ServerSetBalance(int amount) => balance.Value = Mathf.Max(0, amount);
     }
 }
