@@ -83,7 +83,10 @@ namespace MallRatz.Editor
             Block("Floor", new Vector3(0f, -0.5f, -5f), new Vector3(40f, 1f, 34f), Floor);
             Block("Wall N", new Vector3(0f, 1.5f, 12f), new Vector3(40f, 3f, 0.3f), WallColor);
             Block("Wall S", new Vector3(0f, 1.5f, -22f), new Vector3(40f, 3f, 0.3f), WallColor);
-            Block("Wall W", new Vector3(-20f, 1.5f, -5f), new Vector3(0.3f, 3f, 34f), WallColor);
+            // The west wall has the mall's exit in it, out to the parking lot (z -7 to -3).
+            Block("Wall W South", new Vector3(-20f, 1.5f, -14.5f), new Vector3(0.3f, 3f, 15f), WallColor);
+            Block("Wall W North", new Vector3(-20f, 1.5f, 4.5f), new Vector3(0.3f, 3f, 15f), WallColor);
+            ParkingLot();
             Block("Wall E", new Vector3(20f, 1.5f, -5f), new Vector3(0.3f, 3f, 34f), WallColor);
             Shop("Junk Emporium", -11.5f, north: true, JunkShop, "mini inflatable shrimp", new Color(1f, 0.5f, 0.6f));
             Shop("Card Shop", 11.5f, north: true, CardShop, "holo card keychain", new Color(0.6f, 0.95f, 1f));
@@ -308,6 +311,29 @@ namespace MallRatz.Editor
             machine.AddComponent<BoxCollider>().size = new Vector3(2.5f, 2f, 2.5f);
             machine.AddComponent<NetworkObject>();
             SetArray(machine.AddComponent<CapsuleMachine>(), "capsules", capsules);
+        }
+
+        // Outside the west exit: a fenced lot with a pickup truck. In Haul, paid items left in its bed count.
+        static void ParkingLot()
+        {
+            var asphalt = new Color(0.35f, 0.35f, 0.38f);
+            var fence = new Color(0.6f, 0.6f, 0.55f);
+            Block("Parking Lot", new Vector3(-28f, -0.5f, -5f), new Vector3(16f, 1f, 14f), asphalt);
+            Block("Lot Fence N", new Vector3(-28f, 0.6f, 2f), new Vector3(16f, 1.2f, 0.2f), fence);
+            Block("Lot Fence S", new Vector3(-28f, 0.6f, -12f), new Vector3(16f, 1.2f, 0.2f), fence);
+            Block("Lot Fence W", new Vector3(-36f, 0.6f, -5f), new Vector3(0.2f, 1.2f, 14f), fence);
+
+            // Cab to the west, open bed facing the mall so things can be thrown straight in.
+            var paint = new Color(0.2f, 0.45f, 0.8f);
+            Block("Truck Cab", new Vector3(-31.1f, 0.9f, -5f), new Vector3(2.2f, 1.8f, 2.2f), paint);
+            Block("Truck Bed", new Vector3(-28.5f, 0.3f, -5f), new Vector3(3f, 0.2f, 2.2f), paint * 0.8f);
+            Block("Truck Bed Side L", new Vector3(-28.5f, 0.6f, -6.05f), new Vector3(3f, 0.6f, 0.1f), paint);
+            Block("Truck Bed Side R", new Vector3(-28.5f, 0.6f, -3.95f), new Vector3(3f, 0.6f, 0.1f), paint);
+
+            var trunk = new GameObject("Car Trunk");
+            trunk.transform.position = new Vector3(-28.5f, 1f, -5f);
+            trunk.AddComponent<BoxCollider>().size = new Vector3(3.4f, 2f, 2.4f);
+            trunk.AddComponent<CarTrunk>();
         }
 
         static void ReturnsDeskAt(Vector3 position)

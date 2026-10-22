@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MallRatz.Items;
 using MallRatz.Mall;
+using MallRatz.Round;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -84,7 +85,8 @@ namespace MallRatz.Players
         // Host only from here down.
         bool ServerPickUpNearest()
         {
-            bool spender = IsSpender;
+            // Re-bagging only applies where there are bags; in Haul paid things are carried by hand.
+            bool spender = IsSpender && (RoundManager.Instance == null || RoundManager.Instance.UsesBags);
             Holdable nearest = null;
             float nearestDistance = float.MaxValue;
             var center = transform.position + transform.forward * (reach * 0.5f);

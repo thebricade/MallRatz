@@ -30,13 +30,21 @@ namespace MallRatz.UI
             lastPhase = round.Phase;
             if (joining) return;
 
-            message = round.Phase switch
-            {
-                RoundPhase.Shopping => "The mall is open!",
-                RoundPhase.Closing => $"The mall closes in {round.Config.closingSeconds:0} seconds!",
-                RoundPhase.Results => round.Winner == PlayerRole.Spender ? "The Spender got her haul!" : "The Friends saved her wallet!",
-                _ => "Back to the lobby. New Spender!",
-            };
+            message = round.IsHaul
+                ? round.Phase switch
+                {
+                    RoundPhase.Shopping => $"Day {round.Day}: grab the list and get it to the car!",
+                    RoundPhase.Closing => $"The mall closes in {round.Config.closingSeconds:0} seconds!",
+                    RoundPhase.Results => round.HaulSucceeded ? $"Day {round.Day} done!" : "The mall closed on you!",
+                    _ => $"Day {round.Day}. Same team, longer list.",
+                }
+                : round.Phase switch
+                {
+                    RoundPhase.Shopping => "The mall is open!",
+                    RoundPhase.Closing => $"The mall closes in {round.Config.closingSeconds:0} seconds!",
+                    RoundPhase.Results => round.Winner == PlayerRole.Spender ? "The Spender got her haul!" : "The Friends saved her wallet!",
+                    _ => "Back to the lobby. New Spender!",
+                };
             hideAt = Time.time + (round.Phase == RoundPhase.Results ? resultSeconds : showSeconds);
         }
 

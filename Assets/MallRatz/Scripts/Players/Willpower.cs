@@ -126,7 +126,7 @@ namespace MallRatz.Players
             StopTalk();
             // The Spender gets a little cash of her own, for capsule toys and small things before she has her card.
             var round = RoundManager.Instance;
-            int cash = self.Role == PlayerRole.Spender && round != null && round.Config != null ? round.Config.spenderPocketCash : 0;
+            int cash = self.Role == PlayerRole.Spender && round != null && round.Config != null && !round.IsHaul ? round.Config.spenderPocketCash : 0;
             self.PocketCash.ServerSetBalance(cash);
         }
 

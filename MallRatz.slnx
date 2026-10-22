@@ -1,0 +1,13 @@
+﻿<Solution>
+  <Project Path="MallRatz.csproj" />
+  <Project Path="CryingSnow.CheckoutFrenzy.Core.csproj" />
+  <Project Path="SimpleInput.Runtime.csproj" />
+  <Project Path="CryingSnow.CheckoutFrenzy.UI.csproj" />
+  <Project Path="CryingSnow.CheckoutFrenzy.Gameplay.csproj" />
+  <Project Path="DOTween.Modules.csproj" />
+  <Project Path="MallRatz.Editor.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="CryingSnow.CheckoutFrenzy.Editor.csproj" />
+  <Project Path="SimpleInput.Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+</Solution>

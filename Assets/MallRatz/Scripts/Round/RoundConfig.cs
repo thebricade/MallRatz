@@ -19,6 +19,16 @@ namespace MallRatz.Round
         [Min(0)] public float spenderCountdownSeconds = 10f;
         [Tooltip("Her own cash, for capsule toys and small things while the Friends have her card.")]
         [Min(0)] public int spenderPocketCash = 15;
+
+        [Header("Haul (co-op)")]
+        [Tooltip("Everyone shops together for a list drawn from the wish list, and has to get it all out to the car.")]
+        [Min(1)] public float haulSeconds = 300f;
+        [Tooltip("Items on day 1's list. Each day adds one, up to the whole wish list.")]
+        [Min(1)] public int haulFirstDayItems = 3;
+        [Tooltip("Budget beyond the list's total, for mistakes and breakages.")]
+        [Min(0)] public int haulSpareCash = 40;
+        [Tooltip("Share of the list's value that has to be in the car to finish the day.")]
+        [Range(0, 1)] public float haulTarget = 0.8f;
         public List<ItemDefinition> wishList = new();
     }
 }

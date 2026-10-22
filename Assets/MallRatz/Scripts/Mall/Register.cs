@@ -72,9 +72,12 @@ namespace MallRatz.Mall
             return true;
         }
 
-        // The card if they hold it, otherwise a Spender's own cash (hers, or a Friend's who gave in).
+        // Haul: the team budget. Otherwise the card if they hold it, or a Spender's own cash (hers, or a
+        // Friend's who gave in).
         static Wallet WalletFor(MallRatzPlayer player)
         {
+            var round = RoundManager.Instance;
+            if (round != null && round.IsHaul) return round.Wallet;
             var card = player.Hands.Card;
             if (card != null) return card.Wallet;
             return player.Role == PlayerRole.Spender ? player.PocketCash : null;
@@ -123,7 +126,8 @@ namespace MallRatz.Mall
             var wallet = WalletFor(buyer);
             if (!wallet.ServerTrySpend(bought.Definition.price)) return;
             bought.PaidFrom = wallet;
-            buyer.Hands.ServerBag(bought);
+            // In Haul it stays in your hands: getting it to the car is the hard part.
+            if (RoundManager.Instance == null || RoundManager.Instance.UsesBags) buyer.Hands.ServerBag(bought);
             Purchased?.Invoke(buyer, bought);
         }
 

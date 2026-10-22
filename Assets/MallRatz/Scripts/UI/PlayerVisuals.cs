@@ -1,4 +1,5 @@
 using MallRatz.Players;
+using MallRatz.Round;
 using UnityEngine;
 
 namespace MallRatz.UI
@@ -43,7 +44,10 @@ namespace MallRatz.UI
             if (screen.z <= 0f) return;
 
             tagStyle ??= new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold };
-            string roleName = player.Willpower.IsTurned ? "Gave in" : RoleName(player.Role, player.FriendRole);
+            var round = RoundManager.Instance;
+            string roleName = round != null && round.IsHaul ? "Shopper"
+                : player.Willpower.IsTurned ? "Gave in"
+                : RoleName(player.Role, player.FriendRole);
             var text = $"{player.DisplayName}{(player.IsOwner ? " (you)" : "")}\n{roleName}";
             var rect = new Rect(screen.x - 90f, Screen.height - screen.y - 20f, 180f, 40f);
             GUI.color = Color.black;

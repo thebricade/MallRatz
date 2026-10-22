@@ -34,7 +34,7 @@ namespace MallRatz.Items
         public float Condition => condition.Value;
         public bool IsBroken => condition.Value <= 0f;
         public override float Worth => condition.Value;
-        protected override bool Present => !IsBroken;
+        protected override bool Present => base.Present && !IsBroken;
 
         protected override void Awake()
         {
@@ -129,7 +129,7 @@ namespace MallRatz.Items
         {
             if (!IsSpawned) return;
             if (Time.time - crashShownAt < 3f) WorldLabel.Draw(crashPoint + Vector3.up, crashText, Color.red);
-            else if (!IsBroken && Condition < 1f && Slot != HoldSlot.Bag)
+            else if (!IsBroken && !IsDelivered && Condition < 1f && Slot != HoldSlot.Bag)
                 WorldLabel.Draw(transform.position + Vector3.up * 0.6f, $"{Definition.displayName} {Condition:P0}", Color.yellow);
         }
     }

@@ -27,14 +27,30 @@ namespace MallRatz.UI
             GUILayout.BeginVertical(GUI.skin.box);
 
             int seconds = Mathf.CeilToInt(round.TimeLeft);
-            GUILayout.Label($"{round.Phase}   {seconds / 60}:{seconds % 60:00}");
-            GUILayout.Label($"Wish list {round.WishListProgress:P0} of {round.Config.wishListTarget:P0}");
-            GUILayout.Label($"Spender's wallet ${round.Wallet.Balance} of ${round.Wallet.StartingBalance}");
+            if (round.IsHaul)
+            {
+                GUILayout.Label($"Haul, day {round.Day}   {round.Phase}   {seconds / 60}:{seconds % 60:00}");
+                GUILayout.Label($"In the car: {round.DeliveredProgress:P0} of the list's value ({round.Config.haulTarget:P0} needed)");
+                GUILayout.Label($"Team budget ${round.Wallet.Balance}");
+                if (round.IsMallOpen || round.Phase == RoundPhase.Results)
+                {
+                    GUILayout.Label("Shopping list:");
+                    foreach (var wanted in round.ShoppingList)
+                        GUILayout.Label($"  {wanted.displayName} (${wanted.price}): {HaulStatus(wanted)}");
+                }
+            }
+            else
+            {
+                GUILayout.Label($"{round.Phase}   {seconds / 60}:{seconds % 60:00}");
+                GUILayout.Label($"Wish list {round.WishListProgress:P0} of {round.Config.wishListTarget:P0}");
+                GUILayout.Label($"Spender's wallet ${round.Wallet.Balance} of ${round.Wallet.StartingBalance}");
+            }
 
             GUILayout.Space(6);
             foreach (var player in MallRatzPlayer.All)
             {
-                string role = player.Role == PlayerRole.Friend ? $"Friend ({player.FriendRole})"
+                string role = round.IsHaul ? "Shopper"
+                    : player.Role == PlayerRole.Friend ? $"Friend ({player.FriendRole})"
                     : player.Willpower.IsTurned ? "Spender (gave in)" : "Spender";
                 string you = player.IsOwner ? " (you)" : "";
                 GUILayout.Label($"{player.DisplayName}{you}: {role}, {player.Body.State}");
@@ -43,7 +59,8 @@ namespace MallRatz.UI
             if (round.Phase == RoundPhase.Results)
             {
                 GUILayout.Space(6);
-                GUILayout.Label(round.Winner == PlayerRole.Spender ? "The Spender wins." : "The Friends win.");
+                if (round.IsHaul) GUILayout.Label(round.HaulSucceeded ? $"Day {round.Day} done! Next day's list is longer." : "The mall closed on you. Back to day 1.");
+                else GUILayout.Label(round.Winner == PlayerRole.Spender ? "The Spender wins." : "The Friends win.");
                 GUILayout.Label("Receipt of shame:");
                 foreach (var item in round.Receipt) GUILayout.Label($"  {item.Definition.displayName}  ${item.Definition.price}{Chipped(item)}");
             }
@@ -51,8 +68,21 @@ namespace MallRatz.UI
             if (network.IsServer)
             {
                 GUILayout.Space(6);
-                if (round.Phase == RoundPhase.Lobby && GUILayout.Button("Start round")) round.ServerStartRound();
-                if (round.Phase != RoundPhase.Lobby && GUILayout.Button("Reset to lobby (next Spender)")) round.ServerNextRound();
+                if (round.Phase == RoundPhase.Lobby)
+                {
+                    var other = round.IsHaul ? GameMode.Shopaholic : GameMode.Haul;
+                    GUILayout.Label($"Mode: {(round.IsHaul ? "Haul (co-op)" : "Shopaholic (Spender vs Friends)")}");
+                    if (GUILayout.Button($"Switch to {(other == GameMode.Haul ? "Haul (co-op)" : "Shopaholic")}")) round.ServerSetMode(other);
+                    if (GUILayout.Button(round.IsHaul ? $"Start day {round.Day}" : "Start round")) round.ServerStartRound();
+                }
+                else
+                {
+                    string next = !round.IsHaul ? "Reset to lobby (next Spender)"
+                        : round.HaulSucceeded ? $"On to day {round.Day + 1}"
+                        : round.Phase == RoundPhase.Results ? "Start over at day 1"
+                        : "Back to the lobby (same day)";
+                    if (GUILayout.Button(next)) round.ServerNextRound();
+                }
             }
             else if (round.Phase == RoundPhase.Lobby)
             {
@@ -106,6 +136,20 @@ namespace MallRatz.UI
             Trinket toy => toy.DisplayName,
             _ => held.name,
         };
+
+        // Where one thing on the Haul list has got to, best case first.
+        static string HaulStatus(ItemDefinition wanted)
+        {
+            string status = "still in the shop";
+            foreach (var holdable in Holdable.All)
+            {
+                if (!(holdable is ShopItem item) || item.Definition != wanted) continue;
+                if (item.IsDelivered) return $"in the car{Chipped(item)}";
+                if (item.IsPaid) status = item.IsHeld ? "paid, carry it to the car" : "paid, lying around";
+                else if (item is FragileItem { IsBroken: true } && status == "still in the shop") status = "broken!";
+            }
+            return status;
+        }
 
         static string Chipped(ShopItem item) => item.Worth < 1f ? $", {item.Worth:P0} intact" : "";
     }
